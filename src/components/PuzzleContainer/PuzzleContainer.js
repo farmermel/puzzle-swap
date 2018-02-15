@@ -5,6 +5,11 @@ const PuzzleContainer = () => {
   return (
     <div className='puzzle-container'>
       <PuzzleCard />
+      <PuzzleCard />
+      <PuzzleCard />
+      <PuzzleCard />
+      <PuzzleCard />
+      <PuzzleCard />
     </div>
   )
 }
