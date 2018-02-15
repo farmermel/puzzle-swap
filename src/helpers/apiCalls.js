@@ -1,4 +1,4 @@
-import { locationKey, sendGridKey } from './apiKeys';
+import { locationKey } from './apiKeys';
 
 
 export const getGeoLocation = async () => {
@@ -18,7 +18,7 @@ export const getGeoLocation = async () => {
       throw new Error('Bad status code');
     }
   } catch (error) {
-    throw `failed to retrieve geolocation: ${error}`
+    throw Error(`failed to retrieve geolocation: ${error}`)
   }
 }
 
