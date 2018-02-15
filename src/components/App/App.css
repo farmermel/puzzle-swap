@@ -9,22 +9,17 @@ h3 {
 }
 
 button {
-  background-color: #ed952a;
+  border-radius: 5px;
+  /*background-color: #df7a00;*/
+  /*purple:*/
+  background-color: #562d4f;
+  color: #fff;
 }
 
 button:hover {
-  background-color: #e27c00;
-}
-
-.App-header {
-  background-color: #D2DDDC;
-  height: 100px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
+  /*background-color: #a05a00;*/
+  /*purple:*/
+  background-color: #260120;
 }
 
 .App-intro {
