@@ -17,7 +17,7 @@ const Header = () => {
         <button className='messages'>Messages</button>
       </Link>
       <Link to={{ pathname: '/' }}>
-        <h1 className='app-title'>Puzzlr</h1>
+        <h1 className='app-title'>Puzzle Swap</h1>
       </Link>
     </div>
   )
