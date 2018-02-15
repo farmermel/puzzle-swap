@@ -1,4 +1,12 @@
 .puzzle-card {
-  background-color: #EFEDED;
+  display: inline-block;
   border-radius: 6px;
+  background-color: #EFEDED;
+  margin: 10px;
+  height: 330px;
+  width: 45%;
+}
+
+.puzzle-card h3 {
+  font-size: 1.7em;
 }
