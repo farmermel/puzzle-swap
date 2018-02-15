@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Main from '../Main/Main';
+import Main from '../../containers/Main/Main';
 import Header from '../Header/Header';
 import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../Login/Login';

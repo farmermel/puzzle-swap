@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+h1,
+h2,
+h3 {
+  font-family: 'Handlee', cursive;
+}
+
+button {
+  background-color: #ed952a;
+}
+
+button:hover {
+  background-color: #e27c00;
+}
+
 .App-header {
   background-color: #D2DDDC;
   height: 100px;
