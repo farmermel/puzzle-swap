@@ -1,11 +1,6 @@
 .puzzle-post {
-  background-color: #ed952a;
   height: 100px;
   width: 200px;
   font-size: 2em;
   border-radius: 20px;
-}
-
-.puzzle-post:hover {
-  background-color: #e27c00;
 }
