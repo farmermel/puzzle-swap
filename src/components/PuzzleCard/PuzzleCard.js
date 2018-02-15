@@ -7,6 +7,7 @@ const PuzzleCard = () => {
       <h3>Witch Puzzle</h3>
       <p>1,000 pieces</p>
       <p>1-3 pieces missing</p>
+      <button className='claim'>Claim</button>
     </article>
   )
 }

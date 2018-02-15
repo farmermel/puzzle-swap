@@ -1,4 +1,6 @@
 import { createStore } from 'redux';
 import rootReducer from './reducers/index';
 
-export default () => createStore(rootReducer);
+const reduxTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+export default () => createStore(rootReducer, reduxTools);

@@ -4,7 +4,7 @@ export const usersReducer = (state = {}, action) => {
       const nextState = {...state}
       nextState[action.user.name] = action.user;
       return nextState
-    default: 
+    default:
       return state
   }
 }
