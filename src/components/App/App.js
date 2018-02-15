@@ -6,9 +6,14 @@ import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
 import Messages from '../Messages/Messages';
+import { getGeoLocation } from '../../helpers/apiCalls';
 import './App.css';
 
 class App extends Component {
+  async componentDidMount() {
+    const city = await getGeoLocation();
+  }
+
   render() {
     return (
       <div className="App">
