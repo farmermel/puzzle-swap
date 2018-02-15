@@ -1,5 +1,7 @@
 .app-title {
+  margin: 0px;
   color: #260120;
+  font-size: 5.5em;
 }
 
 .App-header {
@@ -11,12 +13,9 @@
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
 .header-right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
 }
