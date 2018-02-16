@@ -1,11 +1,13 @@
-form {
+/*form {
   display: flex;
   flex-direction: column;
   margin: auto;
-}
+}*/
 
-.sign-up {
-  width: 50%;
+.form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sign-up-btn {
