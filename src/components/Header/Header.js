@@ -5,7 +5,7 @@ import { auth } from '../../firebase';
 import { setLogin } from '../../actions/loginAction';
 import './Header.css';
 
-const renderNotLoggedIn = () => {
+export const renderNotLoggedIn = () => {
   return (
     <div className='header-right'>
       <div className='login-container'>
@@ -23,21 +23,21 @@ const renderNotLoggedIn = () => {
   )
 }
 
-const handleSignOut = async () => {
+export const handleSignOut = async () => {
   await auth.doSignOut();
   setLogin(false);
 }
 
-const renderLoggedIn = () => {
+export const renderLoggedIn = () => {
   return <button onClick={handleSignOut}>Sign out</button>
 }
 
-const determineLoginButtons = (loggedIn) => {
+export const determineLoginButtons = (loggedIn) => {
   const display = loggedIn ? renderLoggedIn() : renderNotLoggedIn();
   return display;
 }
 
-const Header = ({ loggedIn }) => {
+export const Header = ({ loggedIn }) => {
   return (
     <div className="App-header">
       <Link to={{ pathname: '/' }}>
@@ -48,7 +48,7 @@ const Header = ({ loggedIn }) => {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setLogin: boolean => dispatch(setLogin(boolean))
 })
 

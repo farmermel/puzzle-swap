@@ -64,7 +64,7 @@ export class SignUp extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   setLogin: boolean => dispatch(setLogin(boolean))
 });
 

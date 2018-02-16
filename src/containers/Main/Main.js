@@ -6,11 +6,12 @@ import { addLocation } from '../../actions/addLocation';
 import PuzzleContainer from '../../components/PuzzleContainer/PuzzleContainer';
 import './Main.css';
 
-class Main extends Component {
+export class Main extends Component {
   constructor() {
     super();
     this.state = {
-      puzzleFilter: 'all'
+      puzzleFilter: 'all',
+      error: null
     }
   }
 
@@ -20,6 +21,9 @@ class Main extends Component {
       const city = await getGeoLocation();
       addLocation(city);
     } catch (error) {
+      this.setState({
+        error: error.message
+      })
       console.log(error)
     }
   }
@@ -57,11 +61,11 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   location: state.location
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   addLocation: location => dispatch(addLocation(location))
 });
 

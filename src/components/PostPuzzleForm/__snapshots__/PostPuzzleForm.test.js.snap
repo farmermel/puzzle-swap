@@ -1,0 +1,677 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostPuzzleForm matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PostPuzzleForm />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <form>
+        <label
+                htmlFor="puzzle-name"
+        >
+                Puzzle Name
+        </label>
+        <input
+                id="puzzle-name"
+                name="title"
+                onChange={[Function]}
+                placeholder="puzzle title"
+                type="text"
+                value=""
+        />
+        <label
+                htmlFor="puzzle-file"
+        >
+                Upload a puzzle photo
+        </label>
+        <input
+                accept="image/x-png,image/jpeg"
+                id="puzzle-file"
+                type="file"
+        />
+        <label
+                htmlFor="num-pieces"
+        >
+                Number of pieces
+        </label>
+        <input
+                id="num-pieces"
+                name="numPieces"
+                onChange={[Function]}
+                placeholder="number of pieces"
+                type="number"
+                value=""
+        />
+        <label
+                htmlFor="missing"
+        >
+                Number of pieces missing
+        </label>
+        <select
+                id="missing"
+                name="piecesMissing"
+                onChange={[Function]}
+        >
+                <option
+                        value="1-3"
+                >
+                        1-3
+                </option>
+                <option
+                        value="4-9"
+                >
+                        4-9
+                </option>
+                <option
+                        value="10 or more"
+                >
+                        10 or more
+                </option>
+        </select>
+        <button>
+                Post puzzle
+        </button>
+</form>,
+      "className": "form-wrapper",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <label
+            htmlFor="puzzle-name"
+>
+            Puzzle Name
+</label>,
+          <input
+            id="puzzle-name"
+            name="title"
+            onChange={[Function]}
+            placeholder="puzzle title"
+            type="text"
+            value=""
+/>,
+          <label
+            htmlFor="puzzle-file"
+>
+            Upload a puzzle photo
+</label>,
+          <input
+            accept="image/x-png,image/jpeg"
+            id="puzzle-file"
+            type="file"
+/>,
+          <label
+            htmlFor="num-pieces"
+>
+            Number of pieces
+</label>,
+          <input
+            id="num-pieces"
+            name="numPieces"
+            onChange={[Function]}
+            placeholder="number of pieces"
+            type="number"
+            value=""
+/>,
+          <label
+            htmlFor="missing"
+>
+            Number of pieces missing
+</label>,
+          <select
+            id="missing"
+            name="piecesMissing"
+            onChange={[Function]}
+>
+            <option
+                        value="1-3"
+            >
+                        1-3
+            </option>
+            <option
+                        value="4-9"
+            >
+                        4-9
+            </option>
+            <option
+                        value="10 or more"
+            >
+                        10 or more
+            </option>
+</select>,
+          <button>
+            Post puzzle
+</button>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Puzzle Name",
+            "htmlFor": "puzzle-name",
+          },
+          "ref": null,
+          "rendered": "Puzzle Name",
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "id": "puzzle-name",
+            "name": "title",
+            "onChange": [Function],
+            "placeholder": "puzzle title",
+            "type": "text",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Upload a puzzle photo",
+            "htmlFor": "puzzle-file",
+          },
+          "ref": null,
+          "rendered": "Upload a puzzle photo",
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "accept": "image/x-png,image/jpeg",
+            "id": "puzzle-file",
+            "type": "file",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Number of pieces",
+            "htmlFor": "num-pieces",
+          },
+          "ref": null,
+          "rendered": "Number of pieces",
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "id": "num-pieces",
+            "name": "numPieces",
+            "onChange": [Function],
+            "placeholder": "number of pieces",
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Number of pieces missing",
+            "htmlFor": "missing",
+          },
+          "ref": null,
+          "rendered": "Number of pieces missing",
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <option
+                value="1-3"
+>
+                1-3
+</option>,
+              <option
+                value="4-9"
+>
+                4-9
+</option>,
+              <option
+                value="10 or more"
+>
+                10 or more
+</option>,
+            ],
+            "id": "missing",
+            "name": "piecesMissing",
+            "onChange": [Function],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1-3",
+                "value": "1-3",
+              },
+              "ref": null,
+              "rendered": "1-3",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "4-9",
+                "value": "4-9",
+              },
+              "ref": null,
+              "rendered": "4-9",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "10 or more",
+                "value": "10 or more",
+              },
+              "ref": null,
+              "rendered": "10 or more",
+              "type": "option",
+            },
+          ],
+          "type": "select",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Post puzzle",
+          },
+          "ref": null,
+          "rendered": "Post puzzle",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <form>
+          <label
+                    htmlFor="puzzle-name"
+          >
+                    Puzzle Name
+          </label>
+          <input
+                    id="puzzle-name"
+                    name="title"
+                    onChange={[Function]}
+                    placeholder="puzzle title"
+                    type="text"
+                    value=""
+          />
+          <label
+                    htmlFor="puzzle-file"
+          >
+                    Upload a puzzle photo
+          </label>
+          <input
+                    accept="image/x-png,image/jpeg"
+                    id="puzzle-file"
+                    type="file"
+          />
+          <label
+                    htmlFor="num-pieces"
+          >
+                    Number of pieces
+          </label>
+          <input
+                    id="num-pieces"
+                    name="numPieces"
+                    onChange={[Function]}
+                    placeholder="number of pieces"
+                    type="number"
+                    value=""
+          />
+          <label
+                    htmlFor="missing"
+          >
+                    Number of pieces missing
+          </label>
+          <select
+                    id="missing"
+                    name="piecesMissing"
+                    onChange={[Function]}
+          >
+                    <option
+                              value="1-3"
+                    >
+                              1-3
+                    </option>
+                    <option
+                              value="4-9"
+                    >
+                              4-9
+                    </option>
+                    <option
+                              value="10 or more"
+                    >
+                              10 or more
+                    </option>
+          </select>
+          <button>
+                    Post puzzle
+          </button>
+</form>,
+        "className": "form-wrapper",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <label
+              htmlFor="puzzle-name"
+>
+              Puzzle Name
+</label>,
+            <input
+              id="puzzle-name"
+              name="title"
+              onChange={[Function]}
+              placeholder="puzzle title"
+              type="text"
+              value=""
+/>,
+            <label
+              htmlFor="puzzle-file"
+>
+              Upload a puzzle photo
+</label>,
+            <input
+              accept="image/x-png,image/jpeg"
+              id="puzzle-file"
+              type="file"
+/>,
+            <label
+              htmlFor="num-pieces"
+>
+              Number of pieces
+</label>,
+            <input
+              id="num-pieces"
+              name="numPieces"
+              onChange={[Function]}
+              placeholder="number of pieces"
+              type="number"
+              value=""
+/>,
+            <label
+              htmlFor="missing"
+>
+              Number of pieces missing
+</label>,
+            <select
+              id="missing"
+              name="piecesMissing"
+              onChange={[Function]}
+>
+              <option
+                            value="1-3"
+              >
+                            1-3
+              </option>
+              <option
+                            value="4-9"
+              >
+                            4-9
+              </option>
+              <option
+                            value="10 or more"
+              >
+                            10 or more
+              </option>
+</select>,
+            <button>
+              Post puzzle
+</button>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Puzzle Name",
+              "htmlFor": "puzzle-name",
+            },
+            "ref": null,
+            "rendered": "Puzzle Name",
+            "type": "label",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "puzzle-name",
+              "name": "title",
+              "onChange": [Function],
+              "placeholder": "puzzle title",
+              "type": "text",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Upload a puzzle photo",
+              "htmlFor": "puzzle-file",
+            },
+            "ref": null,
+            "rendered": "Upload a puzzle photo",
+            "type": "label",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "accept": "image/x-png,image/jpeg",
+              "id": "puzzle-file",
+              "type": "file",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Number of pieces",
+              "htmlFor": "num-pieces",
+            },
+            "ref": null,
+            "rendered": "Number of pieces",
+            "type": "label",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "num-pieces",
+              "name": "numPieces",
+              "onChange": [Function],
+              "placeholder": "number of pieces",
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Number of pieces missing",
+              "htmlFor": "missing",
+            },
+            "ref": null,
+            "rendered": "Number of pieces missing",
+            "type": "label",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <option
+                  value="1-3"
+>
+                  1-3
+</option>,
+                <option
+                  value="4-9"
+>
+                  4-9
+</option>,
+                <option
+                  value="10 or more"
+>
+                  10 or more
+</option>,
+              ],
+              "id": "missing",
+              "name": "piecesMissing",
+              "onChange": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "1-3",
+                  "value": "1-3",
+                },
+                "ref": null,
+                "rendered": "1-3",
+                "type": "option",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "4-9",
+                  "value": "4-9",
+                },
+                "ref": null,
+                "rendered": "4-9",
+                "type": "option",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "10 or more",
+                  "value": "10 or more",
+                },
+                "ref": null,
+                "rendered": "10 or more",
+                "type": "option",
+              },
+            ],
+            "type": "select",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Post puzzle",
+            },
+            "ref": null,
+            "rendered": "Post puzzle",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
