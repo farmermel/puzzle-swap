@@ -25,25 +25,24 @@ export const renderNotLoggedIn = () => {
 
 export const handleSignOut = async () => {
   await auth.doSignOut();
-  setLogin(false);
 }
 
 export const renderLoggedIn = () => {
   return <button onClick={handleSignOut}>Sign out</button>
 }
 
-export const determineLoginButtons = (loggedIn) => {
-  const display = loggedIn ? renderLoggedIn() : renderNotLoggedIn();
+export const determineLoginButtons = (user) => {
+  const display = user ? renderLoggedIn() : renderNotLoggedIn();
   return display;
 }
 
-export const Header = ({ loggedIn }) => {
+export const Header = ({ user }) => {
   return (
     <div className="App-header">
       <Link to={{ pathname: '/' }}>
         <h1 className='app-title'>Puzzle Swap</h1>
       </Link>
-          { determineLoginButtons(loggedIn) }
+          { determineLoginButtons(user) }
     </div>
   )
 }
