@@ -1,4 +1,4 @@
-export const addUser = (user) => ({
-  type: 'ADD_USER',
+export const setUser = (user) => ({
+  type: 'SET_USER',
   user
 });
