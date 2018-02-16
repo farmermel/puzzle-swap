@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth } from '../../firebase'
+import { auth, db } from '../../firebase'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setLogin } from '../../actions/loginAction';
@@ -28,12 +28,7 @@ export class SignUp extends Component {
       const { name, email, password } = this.state;
       const { setLogin } = this.props;
       const authUser = await auth.doCreateUserWithEmailAndPassword(email, password);
-      await this.setState({
-        name: '',
-        email: '',
-        password: '',
-        error: null
-      })
+      await db.doCreateUser(authUser.uid, name, email);
       setLogin(true);
     } catch (e) {
       this.setState({ error: e.message })
