@@ -38,26 +38,28 @@ export class SignUp extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}
-            className='sign-up'>
-        { this.state.error }
-        <input type='name' 
-               placeholder='name' 
-               name='name' 
-               onChange={this.handleChange} 
-               value={this.state.name} />
-        <input type='email' 
-               placeholder='email' 
-               name='email' 
-               onChange={this.handleChange} 
-               value={this.state.value} />
-        <input type='password' 
-               placeholder='password'
-               name='password'
-               onChange={this.handleChange}
-               value={this.state.password} />
-        <button className='sign-up-btn'>Sign up</button>
-      </form>
+      <div className='form-wrapper'>
+        <form onSubmit={this.handleSubmit}
+              className='sign-up'>
+          { this.state.error }
+          <input type='name' 
+                 placeholder='name' 
+                 name='name' 
+                 onChange={this.handleChange} 
+                 value={this.state.name} />
+          <input type='email' 
+                 placeholder='email' 
+                 name='email' 
+                 onChange={this.handleChange} 
+                 value={this.state.value} />
+          <input type='password' 
+                 placeholder='password'
+                 name='password'
+                 onChange={this.handleChange}
+                 value={this.state.password} />
+          <button className='sign-up-btn'>Sign up</button>
+        </form>
+      </div>
     )
   }
 }

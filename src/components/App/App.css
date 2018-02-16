@@ -22,6 +22,24 @@ button:hover {
   background-color: #260120;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+}
+
+input,
+select {
+  height: 40px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+label {
+  font-size: 1.3em;
+}
+
 .App-intro {
   font-size: large;
 }

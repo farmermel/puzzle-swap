@@ -5,3 +5,8 @@
   font-size: 2em;
   width: 200px;
 }
+
+#puzzle-filter {
+  height: 30px;
+  width: 100px;
+}

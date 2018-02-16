@@ -22,24 +22,33 @@ class PostPuzzleForm extends Component {
   //   className='sign-up'
   //   method='post'>
     return (
-      <form>
-        <input type='text' placeholder='puzzle title'
-               value={this.state.title}
-               name='title'
-               onChange={(e) => this.handleChange(e)} />
-        <input type='file' accept='image/x-png,image/jpeg' />
-        <p>please upload a photo of puzzle (png or jpg)</p>
-        <input type='number' placeholder='number of pieces'
-               value={this.state.numPieces}
-               name='numPieces'
-               onChange={(e) => this.handleChange(e)} />
-        <select name='piecesMissing'
-                onChange={(e) => this.handleChange(e)}>
-          <option value='1-3'>1-3</option>
-          <option value='4-9'>4-9</option>
-          <option value='10 or more'>10 or more</option>
-        </select>
-      </form>
+      <div className='form-wrapper'>
+        <form>
+          <label htmlFor='puzzle-name'>Puzzle Name</label>
+            <input type='text' placeholder='puzzle title'
+                   value={this.state.title}
+                   name='title'
+                   id='puzzle-name'
+                   onChange={this.handleChange} />
+          <label htmlFor='puzzle-file'>Upload a puzzle photo</label>
+            <input type='file' accept='image/x-png,image/jpeg' id='puzzle-file' />
+          <label htmlFor='num-pieces'>Number of pieces</label>
+            <input type='number' placeholder='number of pieces'
+                   value={this.state.numPieces}
+                   name='numPieces'
+                   id='num-pieces'
+                   onChange={this.handleChange} />
+          <label htmlFor='missing'>Number of pieces missing</label>
+            <select name='piecesMissing'
+                    id='missing'
+                    onChange={this.handleChange}>
+              <option value='1-3'>1-3</option>
+              <option value='4-9'>4-9</option>
+              <option value='10 or more'>10 or more</option>
+            </select>
+          <button>Post puzzle</button>
+        </form>
+      </div>
     )
   }
 }
