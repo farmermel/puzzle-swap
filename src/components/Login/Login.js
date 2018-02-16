@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { auth } from '../../firebase';
+import { setLogin } from '../../actions/loginAction';
+import { connect } from 'react-redux';
 import '../SignUp/SignUp.css';
 
 class Login extends Component {
@@ -6,7 +9,8 @@ class Login extends Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: null
     }
   }
 
@@ -16,11 +20,29 @@ class Login extends Component {
     })
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { email, password } = this.state;
+      const { setLogin } = this.props;
+      const authUser = await auth.doSignInWithEmailAndPassword(email, password);
+      // await this.setState({
+      //   email: '',
+      //   password: '',
+      //   error: null
+      // });
+      setLogin(true);
+    } catch (e) {
+      this.setState({ error: e.message })
+      console.log(e)
+    }
+  }
+
   render() {
     return (
-      <form action='https://formspree.io/melenasuliteanu@gmail.com'
-            className='sign-up'
-            method='post'>
+      <form onSubmit={ this.handleSubmit }
+            className='sign-up'>
+        <p>{ this.state.error }</p>
         <input type='email' placeholder='email' name='email' value={ this.state.email } onChange={ (e) => this.handleChange(e) } />
         <input type='password' placeholder='password' name='password' value={ this.password } onChange={ (e) => this.handleChange(e) } />
         <button className='sign-up-btn'>Log in</button>
@@ -29,4 +51,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  setLogin: boolean => dispatch(setLogin(boolean))
+})
+
+export default connect(null, mapDispatchToProps)(Login);
