@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import Main from '../../containers/Main/Main';
 import Header from '../Header/Header';
 import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
@@ -12,12 +14,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header loggedIn={ this.props.loggedIn }/>
         <Switch>
           <Route exact path='/' component={ Main } />
           <Route path='/post-puzzle-form' component={ PostPuzzleForm } />
-          <Route path='/login' component={ Login } />
-          <Route path='/sign-up' component={ SignUp } />
+          <Route path='/login' render={() => 
+            this.props.loggedIn ? <Redirect to='/' /> : <Login />
+          } />
+          <Route path='/sign-up' render={() => 
+            this.props.loggedIn ? <Redirect to='/' /> : <SignUp />
+          } />
           <Route path='/messages' component={ Messages } />
         </Switch>
       </div>
@@ -25,4 +31,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+});
+
+export default withRouter(connect(mapStateToProps, null)(App));
