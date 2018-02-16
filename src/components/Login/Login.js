@@ -4,7 +4,7 @@ import { setLogin } from '../../actions/loginAction';
 import { connect } from 'react-redux';
 import '../SignUp/SignUp.css';
 
-class Login extends Component {
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,11 +26,6 @@ class Login extends Component {
       const { email, password } = this.state;
       const { setLogin } = this.props;
       const authUser = await auth.doSignInWithEmailAndPassword(email, password);
-      // await this.setState({
-      //   email: '',
-      //   password: '',
-      //   error: null
-      // });
       setLogin(true);
     } catch (e) {
       this.setState({ error: e.message })
@@ -53,7 +48,7 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setLogin: boolean => dispatch(setLogin(boolean))
 })
 
