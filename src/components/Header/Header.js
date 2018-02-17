@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth } from '../../firebase';
 import { setLogin } from '../../actions/loginAction';
+import puzzleIcon from '../../assets/puzzle.svg';
 import './Header.css';
 
 export const renderNotLoggedIn = () => {
@@ -10,15 +11,13 @@ export const renderNotLoggedIn = () => {
     <div className='header-right'>
       <div className='login-container'>
         <Link to={{ pathname: '/login' }}>
-          <button className='login'>Login</button>
+          <span className='login'>Login</span>
         </Link>
         <Link to={{ pathname: '/sign-up' }}>
-          <button className='login'>Sign up</button>
+          <span>Sign up</span>
         </Link>   
       </div>
-      <Link to={{ pathname: '/messages' }}>
-        <button className='messages'>Messages</button>
-      </Link>
+      
     </div>
   )
 }
@@ -28,7 +27,14 @@ export const handleSignOut = async () => {
 }
 
 export const renderLoggedIn = () => {
-  return <button onClick={handleSignOut}>Sign out</button>
+  return (
+    <div className='header-right'>
+      <a onClick={handleSignOut}>Sign out</a>
+      <Link to={{ pathname: '/messages' }}>
+        <button className='messages'>Messages</button>
+      </Link>
+    </div>
+  )
 }
 
 export const determineLoginButtons = (user) => {
@@ -39,7 +45,8 @@ export const determineLoginButtons = (user) => {
 export const Header = ({ user }) => {
   return (
     <div className="App-header">
-      <Link to={{ pathname: '/' }}>
+      <Link to={{ pathname: '/' }} id='header-wrap'>
+        <img src={puzzleIcon} alt='puzzle' className='puzzleicon' />
         <h1 className='app-title'>Puzzle Swap</h1>
       </Link>
           { determineLoginButtons(user) }
