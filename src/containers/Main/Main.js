@@ -48,12 +48,14 @@ export class Main extends Component {
   }
 
   render() {
-    const { location = '' } = this.props;
+    const { location = '', user } = this.props;
     return (
       <div className='main'>
-        <Link to={{ pathname: '/post-puzzle-form' }}>
-          <button className='puzzle-post'>Post a Puzzle</button>
-        </Link>
+        { 
+          user && <Link to={{ pathname: '/post-puzzle-form' }}>
+            <button className='puzzle-post'>Post a Puzzle</button>
+          </Link>
+        }
         <p>Viewing {this.generateSelect()} piece puzzles posted in {location}</p>
         <PuzzleContainer />
       </div>
@@ -62,7 +64,8 @@ export class Main extends Component {
 }
 
 export const mapStateToProps = state => ({
-  location: state.location
+  location: state.location,
+  user: state.user
 });
 
 export const mapDispatchToProps = dispatch => ({
