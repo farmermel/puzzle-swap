@@ -3,14 +3,15 @@ import { firebaseKey,
   fbAuthDomain,
   fbdbUrl,
   fbProjId,
-  fbMessagingSenderId } from '../helpers/apiKeys';
+  fbMessagingSenderId,
+  storageBucket } from '../helpers/apiKeys';
 
 const config = {
   apiKey: firebaseKey,
   authDomain: fbAuthDomain,
   databaseURL: fbdbUrl,
   projectId: fbProjId,
-  storageBucket: "",
+  storageBucket: storageBucket,
   messagingSenderId: fbMessagingSenderId
 };
 
@@ -22,7 +23,10 @@ const auth = firebase.auth();
 
 const db = firebase.database();
 
+const store = firebase.storage();
+
 export {
   db,
   auth,
+  store
 };
