@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { db } from '../../firebase';
+import { db, store } from '../../firebase';
 
 class PostPuzzleForm extends Component {
   constructor() {
@@ -13,25 +13,43 @@ class PostPuzzleForm extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.value)
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
   handlePhoto = (files: FileList) => {
-    const puzzleImg = window.URL.createObjectURL(files[0])
+    const puzzleImg = files[0];
+
+    // const puzzleImg = window.URL.createObjectURL(files[0])
     this.setState({ puzzleImg });
   }
 
-  postPuzzleToBackend = (e) => {
+  //post to database first, get reference?
+  //make reference in image the same
+
+  postToDB = (puzzleId) => {
+    const { title, numPieces, piecesMissing } = this.state;
+    const postDB = { title, numPieces, piecesMissing, puzzleId }
+    const firebaseKey = db.getFirebaseKey('puzzles');
+    let updates = {};
+    updates[`/puzzles/${firebaseKey}`] = postDB;
+    return console.log('dbUpdate', db.postUpdate(updates));
+  }
+
+  postToCloudStore = () => {
+    const { puzzleImg } = this.state;
+    const puzzleId = Date.now();
+    const ref = store.getStoreRef(`images/${puzzleId}`);
+    console.log(store.putInStore(ref, puzzleImg))
+    return puzzleId;
+  }
+
+  postPuzzleToFirebase = async (e) => {
     e.preventDefault();
     try {
-      const postData = {...this.state}
-      const firebaseKey = db.getFirebaseKey('puzzles');
-      let updates = {};
-      updates[`/puzzles/${firebaseKey}`] = postData;
-      return db.postUpdate(updates);
+      const puzzleId = await this.postToCloudStore();
+      await this.postToDB(puzzleId);
     } catch (error) {
       this.setState({ error: error.message })
     }
@@ -47,7 +65,7 @@ class PostPuzzleForm extends Component {
         {
           this.state.error && <p>{this.state.error}</p>
         }
-        <form onSubmit={this.postPuzzleToBackend}>
+        <form onSubmit={this.postPuzzleToFirebase}>
           <label htmlFor='puzzle-name'>Puzzle Name</label>
             <input type='text' placeholder='puzzle title'
                    value={this.state.title}
