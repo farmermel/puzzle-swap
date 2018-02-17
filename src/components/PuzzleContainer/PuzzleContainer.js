@@ -2,26 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PuzzleCard from '../PuzzleCard/PuzzleCard';
 import { db, store } from '../../firebase';
+import { setPuzzles } from '../../actions/setPuzzles';
 import './PuzzleContainer.css';
 
 class PuzzleContainer extends Component {
-  constructor() {
-    super()
-    this.state = {
-      puzzles: ''
-    }
-  }
 
   componentDidMount = () => {
     const puzzlesData = this.retrievePuzzles();
 
-    const puzzles = puzzlesData.on('value', snapshot => {
+    puzzlesData.on('value', snapshot => {
       this.parsePuzzles(snapshot.val())
     })
   }
 
   retrievePuzzles = () => {
     return db.watchData('puzzles')
+  }
+
+  parsePuzzles = snapshot => {
+    const puzzles = Object.keys(snapshot).map( puzzle => {
+      return snapshot[puzzle];
+    })
+
+    this.props.setPuzzles(puzzles);
+  }
+
+  displayPuzzles = () => {
+    const { puzzles } = this.props;
+    return puzzles && puzzles.map( puzzle => {
+      return <PuzzleCard puzzle={puzzle} />
+    })
   }
 
   // getImg = async (imgId) => {
@@ -34,14 +44,6 @@ class PuzzleContainer extends Component {
   //   }
   // }
 
-  parsePuzzles = snapshot => {
-    const puzzlesDisplay = Object.keys(snapshot).map( puzzle => {
-      return (
-        <PuzzleCard puzzle={snapshot[puzzle]} /> 
-      )
-    })
-    this.setState({ puzzles: puzzlesDisplay })
-  }
 
   // parsePuzzles = async snapshot => {
   //   const puzzlesDisplay = await Object.keys(snapshot).map( async puzzle => {
@@ -59,10 +61,18 @@ class PuzzleContainer extends Component {
   render() {
     return (
       <div className='puzzle-container'>
-        {this.state.puzzles || <div>loading</div>}
+        {this.displayPuzzles() || <div>loading</div>}
       </div>
     )
   }
 }
 
-export default PuzzleContainer;
+const mapStateToProps = state => ({
+  puzzles: state.puzzles
+})
+
+const mapDispatchToProps = dispatch => ({
+  setPuzzles: puzzles => dispatch(setPuzzles(puzzles))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PuzzleContainer);
