@@ -1,13 +1,14 @@
 .app-title {
   margin: 0px;
   color: #260120;
-  font-size: 5.5em;
+  font-size: 4em;
 }
 
 .App-header {
   display: flex;
   justify-content: space-between;
-  background-color: #D2DDDC;
+  /*background-color: #D2DDDC;*/
+  border-bottom: 1px solid #EFEDED;
   height: 100px;
   padding: 20px;
   color: white;
@@ -18,4 +19,23 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.header-right a {
+  text-decoration: underline;
+  color: black;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.puzzleicon {
+  width: 80px;
+}
+
+#header-wrap {
+  display: flex;
+}
+
+.login {
+  margin: 0 15px 0 0;
 }

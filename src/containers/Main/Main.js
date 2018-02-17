@@ -56,7 +56,7 @@ export class Main extends Component {
             <button className='puzzle-post'>Post a Puzzle</button>
           </Link>
         }
-        <p>Viewing {this.generateSelect()} piece puzzles posted in {location}</p>
+        <p className='view-description'>Viewing {this.generateSelect()} piece puzzles posted in {location}</p>
         <PuzzleContainer />
       </div>
     ) 
