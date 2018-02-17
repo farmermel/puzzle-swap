@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PuzzleCard from '../PuzzleCard/PuzzleCard';
 import { db, store } from '../../firebase';
+import { setPuzzles } from '../../actions/setPuzzles';
 import './PuzzleContainer.css';
 
 class PuzzleContainer extends Component {
-  constructor() {
-    super()
-    this.state = {
-      puzzles: ''
-    }
-  }
-
   componentDidMount = () => {
     const puzzlesData = this.retrievePuzzles();
 
-    const puzzles = puzzlesData.on('value', snapshot => {
+    puzzlesData.on('value', snapshot => {
       this.parsePuzzles(snapshot.val())
     })
   }
@@ -24,45 +18,49 @@ class PuzzleContainer extends Component {
     return db.watchData('puzzles')
   }
 
-  // getImg = async (imgId) => {
-  //   try{
-  //     const ref = await store.getStoreRef(`images/${imgId}`)
-  //     const imgUrl = await ref.getDownloadURL();
-  //     return imgUrl;
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  parsePuzzles = snapshot => {
-    const puzzlesDisplay = Object.keys(snapshot).map( puzzle => {
-      return (
-        <PuzzleCard puzzle={snapshot[puzzle]} /> 
-      )
+  parsePuzzles = async snapshot => {
+    const puzzles = await Object.keys(snapshot).map(async puzzle => {
+      const imgUrl = await this.getImg(snapshot[puzzle].puzzleId);
+      snapshot[puzzle].imgUrl = imgUrl;
+      return snapshot[puzzle];
     })
-    this.setState({ puzzles: puzzlesDisplay })
+    const resolvedPuzzles = await Promise.all(puzzles)
+    this.props.setPuzzles(resolvedPuzzles);
   }
 
-  // parsePuzzles = async snapshot => {
-  //   const puzzlesDisplay = await Object.keys(snapshot).map( async puzzle => {
-  //     const imgUrl = await this.getImg(snapshot[puzzle].puzzleId)
-  //     console.log(snapshot[puzzle])
-  //     return (
-  //       <PuzzleCard puzzle={snapshot[puzzle]}
-  //                   img={imgUrl} /> 
-  //     )
-  //   })
-  //   console.log('puzzles', puzzlesDisplay)
-  //   await this.setState({ puzzles: puzzlesDisplay })
-  // }
+  displayPuzzles = () => {
+    const { puzzles } = this.props;
+    return puzzles && puzzles.map( puzzle => {
+      return <PuzzleCard puzzle={puzzle}
+                         key={puzzle.puzzleId} />
+    })
+  }
+
+  getImg = async (imgId) => {
+    try{
+      const ref = await store.getStoreRef(`images/${imgId}`)
+      const imgUrl = await ref.getDownloadURL();
+      return imgUrl;
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   render() {
     return (
       <div className='puzzle-container'>
-        {this.state.puzzles || <div>loading</div>}
+        {this.displayPuzzles() || <div>loading</div>}
       </div>
     )
   }
 }
 
-export default PuzzleContainer;
+const mapStateToProps = state => ({
+  puzzles: state.puzzles
+})
+
+const mapDispatchToProps = dispatch => ({
+  setPuzzles: puzzles => dispatch(setPuzzles(puzzles))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PuzzleContainer);
