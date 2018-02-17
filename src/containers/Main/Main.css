@@ -10,3 +10,8 @@
   height: 30px;
   width: 100px;
 }
+
+.view-description {
+  text-align: left;
+  margin: 0 0 0 4%;
+}
