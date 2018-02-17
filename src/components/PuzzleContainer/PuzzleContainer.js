@@ -6,7 +6,6 @@ import { setPuzzles } from '../../actions/setPuzzles';
 import './PuzzleContainer.css';
 
 class PuzzleContainer extends Component {
-
   componentDidMount = () => {
     const puzzlesData = this.retrievePuzzles();
 
@@ -19,44 +18,33 @@ class PuzzleContainer extends Component {
     return db.watchData('puzzles')
   }
 
-  parsePuzzles = snapshot => {
-    const puzzles = Object.keys(snapshot).map( puzzle => {
+  parsePuzzles = async snapshot => {
+    const puzzles = await Object.keys(snapshot).map(async puzzle => {
+      const imgUrl = await this.getImg(snapshot[puzzle].puzzleId);
+      snapshot[puzzle].imgUrl = imgUrl;
       return snapshot[puzzle];
     })
-
-    this.props.setPuzzles(puzzles);
+    const resolvedPuzzles = await Promise.all(puzzles)
+    this.props.setPuzzles(resolvedPuzzles);
   }
 
   displayPuzzles = () => {
     const { puzzles } = this.props;
     return puzzles && puzzles.map( puzzle => {
-      return <PuzzleCard puzzle={puzzle} />
+      return <PuzzleCard puzzle={puzzle}
+                         key={puzzle.puzzleId} />
     })
   }
 
-  // getImg = async (imgId) => {
-  //   try{
-  //     const ref = await store.getStoreRef(`images/${imgId}`)
-  //     const imgUrl = await ref.getDownloadURL();
-  //     return imgUrl;
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-
-  // parsePuzzles = async snapshot => {
-  //   const puzzlesDisplay = await Object.keys(snapshot).map( async puzzle => {
-  //     const imgUrl = await this.getImg(snapshot[puzzle].puzzleId)
-  //     console.log(snapshot[puzzle])
-  //     return (
-  //       <PuzzleCard puzzle={snapshot[puzzle]}
-  //                   img={imgUrl} /> 
-  //     )
-  //   })
-  //   console.log('puzzles', puzzlesDisplay)
-  //   await this.setState({ puzzles: puzzlesDisplay })
-  // }
+  getImg = async (imgId) => {
+    try{
+      const ref = await store.getStoreRef(`images/${imgId}`)
+      const imgUrl = await ref.getDownloadURL();
+      return imgUrl;
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   render() {
     return (
