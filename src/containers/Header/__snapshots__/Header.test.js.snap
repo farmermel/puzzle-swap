@@ -5,7 +5,6 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Unknown
-    loggedIn={true}
     setLogin={[Function]}
 />,
   Symbol(enzyme.__renderer__): Object {

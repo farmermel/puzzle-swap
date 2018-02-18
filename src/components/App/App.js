@@ -13,7 +13,7 @@ import Messages from '../Messages/Messages';
 import PropTypes from 'prop-types';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   componentDidMount = () => {
     const { setUser } = this.props;
     auth.onAuthStateChanged(authUser => {
@@ -42,11 +42,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   user: state.user
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setUser: user => dispatch(setUser(user))
 })
 
