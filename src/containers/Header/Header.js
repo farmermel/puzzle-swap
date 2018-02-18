@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { auth } from '../../firebase';
-import { setLogin } from '../../actions/loginAction';
 import puzzleIcon from '../../assets/puzzle.svg';
 import './Header.css';
 
@@ -54,8 +52,4 @@ export const Header = ({ user }) => {
   )
 }
 
-export const mapDispatchToProps = dispatch => ({
-  setLogin: boolean => dispatch(setLogin(boolean))
-})
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;
