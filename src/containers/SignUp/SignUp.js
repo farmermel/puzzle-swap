@@ -3,6 +3,7 @@ import { auth, db } from '../../firebase'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setLogin } from '../../actions/loginAction';
+import PropTypes from 'prop-types';
 import './SignUp';
 
 export class SignUp extends Component {
@@ -30,9 +31,9 @@ export class SignUp extends Component {
       const authUser = await auth.doCreateUserWithEmailAndPassword(email, password);
       await db.doCreateUser(authUser.uid, name, email);
       setLogin(true);
-    } catch (e) {
-      this.setState({ error: e.message })
-      console.log(e)
+    } catch (error) {
+      this.setState({ error: error.message })
+      console.log(error)
     }
   }
 
@@ -67,5 +68,9 @@ export class SignUp extends Component {
 export const mapDispatchToProps = (dispatch) => ({
   setLogin: boolean => dispatch(setLogin(boolean))
 });
+
+SignUp.propTypes = {
+  setLogin: PropTypes.func.isRequired
+}
 
 export default connect(null, mapDispatchToProps)(withRouter(SignUp));
