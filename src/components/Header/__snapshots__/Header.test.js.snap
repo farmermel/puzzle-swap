@@ -22,6 +22,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Link
+          id="header-wrap"
           replace={false}
           to={
                     Object {
@@ -29,17 +30,51 @@ ShallowWrapper {
                             }
           }
 >
+          <img
+                    alt="puzzle"
+                    className="puzzleicon"
+                    src="puzzle.svg"
+          />
           <h1
                     className="app-title"
           >
                     Puzzle Swap
           </h1>
 </Link>,
-        <button
-          onClick={[Function]}
+        <div
+          className="header-right"
 >
-          Sign out
-</button>,
+          <div
+                    className="login-container"
+          >
+                    <Link
+                              replace={false}
+                              to={
+                                        Object {
+                                                  "pathname": "/login",
+                                                }
+                              }
+                    >
+                              <span
+                                        className="login"
+                              >
+                                        Login
+                              </span>
+                    </Link>
+                    <Link
+                              replace={false}
+                              to={
+                                        Object {
+                                                  "pathname": "/sign-up",
+                                                }
+                              }
+                    >
+                              <span>
+                                        Sign up
+                              </span>
+                    </Link>
+          </div>
+</div>,
       ],
       "className": "App-header",
     },
@@ -50,29 +85,52 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <h1
-            className="app-title"
+          "children": Array [
+            <img
+              alt="puzzle"
+              className="puzzleicon"
+              src="puzzle.svg"
+/>,
+            <h1
+              className="app-title"
 >
-            Puzzle Swap
+              Puzzle Swap
 </h1>,
+          ],
+          "id": "header-wrap",
           "replace": false,
           "to": Object {
             "pathname": "/",
           },
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Puzzle Swap",
-            "className": "app-title",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "puzzle",
+              "className": "puzzleicon",
+              "src": "puzzle.svg",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
           },
-          "ref": null,
-          "rendered": "Puzzle Swap",
-          "type": "h1",
-        },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Puzzle Swap",
+              "className": "app-title",
+            },
+            "ref": null,
+            "rendered": "Puzzle Swap",
+            "type": "h1",
+          },
+        ],
         "type": [Function],
       },
       Object {
@@ -80,12 +138,137 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Sign out",
-          "onClick": [Function],
+          "children": <div
+            className="login-container"
+>
+            <Link
+                        replace={false}
+                        to={
+                                    Object {
+                                                "pathname": "/login",
+                                              }
+                        }
+            >
+                        <span
+                                    className="login"
+                        >
+                                    Login
+                        </span>
+            </Link>
+            <Link
+                        replace={false}
+                        to={
+                                    Object {
+                                                "pathname": "/sign-up",
+                                              }
+                        }
+            >
+                        <span>
+                                    Sign up
+                        </span>
+            </Link>
+</div>,
+          "className": "header-right",
         },
         "ref": null,
-        "rendered": "Sign out",
-        "type": "button",
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <Link
+                replace={false}
+                to={
+                                Object {
+                                                "pathname": "/login",
+                                              }
+                }
+>
+                <span
+                                className="login"
+                >
+                                Login
+                </span>
+</Link>,
+              <Link
+                replace={false}
+                to={
+                                Object {
+                                                "pathname": "/sign-up",
+                                              }
+                }
+>
+                <span>
+                                Sign up
+                </span>
+</Link>,
+            ],
+            "className": "login-container",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <span
+                  className="login"
+>
+                  Login
+</span>,
+                "replace": false,
+                "to": Object {
+                  "pathname": "/login",
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Login",
+                  "className": "login",
+                },
+                "ref": null,
+                "rendered": "Login",
+                "type": "span",
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <span>
+                  Sign up
+</span>,
+                "replace": false,
+                "to": Object {
+                  "pathname": "/sign-up",
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Sign up",
+                },
+                "ref": null,
+                "rendered": "Sign up",
+                "type": "span",
+              },
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": "div",
       },
     ],
     "type": "div",
@@ -98,6 +281,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Link
+            id="header-wrap"
             replace={false}
             to={
                         Object {
@@ -105,17 +289,51 @@ ShallowWrapper {
                                   }
             }
 >
+            <img
+                        alt="puzzle"
+                        className="puzzleicon"
+                        src="puzzle.svg"
+            />
             <h1
                         className="app-title"
             >
                         Puzzle Swap
             </h1>
 </Link>,
-          <button
-            onClick={[Function]}
+          <div
+            className="header-right"
 >
-            Sign out
-</button>,
+            <div
+                        className="login-container"
+            >
+                        <Link
+                                    replace={false}
+                                    to={
+                                                Object {
+                                                            "pathname": "/login",
+                                                          }
+                                    }
+                        >
+                                    <span
+                                                className="login"
+                                    >
+                                                Login
+                                    </span>
+                        </Link>
+                        <Link
+                                    replace={false}
+                                    to={
+                                                Object {
+                                                            "pathname": "/sign-up",
+                                                          }
+                                    }
+                        >
+                                    <span>
+                                                Sign up
+                                    </span>
+                        </Link>
+            </div>
+</div>,
         ],
         "className": "App-header",
       },
@@ -126,29 +344,52 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <h1
-              className="app-title"
+            "children": Array [
+              <img
+                alt="puzzle"
+                className="puzzleicon"
+                src="puzzle.svg"
+/>,
+              <h1
+                className="app-title"
 >
-              Puzzle Swap
+                Puzzle Swap
 </h1>,
+            ],
+            "id": "header-wrap",
             "replace": false,
             "to": Object {
               "pathname": "/",
             },
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Puzzle Swap",
-              "className": "app-title",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "puzzle",
+                "className": "puzzleicon",
+                "src": "puzzle.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
             },
-            "ref": null,
-            "rendered": "Puzzle Swap",
-            "type": "h1",
-          },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Puzzle Swap",
+                "className": "app-title",
+              },
+              "ref": null,
+              "rendered": "Puzzle Swap",
+              "type": "h1",
+            },
+          ],
           "type": [Function],
         },
         Object {
@@ -156,12 +397,137 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Sign out",
-            "onClick": [Function],
+            "children": <div
+              className="login-container"
+>
+              <Link
+                            replace={false}
+                            to={
+                                          Object {
+                                                        "pathname": "/login",
+                                                      }
+                            }
+              >
+                            <span
+                                          className="login"
+                            >
+                                          Login
+                            </span>
+              </Link>
+              <Link
+                            replace={false}
+                            to={
+                                          Object {
+                                                        "pathname": "/sign-up",
+                                                      }
+                            }
+              >
+                            <span>
+                                          Sign up
+                            </span>
+              </Link>
+</div>,
+            "className": "header-right",
           },
           "ref": null,
-          "rendered": "Sign out",
-          "type": "button",
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Link
+                  replace={false}
+                  to={
+                                    Object {
+                                                      "pathname": "/login",
+                                                    }
+                  }
+>
+                  <span
+                                    className="login"
+                  >
+                                    Login
+                  </span>
+</Link>,
+                <Link
+                  replace={false}
+                  to={
+                                    Object {
+                                                      "pathname": "/sign-up",
+                                                    }
+                  }
+>
+                  <span>
+                                    Sign up
+                  </span>
+</Link>,
+              ],
+              "className": "login-container",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <span
+                    className="login"
+>
+                    Login
+</span>,
+                  "replace": false,
+                  "to": Object {
+                    "pathname": "/login",
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Login",
+                    "className": "login",
+                  },
+                  "ref": null,
+                  "rendered": "Login",
+                  "type": "span",
+                },
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <span>
+                    Sign up
+</span>,
+                  "replace": false,
+                  "to": Object {
+                    "pathname": "/sign-up",
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Sign up",
+                  },
+                  "ref": null,
+                  "rendered": "Sign up",
+                  "type": "span",
+                },
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": "div",
         },
       ],
       "type": "div",
@@ -199,6 +565,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Link
+          id="header-wrap"
           replace={false}
           to={
                     Object {
@@ -206,6 +573,11 @@ ShallowWrapper {
                             }
           }
 >
+          <img
+                    alt="puzzle"
+                    className="puzzleicon"
+                    src="puzzle.svg"
+          />
           <h1
                     className="app-title"
           >
@@ -226,11 +598,11 @@ ShallowWrapper {
                                                 }
                               }
                     >
-                              <button
+                              <span
                                         className="login"
                               >
                                         Login
-                              </button>
+                              </span>
                     </Link>
                     <Link
                               replace={false}
@@ -240,27 +612,11 @@ ShallowWrapper {
                                                 }
                               }
                     >
-                              <button
-                                        className="login"
-                              >
+                              <span>
                                         Sign up
-                              </button>
+                              </span>
                     </Link>
           </div>
-          <Link
-                    replace={false}
-                    to={
-                              Object {
-                                        "pathname": "/messages",
-                                      }
-                    }
-          >
-                    <button
-                              className="messages"
-                    >
-                              Messages
-                    </button>
-          </Link>
 </div>,
       ],
       "className": "App-header",
@@ -272,85 +628,23 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <h1
-            className="app-title"
+          "children": Array [
+            <img
+              alt="puzzle"
+              className="puzzleicon"
+              src="puzzle.svg"
+/>,
+            <h1
+              className="app-title"
 >
-            Puzzle Swap
+              Puzzle Swap
 </h1>,
+          ],
+          "id": "header-wrap",
           "replace": false,
           "to": Object {
             "pathname": "/",
           },
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Puzzle Swap",
-            "className": "app-title",
-          },
-          "ref": null,
-          "rendered": "Puzzle Swap",
-          "type": "h1",
-        },
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <div
-              className="login-container"
->
-              <Link
-                            replace={false}
-                            to={
-                                          Object {
-                                                        "pathname": "/login",
-                                                      }
-                            }
-              >
-                            <button
-                                          className="login"
-                            >
-                                          Login
-                            </button>
-              </Link>
-              <Link
-                            replace={false}
-                            to={
-                                          Object {
-                                                        "pathname": "/sign-up",
-                                                      }
-                            }
-              >
-                            <button
-                                          className="login"
-                            >
-                                          Sign up
-                            </button>
-              </Link>
-</div>,
-            <Link
-              replace={false}
-              to={
-                            Object {
-                                          "pathname": "/messages",
-                                        }
-              }
->
-              <button
-                            className="messages"
-              >
-                            Messages
-              </button>
-</Link>,
-          ],
-          "className": "header-right",
         },
         "ref": null,
         "rendered": Array [
@@ -359,134 +653,164 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": Array [
-                <Link
-                  replace={false}
-                  to={
-                                    Object {
-                                                      "pathname": "/login",
-                                                    }
-                  }
->
-                  <button
-                                    className="login"
-                  >
-                                    Login
-                  </button>
-</Link>,
-                <Link
-                  replace={false}
-                  to={
-                                    Object {
-                                                      "pathname": "/sign-up",
-                                                    }
-                  }
->
-                  <button
-                                    className="login"
-                  >
-                                    Sign up
-                  </button>
-</Link>,
-              ],
-              "className": "login-container",
+              "alt": "puzzle",
+              "className": "puzzleicon",
+              "src": "puzzle.svg",
             },
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": <button
-                    className="login"
->
-                    Login
-</button>,
-                  "replace": false,
-                  "to": Object {
-                    "pathname": "/login",
-                  },
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Login",
-                    "className": "login",
-                  },
-                  "ref": null,
-                  "rendered": "Login",
-                  "type": "button",
-                },
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": <button
-                    className="login"
->
-                    Sign up
-</button>,
-                  "replace": false,
-                  "to": Object {
-                    "pathname": "/sign-up",
-                  },
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Sign up",
-                    "className": "login",
-                  },
-                  "ref": null,
-                  "rendered": "Sign up",
-                  "type": "button",
-                },
-                "type": [Function],
-              },
-            ],
-            "type": "div",
+            "rendered": null,
+            "type": "img",
           },
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "host",
             "props": Object {
-              "children": <button
-                className="messages"
->
-                Messages
-</button>,
-              "replace": false,
-              "to": Object {
-                "pathname": "/messages",
-              },
+              "children": "Puzzle Swap",
+              "className": "app-title",
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Messages",
-                "className": "messages",
-              },
-              "ref": null,
-              "rendered": "Messages",
-              "type": "button",
-            },
-            "type": [Function],
+            "rendered": "Puzzle Swap",
+            "type": "h1",
           },
         ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="login-container"
+>
+            <Link
+                        replace={false}
+                        to={
+                                    Object {
+                                                "pathname": "/login",
+                                              }
+                        }
+            >
+                        <span
+                                    className="login"
+                        >
+                                    Login
+                        </span>
+            </Link>
+            <Link
+                        replace={false}
+                        to={
+                                    Object {
+                                                "pathname": "/sign-up",
+                                              }
+                        }
+            >
+                        <span>
+                                    Sign up
+                        </span>
+            </Link>
+</div>,
+          "className": "header-right",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <Link
+                replace={false}
+                to={
+                                Object {
+                                                "pathname": "/login",
+                                              }
+                }
+>
+                <span
+                                className="login"
+                >
+                                Login
+                </span>
+</Link>,
+              <Link
+                replace={false}
+                to={
+                                Object {
+                                                "pathname": "/sign-up",
+                                              }
+                }
+>
+                <span>
+                                Sign up
+                </span>
+</Link>,
+            ],
+            "className": "login-container",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <span
+                  className="login"
+>
+                  Login
+</span>,
+                "replace": false,
+                "to": Object {
+                  "pathname": "/login",
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Login",
+                  "className": "login",
+                },
+                "ref": null,
+                "rendered": "Login",
+                "type": "span",
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <span>
+                  Sign up
+</span>,
+                "replace": false,
+                "to": Object {
+                  "pathname": "/sign-up",
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Sign up",
+                },
+                "ref": null,
+                "rendered": "Sign up",
+                "type": "span",
+              },
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
         "type": "div",
       },
     ],
@@ -500,6 +824,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Link
+            id="header-wrap"
             replace={false}
             to={
                         Object {
@@ -507,6 +832,11 @@ ShallowWrapper {
                                   }
             }
 >
+            <img
+                        alt="puzzle"
+                        className="puzzleicon"
+                        src="puzzle.svg"
+            />
             <h1
                         className="app-title"
             >
@@ -527,11 +857,11 @@ ShallowWrapper {
                                                           }
                                     }
                         >
-                                    <button
+                                    <span
                                                 className="login"
                                     >
                                                 Login
-                                    </button>
+                                    </span>
                         </Link>
                         <Link
                                     replace={false}
@@ -541,27 +871,11 @@ ShallowWrapper {
                                                           }
                                     }
                         >
-                                    <button
-                                                className="login"
-                                    >
+                                    <span>
                                                 Sign up
-                                    </button>
+                                    </span>
                         </Link>
             </div>
-            <Link
-                        replace={false}
-                        to={
-                                    Object {
-                                                "pathname": "/messages",
-                                              }
-                        }
-            >
-                        <button
-                                    className="messages"
-                        >
-                                    Messages
-                        </button>
-            </Link>
 </div>,
         ],
         "className": "App-header",
@@ -573,85 +887,23 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <h1
-              className="app-title"
+            "children": Array [
+              <img
+                alt="puzzle"
+                className="puzzleicon"
+                src="puzzle.svg"
+/>,
+              <h1
+                className="app-title"
 >
-              Puzzle Swap
+                Puzzle Swap
 </h1>,
+            ],
+            "id": "header-wrap",
             "replace": false,
             "to": Object {
               "pathname": "/",
             },
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Puzzle Swap",
-              "className": "app-title",
-            },
-            "ref": null,
-            "rendered": "Puzzle Swap",
-            "type": "h1",
-          },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <div
-                className="login-container"
->
-                <Link
-                                replace={false}
-                                to={
-                                                Object {
-                                                                "pathname": "/login",
-                                                              }
-                                }
-                >
-                                <button
-                                                className="login"
-                                >
-                                                Login
-                                </button>
-                </Link>
-                <Link
-                                replace={false}
-                                to={
-                                                Object {
-                                                                "pathname": "/sign-up",
-                                                              }
-                                }
-                >
-                                <button
-                                                className="login"
-                                >
-                                                Sign up
-                                </button>
-                </Link>
-</div>,
-              <Link
-                replace={false}
-                to={
-                                Object {
-                                                "pathname": "/messages",
-                                              }
-                }
->
-                <button
-                                className="messages"
-                >
-                                Messages
-                </button>
-</Link>,
-            ],
-            "className": "header-right",
           },
           "ref": null,
           "rendered": Array [
@@ -660,134 +912,164 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": Array [
-                  <Link
-                    replace={false}
-                    to={
-                                        Object {
-                                                            "pathname": "/login",
-                                                          }
-                    }
->
-                    <button
-                                        className="login"
-                    >
-                                        Login
-                    </button>
-</Link>,
-                  <Link
-                    replace={false}
-                    to={
-                                        Object {
-                                                            "pathname": "/sign-up",
-                                                          }
-                    }
->
-                    <button
-                                        className="login"
-                    >
-                                        Sign up
-                    </button>
-</Link>,
-                ],
-                "className": "login-container",
+                "alt": "puzzle",
+                "className": "puzzleicon",
+                "src": "puzzle.svg",
               },
               "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "children": <button
-                      className="login"
->
-                      Login
-</button>,
-                    "replace": false,
-                    "to": Object {
-                      "pathname": "/login",
-                    },
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Login",
-                      "className": "login",
-                    },
-                    "ref": null,
-                    "rendered": "Login",
-                    "type": "button",
-                  },
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "children": <button
-                      className="login"
->
-                      Sign up
-</button>,
-                    "replace": false,
-                    "to": Object {
-                      "pathname": "/sign-up",
-                    },
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Sign up",
-                      "className": "login",
-                    },
-                    "ref": null,
-                    "rendered": "Sign up",
-                    "type": "button",
-                  },
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
+              "rendered": null,
+              "type": "img",
             },
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "host",
               "props": Object {
-                "children": <button
-                  className="messages"
->
-                  Messages
-</button>,
-                "replace": false,
-                "to": Object {
-                  "pathname": "/messages",
-                },
+                "children": "Puzzle Swap",
+                "className": "app-title",
               },
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Messages",
-                  "className": "messages",
-                },
-                "ref": null,
-                "rendered": "Messages",
-                "type": "button",
-              },
-              "type": [Function],
+              "rendered": "Puzzle Swap",
+              "type": "h1",
             },
           ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="login-container"
+>
+              <Link
+                            replace={false}
+                            to={
+                                          Object {
+                                                        "pathname": "/login",
+                                                      }
+                            }
+              >
+                            <span
+                                          className="login"
+                            >
+                                          Login
+                            </span>
+              </Link>
+              <Link
+                            replace={false}
+                            to={
+                                          Object {
+                                                        "pathname": "/sign-up",
+                                                      }
+                            }
+              >
+                            <span>
+                                          Sign up
+                            </span>
+              </Link>
+</div>,
+            "className": "header-right",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Link
+                  replace={false}
+                  to={
+                                    Object {
+                                                      "pathname": "/login",
+                                                    }
+                  }
+>
+                  <span
+                                    className="login"
+                  >
+                                    Login
+                  </span>
+</Link>,
+                <Link
+                  replace={false}
+                  to={
+                                    Object {
+                                                      "pathname": "/sign-up",
+                                                    }
+                  }
+>
+                  <span>
+                                    Sign up
+                  </span>
+</Link>,
+              ],
+              "className": "login-container",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <span
+                    className="login"
+>
+                    Login
+</span>,
+                  "replace": false,
+                  "to": Object {
+                    "pathname": "/login",
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Login",
+                    "className": "login",
+                  },
+                  "ref": null,
+                  "rendered": "Login",
+                  "type": "span",
+                },
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <span>
+                    Sign up
+</span>,
+                  "replace": false,
+                  "to": Object {
+                    "pathname": "/sign-up",
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Sign up",
+                  },
+                  "ref": null,
+                  "rendered": "Sign up",
+                  "type": "span",
+                },
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
           "type": "div",
         },
       ],

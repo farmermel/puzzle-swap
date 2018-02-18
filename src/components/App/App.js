@@ -10,6 +10,7 @@ import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
 import Messages from '../Messages/Messages';
+import PropTypes from 'prop-types';
 import './App.css';
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.props;
     return (
       <div className="App">
         <Header user={ this.props.user }/>
@@ -28,10 +30,10 @@ class App extends Component {
           <Route exact path='/' component={ Main } />
           <Route path='/post-puzzle-form' component={ PostPuzzleForm } />
           <Route path='/login' render={() => 
-            this.props.user ? <Redirect to='/' /> : <Login />
+            user ? <Redirect to='/' /> : <Login />
           } />
           <Route path='/sign-up' render={() => 
-            this.props.user ? <Redirect to='/' /> : <SignUp />
+            user ? <Redirect to='/' /> : <SignUp />
           } />
           <Route path='/messages' component={ Messages } />
         </Switch>
@@ -47,5 +49,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setUser: user => dispatch(setUser(user))
 })
+
+App.propTypes = {
+  user: PropTypes.object,
+  setUser: PropTypes.func.isRequired
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

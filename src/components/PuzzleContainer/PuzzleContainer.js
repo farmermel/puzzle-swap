@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import PuzzleCard from '../PuzzleCard/PuzzleCard';
 import { db, store } from '../../firebase';
 import { setPuzzles } from '../../actions/setPuzzles';
+import PropTypes from 'prop-types';
 import './PuzzleContainer.css';
 
-class PuzzleContainer extends Component {
+export class PuzzleContainer extends Component {
   componentDidMount = () => {
     const puzzlesData = this.retrievePuzzles();
 
@@ -55,12 +56,23 @@ class PuzzleContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   puzzles: state.puzzles
 })
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setPuzzles: puzzles => dispatch(setPuzzles(puzzles))
 })
+
+PuzzleContainer.propTypes = {
+  puzzles: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    numPieces: PropTypes.string,
+    piecesMissing: PropTypes.string,
+    imgUrl: PropTypes.string,
+    puzzleId: PropTypes.number
+  })),
+  setPuzzles: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PuzzleContainer);

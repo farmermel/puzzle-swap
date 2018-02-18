@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './PuzzleCard.css';
 
 const PuzzleCard = ({ puzzle }) => {
@@ -14,6 +15,16 @@ const PuzzleCard = ({ puzzle }) => {
       <button className='claim'>Claim</button>
     </article>
   )
+}
+
+PuzzleCard.propTypes = {
+  puzzle: PropTypes.shape({
+    title: PropTypes.string,
+    numPieces: PropTypes.string,
+    piecesMissing: PropTypes.string,
+    imgUrl: PropTypes.string,
+    puzzleId: PropTypes.number
+  })
 }
 
 export default PuzzleCard;

@@ -24,7 +24,6 @@ export class Main extends Component {
       this.setState({
         error: error.message
       })
-      console.log(error)
     }
   }
 

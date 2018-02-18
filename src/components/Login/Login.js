@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { auth } from '../../firebase';
 import { setLogin } from '../../actions/loginAction';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import '../SignUp/SignUp.css';
 
 export class Login extends Component {
@@ -51,5 +52,9 @@ export class Login extends Component {
 export const mapDispatchToProps = dispatch => ({
   setLogin: boolean => dispatch(setLogin(boolean))
 })
+
+Login.propTypes = {
+  setLogin: PropTypes.func.isRequired
+}
 
 export default connect(null, mapDispatchToProps)(Login);
