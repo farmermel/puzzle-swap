@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { auth, db } from '../../firebase';
-import { SignUp, mapDispatchToProps } from './SignUp';
+import { SignUp } from './SignUp';
 
 describe('SignUp', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<SignUp setLogin={jest.fn()} />)
+    wrapper = shallow(<SignUp />)
   })
 
   it('matches snapshot', () => {
@@ -61,12 +61,6 @@ describe('SignUp', () => {
       expect(db.doCreateUser).toHaveBeenCalled();
     })
 
-    it('calls setLogin', async () => {
-      expect(wrapper.instance().props.setLogin).not.toHaveBeenCalled();
-      await wrapper.instance().handleSubmit(mockEvent);
-      expect(wrapper.instance().props.setLogin).toHaveBeenCalled();
-    })
-
     it.skip('sets state with error if either create user method fails', async () => {
       window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
         status: 500,
@@ -75,16 +69,6 @@ describe('SignUp', () => {
       db.doCreateUser = window.fetch;
       await wrapper.instance().handleSubmit(mockEvent);
       expect(wrapper.instance().state).toEqual();
-    })
-  })
-
-  describe('mapDispatchToProps', () => {
-    it('maps dispatch to props', () => {
-      const mockDispatch = jest.fn();
-      const mapped = mapDispatchToProps(mockDispatch);
-      expect(mockDispatch).not.toHaveBeenCalled();
-      mapped.setLogin(true);
-      expect(mockDispatch).toHaveBeenCalled();
     })
   })
 })
