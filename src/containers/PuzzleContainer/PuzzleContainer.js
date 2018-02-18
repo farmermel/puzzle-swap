@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard';
-import { db, store } from '../../firebase';
+import { db, storage } from '../../firebase';
 import { setPuzzles } from '../../actions/setPuzzles';
 import PropTypes from 'prop-types';
 import './PuzzleContainer.css';
@@ -39,7 +39,7 @@ export class PuzzleContainer extends Component {
 
   getImg = async (imgId) => {
     try{
-      const ref = await store.getStoreRef(`images/${imgId}`)
+      const ref = await storage.getStoreRef(`images/${imgId}`)
       const imgUrl = await ref.getDownloadURL();
       return imgUrl;
     } catch (error) {
