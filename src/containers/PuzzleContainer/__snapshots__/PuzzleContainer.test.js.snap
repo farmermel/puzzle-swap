@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PuzzleContainer matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PuzzleContainer
+    puzzles={
+        Array [
+            Object {
+              "imgUrl": "google",
+              "numPieces": "1000",
+              "piecesMissing": "3-4",
+              "puzzleId": 4,
+              "title": "Witch",
+            },
+            Object {
+              "imgUrl": "yahoo",
+              "numPieces": "1000",
+              "piecesMissing": "3-4",
+              "puzzleId": 45,
+              "title": "Fairy",
+            },
+            Object {
+              "imgUrl": "aol",
+              "numPieces": "1500",
+              "piecesMissing": "3-4",
+              "puzzleId": 6,
+              "title": "Unicorn",
+            },
+          ]
+    }
+    setPuzzles={[Function]}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <PuzzleCard
+          puzzle={
+                    Object {
+                              "imgUrl": "google",
+                              "numPieces": "1000",
+                              "piecesMissing": "3-4",
+                              "puzzleId": 4,
+                              "title": "Witch",
+                            }
+          }
+/>,
+        <PuzzleCard
+          puzzle={
+                    Object {
+                              "imgUrl": "yahoo",
+                              "numPieces": "1000",
+                              "piecesMissing": "3-4",
+                              "puzzleId": 45,
+                              "title": "Fairy",
+                            }
+          }
+/>,
+        <PuzzleCard
+          puzzle={
+                    Object {
+                              "imgUrl": "aol",
+                              "numPieces": "1500",
+                              "piecesMissing": "3-4",
+                              "puzzleId": 6,
+                              "title": "Unicorn",
+                            }
+          }
+/>,
+      ],
+      "className": "puzzle-container",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": "4",
+        "nodeType": "function",
+        "props": Object {
+          "puzzle": Object {
+            "imgUrl": "google",
+            "numPieces": "1000",
+            "piecesMissing": "3-4",
+            "puzzleId": 4,
+            "title": "Witch",
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "45",
+        "nodeType": "function",
+        "props": Object {
+          "puzzle": Object {
+            "imgUrl": "yahoo",
+            "numPieces": "1000",
+            "piecesMissing": "3-4",
+            "puzzleId": 45,
+            "title": "Fairy",
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "6",
+        "nodeType": "function",
+        "props": Object {
+          "puzzle": Object {
+            "imgUrl": "aol",
+            "numPieces": "1500",
+            "piecesMissing": "3-4",
+            "puzzleId": 6,
+            "title": "Unicorn",
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <PuzzleCard
+            puzzle={
+                        Object {
+                                    "imgUrl": "google",
+                                    "numPieces": "1000",
+                                    "piecesMissing": "3-4",
+                                    "puzzleId": 4,
+                                    "title": "Witch",
+                                  }
+            }
+/>,
+          <PuzzleCard
+            puzzle={
+                        Object {
+                                    "imgUrl": "yahoo",
+                                    "numPieces": "1000",
+                                    "piecesMissing": "3-4",
+                                    "puzzleId": 45,
+                                    "title": "Fairy",
+                                  }
+            }
+/>,
+          <PuzzleCard
+            puzzle={
+                        Object {
+                                    "imgUrl": "aol",
+                                    "numPieces": "1500",
+                                    "piecesMissing": "3-4",
+                                    "puzzleId": 6,
+                                    "title": "Unicorn",
+                                  }
+            }
+/>,
+        ],
+        "className": "puzzle-container",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": "4",
+          "nodeType": "function",
+          "props": Object {
+            "puzzle": Object {
+              "imgUrl": "google",
+              "numPieces": "1000",
+              "piecesMissing": "3-4",
+              "puzzleId": 4,
+              "title": "Witch",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "45",
+          "nodeType": "function",
+          "props": Object {
+            "puzzle": Object {
+              "imgUrl": "yahoo",
+              "numPieces": "1000",
+              "piecesMissing": "3-4",
+              "puzzleId": 45,
+              "title": "Fairy",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "6",
+          "nodeType": "function",
+          "props": Object {
+            "puzzle": Object {
+              "imgUrl": "aol",
+              "numPieces": "1500",
+              "piecesMissing": "3-4",
+              "puzzleId": 6,
+              "title": "Unicorn",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

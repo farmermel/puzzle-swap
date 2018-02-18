@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { db, store } from '../../firebase';
+import { withRouter } from 'react-router';
+import { db, storage } from '../../firebase';
 
-class PostPuzzleForm extends Component {
+export class PostPuzzleForm extends Component {
   constructor() {
     super();
     this.state = {
       title: '',
       numPieces: '',
-      piecesMissing: '',
+      piecesMissing: '1-3',
       error: null
     }
   }
@@ -20,13 +21,8 @@ class PostPuzzleForm extends Component {
 
   handlePhoto = (files: FileList) => {
     const puzzleImg = files[0];
-
-    // const puzzleImg = window.URL.createObjectURL(files[0])
     this.setState({ puzzleImg });
   }
-
-  //post to database first, get reference?
-  //make reference in image the same
 
   postToDB = (puzzleId) => {
     const { title, numPieces, piecesMissing } = this.state;
@@ -34,14 +30,13 @@ class PostPuzzleForm extends Component {
     const firebaseKey = db.getFirebaseKey('puzzles');
     let updates = {};
     updates[`/puzzles/${firebaseKey}`] = postDB;
-    return console.log('dbUpdate', db.postUpdate(updates));
+    return db.postUpdate(updates);
   }
 
   postToCloudStore = () => {
     const { puzzleImg } = this.state;
     const puzzleId = Date.now();
-    const ref = store.getStoreRef(`images/${puzzleId}`);
-    console.log(store.putInStore(ref, puzzleImg))
+    const ref = storage.getStoreRef(`images/${puzzleId}`);
     return puzzleId;
   }
 
@@ -50,6 +45,7 @@ class PostPuzzleForm extends Component {
     try {
       const puzzleId = await this.postToCloudStore();
       await this.postToDB(puzzleId);
+      this.props.history.push('/');
     } catch (error) {
       this.setState({ error: error.message })
     }
@@ -103,4 +99,4 @@ class PostPuzzleForm extends Component {
   }
 }
 
-export default PostPuzzleForm;
+export default withRouter(PostPuzzleForm);
