@@ -8,7 +8,7 @@ import Main from '../../containers/Main/Main';
 import Header from '../Header/Header';
 import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
+import SignUp from '../../containers/SignUp/SignUp';
 import Messages from '../Messages/Messages';
 import PropTypes from 'prop-types';
 import './App.css';
