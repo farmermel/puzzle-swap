@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getGeoLocation } from '../../helpers/apiCalls';
 import { addLocation } from '../../actions/addLocation';
-import PuzzleContainer from '../../components/PuzzleContainer/PuzzleContainer';
+import PuzzleContainer from '../PuzzleContainer/PuzzleContainer';
 import './Main.css';
 
 export class Main extends Component {
