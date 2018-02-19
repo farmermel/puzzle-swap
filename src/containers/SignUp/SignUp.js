@@ -24,7 +24,6 @@ export class SignUp extends Component {
     e.preventDefault()
     try {
       const { name, email, password } = this.state;
-      const { setLogin } = this.props;
       const authUser = await auth.doCreateUserWithEmailAndPassword(email, password);
       await db.doCreateUser(authUser.uid, name, email);
     } catch (error) {
