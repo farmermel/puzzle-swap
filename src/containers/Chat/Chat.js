@@ -1,4 +1,11 @@
 import React from 'react';
+import './Chat.css';
+
+const getMembers = members => {
+  return Object.keys(members).map( member => (
+    members[member]
+  ))
+}
 
 const Chat = ({ chat }) => {
   //on claim, start a new chat between current user and puzzle owner
@@ -7,10 +14,11 @@ const Chat = ({ chat }) => {
   //to messages array located under messages in storage
     console.log(chat)
   return (
-    <div>
+    <div className='chat'>
+      <h3>Members: <span>{getMembers(chat.members)}</span></h3>
       <h2>{chat.timeStamp}</h2>
       <p>I'm a chat blurb</p>
-      <p>hopefully one day I'll also print a bunch of messages conditionally</p>
+      <p>hopefully one day you can click on me and I'll also print a bunch of messages</p>
     </div>
   )
 }
