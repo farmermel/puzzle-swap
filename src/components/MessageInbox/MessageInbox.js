@@ -3,6 +3,7 @@ import { db } from '../../firebase';
 import { connect } from 'react-redux';
 import { setUsersChats } from '../../actions/userChats';
 import Chat from '../../containers/Chat/Chat';
+import './MessageInbox.css';
 
 export class MessageInbox extends Component {
   async componentDidMount() {
@@ -31,7 +32,7 @@ export class MessageInbox extends Component {
   //click of chat goes to associated chat
   render() {
     return (
-      <div>
+      <div className='inbox'>
         {this.renderChats()}
       </div>
     )

@@ -1,0 +1,5 @@
+.inbox {
+  padding: 160px 0 0 0;
+  height: 100vh;
+  overflow-y: scroll;
+}

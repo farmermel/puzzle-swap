@@ -10,6 +10,7 @@ import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../../containers/Login/Login';
 import SignUp from '../../containers/SignUp/SignUp';
 import MessageInbox from '../MessageInbox/MessageInbox';
+import Chat from '../../containers/Chat/Chat';
 import PropTypes from 'prop-types';
 import './App.css';
 
@@ -22,7 +23,7 @@ export class App extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, usersChats } = this.props;
     return (
       <div className="App">
         <Header user={ user }/>
@@ -46,7 +47,8 @@ export class App extends Component {
 }
 
 export const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  usersChats: state.usersChats
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -57,5 +59,15 @@ App.propTypes = {
   user: PropTypes.object,
   setUser: PropTypes.func.isRequired
 }
+
+// <Route path='/messages/:id' render={() => {
+  // const currentChat = usersChats.find( chat => {
+    // console.log(this.props.match)
+    // return this.props.match.params.id === chat.chatId
+  // })
+  // console.log(currentChat)
+  // return <Chat />
+  // find current chat id in users chats, pass that in to chat to be rendered
+// }} />
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
