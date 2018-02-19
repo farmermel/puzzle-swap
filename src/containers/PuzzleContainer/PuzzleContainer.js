@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard';
 import { db, storage } from '../../firebase';
 import { setPuzzles } from '../../actions/setPuzzles';
@@ -15,8 +16,61 @@ export class PuzzleContainer extends Component {
     })
   }
 
+  parseChats = (snapshot, ownerId, claimerId) => {
+    return Object.keys(snapshot).find( chat => {
+      return chat.message[ownerId] && chat.message[claimerId]
+    })
+  }
+
+  checkForExistingChat = async (ownerId, claimerId) => {
+    try {
+      const chatsSnapshot = await db.getOnce('chats');
+      const chats = chatsSnapshot.val();
+      const existingChat = Object.keys(chats).find( chat => {
+        return chats[chat].members[ownerId] && chats[chat].members[claimerId]
+      })
+      return existingChat ? chats[existingChat] : null;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  goToChat = existingChat => {
+    this.props.history.push(`messages/${existingChat.chatId}`)
+  }
+
+  makeNewChat = (ownerId, claimerId) => {
+    try {
+      const firebaseKey = db.getFirebaseKey('chats');
+      const postDB = {
+        members: {
+          [claimerId]: true,
+          [ownerId]: true
+        },
+        timeStamp: Date.now(),
+        lastMessage: '',
+        chatId: firebaseKey
+      }
+      let updates = {};
+      updates[`chats/${firebaseKey}`] = postDB;
+      db.postUpdate(updates);
+      this.checkForExistingChat();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  handleClaim = async (puzzleId, ownerId) => {
+    const { user } = this.props;
+    const claimerId = user.uid;
+    const existingChat = await this.checkForExistingChat(ownerId, claimerId);
+    console.log(existingChat)
+    existingChat ? this.goToChat(existingChat) : this.makeNewChat(ownerId, claimerId);
+    //this.handlePuzzleStatus(puzzleId)
+  }
+
   retrievePuzzles = () => {
-    return db.watchData('puzzles')
+    return db.watchData('puzzles');
   }
 
   parsePuzzles = async snapshot => {
@@ -33,6 +87,7 @@ export class PuzzleContainer extends Component {
     const { puzzles } = this.props;
     return puzzles && puzzles.map( puzzle => {
       return <PuzzleCard puzzle={puzzle}
+                         handleClaim={this.handleClaim}
                          key={puzzle.puzzleId} />
     })
   }
@@ -57,7 +112,8 @@ export class PuzzleContainer extends Component {
 }
 
 export const mapStateToProps = state => ({
-  puzzles: state.puzzles
+  puzzles: state.puzzles,
+  user: state.user
 })
 
 export const mapDispatchToProps = dispatch => ({
@@ -75,4 +131,4 @@ PuzzleContainer.propTypes = {
   setPuzzles: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PuzzleContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PuzzleContainer));
