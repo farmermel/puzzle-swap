@@ -25,10 +25,11 @@ export class App extends Component {
     const { user } = this.props;
     return (
       <div className="App">
-        <Header user={ this.props.user }/>
+        <Header user={ user }/>
         <Switch>
           <Route exact path='/' component={ Main } />
-          <Route path='/post-puzzle-form' component={ PostPuzzleForm } />
+          <Route path='/post-puzzle-form' render={() => (
+            <PostPuzzleForm userId={ user.uid } /> )} />
           <Route path='/login' render={() => 
             user ? <Redirect to='/' /> : <Login />
           } />

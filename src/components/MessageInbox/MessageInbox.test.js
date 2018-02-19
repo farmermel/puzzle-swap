@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Messages from './Messages';
+import MessageInbox from './MessageInbox';
 
-describe('Messages', () => {
+describe('MessageInbox', () => {
   it('exists', () => {
-    const wrapper = shallow(<Messages />);
+    const wrapper = shallow(<MessageInbox />);
 
     expect(wrapper).toBeDefined()
   })

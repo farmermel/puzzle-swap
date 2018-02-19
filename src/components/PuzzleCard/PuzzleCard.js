@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PuzzleCard.css';
 
-const PuzzleCard = ({ puzzle }) => {
+const PuzzleCard = ({ puzzle, handleClaim }) => {
   const inlineStyles = {
     backgroundImage: `url(${puzzle.imgUrl})`
   }
+  const { puzzleId, userId } = puzzle;
   return (
     <article className='puzzle-card'>
       <div className='puzzle-img' style={inlineStyles}></div>
       <h3>{puzzle.title}</h3>
       <p>{puzzle.numPieces}</p>
       <p>{puzzle.piecesMissing}</p>
-      <button className='claim'>Claim</button>
+      <button onClick={() => handleClaim(puzzleId, userId)}
+              className='claim'>Claim</button>
     </article>
   )
 }

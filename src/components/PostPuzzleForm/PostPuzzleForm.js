@@ -26,7 +26,8 @@ export class PostPuzzleForm extends Component {
 
   postToDB = (puzzleId) => {
     const { title, numPieces, piecesMissing } = this.state;
-    const postDB = { title, numPieces, piecesMissing, puzzleId }
+    const { userId } = this.props
+    const postDB = { title, numPieces, piecesMissing, puzzleId, userId }
     const firebaseKey = db.getFirebaseKey('puzzles');
     let updates = {};
     updates[`/puzzles/${firebaseKey}`] = postDB;
@@ -37,6 +38,7 @@ export class PostPuzzleForm extends Component {
     const { puzzleImg } = this.state;
     const puzzleId = Date.now();
     const ref = storage.getStoreRef(`images/${puzzleId}`);
+    storage.putInStore(ref, puzzleImg);
     return puzzleId;
   }
 
