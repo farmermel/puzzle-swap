@@ -1,3 +1,9 @@
+.main {
+  padding: 140px 0 0 0;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 .puzzle-post {
   border-radius: 20px;
   margin: 25px 0 0 0;
