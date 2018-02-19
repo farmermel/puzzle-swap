@@ -9,7 +9,7 @@ import Header from '../../containers/Header/Header';
 import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../../containers/Login/Login';
 import SignUp from '../../containers/SignUp/SignUp';
-import Messages from '../Messages/Messages';
+import MessageInbox from '../MessageInbox/MessageInbox';
 import PropTypes from 'prop-types';
 import './App.css';
 
@@ -29,14 +29,16 @@ export class App extends Component {
         <Switch>
           <Route exact path='/' component={ Main } />
           <Route path='/post-puzzle-form' render={() => (
-            <PostPuzzleForm userId={ user.uid } /> )} />
+            <PostPuzzleForm userId={ user.uid } />)} />
           <Route path='/login' render={() => 
             user ? <Redirect to='/' /> : <Login />
           } />
           <Route path='/sign-up' render={() => 
             user ? <Redirect to='/' /> : <SignUp />
           } />
-          <Route path='/messages' component={ Messages } />
+          <Route path='/messages' render={() => (
+            user ? <MessageInbox /> : <Redirect to='/' />
+          )} />
         </Switch>
       </div>
     );
