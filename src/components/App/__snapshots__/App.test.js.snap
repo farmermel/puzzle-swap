@@ -31,8 +31,8 @@ ShallowWrapper {
                     path="/"
           />
           <Route
-                    component={[Function]}
                     path="/post-puzzle-form"
+                    render={[Function]}
           />
           <Route
                     path="/login"
@@ -75,8 +75,8 @@ ShallowWrapper {
               path="/"
 />,
             <Route
-              component={[Function]}
               path="/post-puzzle-form"
+              render={[Function]}
 />,
             <Route
               path="/login"
@@ -112,8 +112,8 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "component": [Function],
               "path": "/post-puzzle-form",
+              "render": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -178,8 +178,8 @@ ShallowWrapper {
                         path="/"
             />
             <Route
-                        component={[Function]}
                         path="/post-puzzle-form"
+                        render={[Function]}
             />
             <Route
                         path="/login"
@@ -222,8 +222,8 @@ ShallowWrapper {
                 path="/"
 />,
               <Route
-                component={[Function]}
                 path="/post-puzzle-form"
+                render={[Function]}
 />,
               <Route
                 path="/login"
@@ -259,8 +259,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "component": [Function],
                 "path": "/post-puzzle-form",
+                "render": [Function],
               },
               "ref": null,
               "rendered": null,
