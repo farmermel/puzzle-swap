@@ -16,9 +16,9 @@ export class PuzzleContainer extends Component {
     })
   }
 
-  parseChats = (snapshot, ownerId, claimerId) => {
-    return Object.keys(snapshot).find( chat => {
-      return chat.message[ownerId] && chat.message[claimerId]
+  parseChats = (chats, ownerId, claimerId) => {
+    return Object.keys(chats).find( chat => {
+      return chats[chat].members[ownerId] && chats[chat].members[claimerId]
     })
   }
 
@@ -26,9 +26,7 @@ export class PuzzleContainer extends Component {
     try {
       const chatsSnapshot = await db.getOnce('chats');
       const chats = chatsSnapshot.val();
-      const existingChat = Object.keys(chats).find( chat => {
-        return chats[chat].members[ownerId] && chats[chat].members[claimerId]
-      })
+      const existingChat = this.parseChats(chats, ownerId, claimerId)
       return existingChat ? chats[existingChat] : null;
     } catch (error) {
       console.log(error)
@@ -64,7 +62,6 @@ export class PuzzleContainer extends Component {
     const { user } = this.props;
     const claimerId = user.uid;
     const existingChat = await this.checkForExistingChat(ownerId, claimerId);
-    console.log(existingChat)
     existingChat ? this.goToChat(existingChat) : this.makeNewChat(ownerId, claimerId);
     //this.handlePuzzleStatus(puzzleId)
   }

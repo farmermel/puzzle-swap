@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-image: url('../../assets/tablewood.jpg');
+  background-size: contain;
 }
 
 h1,
@@ -23,7 +25,7 @@ button {
 button:hover {
   /*background-color: #a05a00;*/
   /*purple:*/
-  background-color: #260120;
+  background-color: #d1a425;
 }
 
 form {

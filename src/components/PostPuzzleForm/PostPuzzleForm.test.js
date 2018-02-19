@@ -82,15 +82,21 @@ describe('PostPuzzleForm', () => {
   })
 
   describe('postToCloudStore', () => {
-    storage.getStoreRef = jest.fn();
+    storage.getStoreRef = jest.fn().mockImplementation(() => {
+      return 'ref'
+    });
+    storage.putInStore = jest.fn();
     Date.now = jest.fn().mockImplementation(() => {
       return 5
     })
 
-    it('calls getStoreRef on storage with a url as parameter', () => {
+    it('calls getStoreRef on storage with a url as parameter and putInStore with ref and puzzleimg as arguments', () => {
+      wrapper.instance().state.puzzleImg = 'puzzleImg';
       expect(storage.getStoreRef).not.toHaveBeenCalled();
+      expect(storage.putInStore).not.toHaveBeenCalled();
       wrapper.instance().postToCloudStore();
       expect(storage.getStoreRef).toHaveBeenCalledWith('images/5');
+      expect(storage.putInStore).toHaveBeenCalledWith('ref', 'puzzleImg');
     })
 
     it('returns a generated puzzleId', () => {

@@ -5,6 +5,11 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <PuzzleContainer
+    history={
+        Object {
+            "push": [Function],
+          }
+    }
     puzzles={
         Array [
             Object {
@@ -46,6 +51,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <PuzzleCard
+          handleClaim={[Function]}
           puzzle={
                     Object {
                               "imgUrl": "google",
@@ -57,6 +63,7 @@ ShallowWrapper {
           }
 />,
         <PuzzleCard
+          handleClaim={[Function]}
           puzzle={
                     Object {
                               "imgUrl": "yahoo",
@@ -68,6 +75,7 @@ ShallowWrapper {
           }
 />,
         <PuzzleCard
+          handleClaim={[Function]}
           puzzle={
                     Object {
                               "imgUrl": "aol",
@@ -88,6 +96,7 @@ ShallowWrapper {
         "key": "4",
         "nodeType": "function",
         "props": Object {
+          "handleClaim": [Function],
           "puzzle": Object {
             "imgUrl": "google",
             "numPieces": "1000",
@@ -105,6 +114,7 @@ ShallowWrapper {
         "key": "45",
         "nodeType": "function",
         "props": Object {
+          "handleClaim": [Function],
           "puzzle": Object {
             "imgUrl": "yahoo",
             "numPieces": "1000",
@@ -122,6 +132,7 @@ ShallowWrapper {
         "key": "6",
         "nodeType": "function",
         "props": Object {
+          "handleClaim": [Function],
           "puzzle": Object {
             "imgUrl": "aol",
             "numPieces": "1500",
@@ -145,6 +156,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <PuzzleCard
+            handleClaim={[Function]}
             puzzle={
                         Object {
                                     "imgUrl": "google",
@@ -156,6 +168,7 @@ ShallowWrapper {
             }
 />,
           <PuzzleCard
+            handleClaim={[Function]}
             puzzle={
                         Object {
                                     "imgUrl": "yahoo",
@@ -167,6 +180,7 @@ ShallowWrapper {
             }
 />,
           <PuzzleCard
+            handleClaim={[Function]}
             puzzle={
                         Object {
                                     "imgUrl": "aol",
@@ -187,6 +201,7 @@ ShallowWrapper {
           "key": "4",
           "nodeType": "function",
           "props": Object {
+            "handleClaim": [Function],
             "puzzle": Object {
               "imgUrl": "google",
               "numPieces": "1000",
@@ -204,6 +219,7 @@ ShallowWrapper {
           "key": "45",
           "nodeType": "function",
           "props": Object {
+            "handleClaim": [Function],
             "puzzle": Object {
               "imgUrl": "yahoo",
               "numPieces": "1000",
@@ -221,6 +237,7 @@ ShallowWrapper {
           "key": "6",
           "nodeType": "function",
           "props": Object {
+            "handleClaim": [Function],
             "puzzle": Object {
               "imgUrl": "aol",
               "numPieces": "1500",
