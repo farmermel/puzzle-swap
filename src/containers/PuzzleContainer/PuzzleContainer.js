@@ -37,21 +37,32 @@ export class PuzzleContainer extends Component {
     this.props.history.push(`messages/${existingChat.chatId}`)
   }
 
-  makeNewChat = (ownerId, claimerId) => {
+  getUserNames = async (ownerId, claimerId) => {
+    const allUsersSnap = await db.getOnce('users');
+    const allUsers = allUsersSnap.val();
+    return Object.keys(allUsers).reduce((userNames, user) => {
+      // console.log(allUsers[user])
+      // {email: "case@mail.com", username: "case"}
+      if (user === ownerId || user === claimerId) {
+        userNames[user] = allUsers[user].username
+      }
+      return userNames;
+    }, {})
+  }
+
+  makeNewChat = async (ownerId, claimerId) => {
     try {
-      const firebaseKey = db.getFirebaseKey('chats');
+      const firebaseKey = await db.getFirebaseKey('chats');
+      const userNames = await this.getUserNames(ownerId, claimerId);
       const postDB = {
-        members: {
-          [claimerId]: true,
-          [ownerId]: true
-        },
+        members: userNames,
         timeStamp: Date.now(),
         lastMessage: '',
         chatId: firebaseKey
       }
       let updates = {};
       updates[`chats/${firebaseKey}`] = postDB;
-      db.postUpdate(updates);
+      await db.postUpdate(updates);
       this.checkForExistingChat();
     } catch (error) {
       console.log(error)
