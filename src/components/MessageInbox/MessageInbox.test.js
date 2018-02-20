@@ -4,7 +4,7 @@ import { MessageInbox, mapStateToProps, mapDispatchToProps } from './MessageInbo
 
 describe('MessageInbox', () => {
   it('exists', () => {
-    const wrapper = shallow(<MessageInbox />);
+    const wrapper = shallow(<MessageInbox setUsersChats={jest.fn()} />);
 
     expect(wrapper).toBeDefined()
   })
