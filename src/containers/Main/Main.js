@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getGeoLocation } from '../../helpers/apiCalls';
 import { addLocation } from '../../actions/addLocation';
 import PuzzleContainer from '../PuzzleContainer/PuzzleContainer';
+import PropTypes from 'prop-types';
 import './Main.css';
 
 export class Main extends Component {
@@ -70,5 +71,11 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   addLocation: location => dispatch(addLocation(location))
 });
+
+Main.propTypes = {
+  location: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
+  addLocation: PropTypes.func.isRequired 
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
