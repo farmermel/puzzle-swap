@@ -37,18 +37,25 @@ export class SignUp extends Component {
       <div className='form-wrapper'>
         <form onSubmit={this.handleSubmit}
               className='sign-up'>
+          <h3>Sign Up</h3>
           { this.state.error }
+          <label htmlFor='signup-name'>Name</label>
           <input type='name' 
+                 id='signup-name'
                  placeholder='name' 
                  name='name' 
                  onChange={this.handleChange} 
                  value={this.state.name} />
+          <label htmlFor='signup-email'>Email</label>
           <input type='email' 
+                 id='signup-email'
                  placeholder='email' 
                  name='email' 
                  onChange={this.handleChange} 
                  value={this.state.value} />
+          <label htmlFor='signup-password'>Password</label>
           <input type='password' 
+                 id='signup-password'
                  placeholder='password'
                  name='password'
                  onChange={this.handleChange}
