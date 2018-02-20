@@ -6,7 +6,8 @@ import { mockPuzzles } from '../../mockData';
 describe('PuzzleCard', () => {
   const mockPuzzle = mockPuzzles[0]
   it('should exist', () => {
-    const wrapper = shallow(<PuzzleCard puzzle={ mockPuzzle } />);
+    const wrapper = shallow(<PuzzleCard puzzle={ mockPuzzle }
+                                        handleClaim={ jest.fn() } />);
     expect(wrapper).toBeDefined();
   })
 })
