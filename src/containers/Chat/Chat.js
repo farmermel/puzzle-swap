@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Chat.css';
 
 const getMembers = members => {
@@ -12,7 +13,6 @@ const Chat = ({ chat }) => {
   //gray out claim buttons for puzzles that are current user's
   //chats have {members: uid: 'name', uid: 'name'}, 'last message', 'timestamp', and 'id' that links
   //to messages array located under messages in storage
-    console.log(chat)
   return (
     <div className='chat'>
       <h3>Members: <span>{getMembers(chat.members)}</span></h3>
@@ -21,6 +21,15 @@ const Chat = ({ chat }) => {
       <p>hopefully one day you can click on me and I'll also print a bunch of messages</p>
     </div>
   )
+}
+
+Chat.propTypes = {
+  chat: PropTypes.shape({
+    timeStamp: PropTypes.number,
+    members: PropTypes.objectOf(PropTypes.string),
+    chatId: PropTypes.string,
+    lastMessage: PropTypes.string
+  })
 }
 
 export default Chat;

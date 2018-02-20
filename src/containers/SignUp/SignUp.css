@@ -1,17 +1,29 @@
-/*form {
+form {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin: auto;
-}*/
+  border: 1px solid #c0c0c0;
+  padding: 40px;
+  background-color: #fdfdfd;
+  width: 50%;
+}
+
+form button {
+  height: 50px;
+  letter-spacing: 2.5px;
+  font-size: 2em;
+  width: 102%;
+}
+
+form h3 {
+  font-size: 2em;
+  margin: 0 0 10px 0;
+}
 
 .form-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 0 0 0;
+  padding: 50px 0 0 0;
   height: 100vh;
-}
-
-.sign-up-btn {
-  height: 30px;
 }

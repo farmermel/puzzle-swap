@@ -18,7 +18,7 @@ export class PuzzleContainer extends Component {
 
   parseChats = (chats, ownerId, claimerId) => {
     return Object.keys(chats).find( chat => {
-      return chats[chat].members[ownerId] && chats[chat].members[claimerId]
+      return chats[chat].members[ownerId] && chats[chat].members[claimerId];
     })
   }
 
@@ -41,8 +41,6 @@ export class PuzzleContainer extends Component {
     const allUsersSnap = await db.getOnce('users');
     const allUsers = allUsersSnap.val();
     return Object.keys(allUsers).reduce((userNames, user) => {
-      // console.log(allUsers[user])
-      // {email: "case@mail.com", username: "case"}
       if (user === ownerId || user === claimerId) {
         userNames[user] = allUsers[user].username
       }
@@ -136,6 +134,7 @@ PuzzleContainer.propTypes = {
     imgUrl: PropTypes.string,
     puzzleId: PropTypes.number
   })),
+  user: PropTypes.objectOf(PropTypes.string),
   setPuzzles: PropTypes.func.isRequired
 }
 

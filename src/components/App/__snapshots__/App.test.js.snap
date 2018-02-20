@@ -43,8 +43,8 @@ ShallowWrapper {
                     render={[Function]}
           />
           <Route
-                    component={[Function]}
                     path="/messages"
+                    render={[Function]}
           />
 </Switch>,
       ],
@@ -87,8 +87,8 @@ ShallowWrapper {
               render={[Function]}
 />,
             <Route
-              component={[Function]}
               path="/messages"
+              render={[Function]}
 />,
           ],
         },
@@ -148,8 +148,8 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "component": [Function],
               "path": "/messages",
+              "render": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -190,8 +190,8 @@ ShallowWrapper {
                         render={[Function]}
             />
             <Route
-                        component={[Function]}
                         path="/messages"
+                        render={[Function]}
             />
 </Switch>,
         ],
@@ -234,8 +234,8 @@ ShallowWrapper {
                 render={[Function]}
 />,
               <Route
-                component={[Function]}
                 path="/messages"
+                render={[Function]}
 />,
             ],
           },
@@ -295,8 +295,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "component": [Function],
                 "path": "/messages",
+                "render": [Function],
               },
               "ref": null,
               "rendered": null,

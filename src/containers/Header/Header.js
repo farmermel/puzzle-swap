@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase';
 import puzzleIcon from '../../assets/puzzle.svg';
+import PropTypes from 'prop-types';
 import './Header.css';
 
 export const renderNotLoggedIn = () => {
@@ -44,7 +45,6 @@ export const determineLoginButtons = (user) => {
 }
 
 export const Header = ({ user }) => {
-  console.log(user)
   return (
     <div className="App-header">
       <Link to={{ pathname: '/' }} id='header-wrap'>
@@ -54,6 +54,10 @@ export const Header = ({ user }) => {
           { determineLoginButtons(user) }
     </div>
   )
+}
+
+Header.propTypes = {
+  user: PropTypes.objectOf(PropTypes.string)
 }
 
 export default Header;

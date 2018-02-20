@@ -34,9 +34,22 @@ export class Login extends Component {
       <div className='form-wrapper'>
         <form onSubmit={ this.handleSubmit }
               className='sign-up'>
+          <h3>Log in</h3>
           <p>{ this.state.error }</p>
-          <input type='email' placeholder='email' name='email' value={ this.state.email } onChange={ this.handleChange } />
-          <input type='password' placeholder='password' name='password' value={ this.password } onChange={ this.handleChange } />
+          <label htmlFor='login-email'>Email</label>
+          <input type='email' 
+                 id='login-email'
+                 placeholder='email' 
+                 name='email' 
+                 value={ this.state.email } 
+                 onChange={ this.handleChange } />
+          <label htmlFor='login-password'>Password</label>
+          <input type='password' 
+                 id='login-password'
+                 placeholder='password' 
+                 name='password' 
+                 value={ this.password } 
+                 onChange={ this.handleChange } />
           <button className='sign-up-btn'>Log in</button>
         </form>
       </div>

@@ -26,7 +26,8 @@ PuzzleCard.propTypes = {
     piecesMissing: PropTypes.string,
     imgUrl: PropTypes.string,
     puzzleId: PropTypes.number
-  })
+  }),
+  handleClaim: PropTypes.func.isRequired
 }
 
 export default PuzzleCard;

@@ -65,7 +65,13 @@ export const mapDispatchToProps = dispatch => ({
 
 App.propTypes = {
   user: PropTypes.object,
-  setUser: PropTypes.func.isRequired
+  setUser: PropTypes.func.isRequired,
+  usersChats: PropTypes.arrayOf(PropTypes.shape({
+    chatId: PropTypes.string,
+    lastMessage: PropTypes.string,
+    members: PropTypes.objectOf(PropTypes.string),
+    timeStamp: PropTypes.number
+  }))
 }
 
 // <Route path='/messages/:id' render={() => {

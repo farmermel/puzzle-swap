@@ -3,6 +3,7 @@ import { db } from '../../firebase';
 import { connect } from 'react-redux';
 import { setUsersChats } from '../../actions/userChats';
 import Chat from '../../containers/Chat/Chat';
+import PropTypes from 'prop-types';
 import './MessageInbox.css';
 
 export class MessageInbox extends Component {
@@ -39,13 +40,24 @@ export class MessageInbox extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   userId: state.user.uid,
   usersChats: state.usersChats
 })
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setUsersChats: usersChats => dispatch(setUsersChats(usersChats))
 })
+
+MessageInbox.propTypes = {
+  userId: PropTypes.string,
+  usersChats: PropTypes.arrayOf(PropTypes.shape({
+    chatId: PropTypes.string,
+    lastMessage: PropTypes.string,
+    members: PropTypes.objectOf(PropTypes.string),
+    timeStamp: PropTypes.number
+  })),
+  setUsersChats: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageInbox);
