@@ -11,8 +11,8 @@ const PuzzleCard = ({ puzzle, handleClaim }) => {
     <article className='puzzle-card'>
       <div className='puzzle-img' style={inlineStyles}></div>
       <h3>{puzzle.title}</h3>
-      <p>{puzzle.numPieces}</p>
-      <p>{puzzle.piecesMissing}</p>
+      <p>Pieces: {puzzle.numPieces}</p>
+      <p>Pieces missing: {puzzle.piecesMissing}</p>
       <button onClick={() => handleClaim(puzzleId, userId)}
               className='claim'>Claim</button>
     </article>

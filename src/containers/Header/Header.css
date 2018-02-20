@@ -41,6 +41,17 @@
   display: flex;
 }
 
+.user-wrap {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.user-wrap p {
+  color: black;
+  margin: 0 0 7px 0;
+}
+
 .login {
   margin: 0 15px 0 0;
 }

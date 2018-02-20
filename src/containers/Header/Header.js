@@ -24,10 +24,13 @@ export const handleSignOut = async () => {
   await auth.doSignOut();
 }
 
-export const renderLoggedIn = () => {
+export const renderLoggedIn = (user) => {
   return (
     <div className='header-right'>
-      <a onClick={handleSignOut}>Sign out</a>
+      <div className='user-wrap'>
+        <p>{user.username}</p>
+        <a onClick={handleSignOut}>Sign out</a>
+      </div>
       <Link to={{ pathname: '/messages' }}>
         <button className='messages'>Messages</button>
       </Link>
@@ -36,11 +39,12 @@ export const renderLoggedIn = () => {
 }
 
 export const determineLoginButtons = (user) => {
-  const display = user ? renderLoggedIn() : renderNotLoggedIn();
+  const display = user ? renderLoggedIn(user) : renderNotLoggedIn();
   return display;
 }
 
 export const Header = ({ user }) => {
+  console.log(user)
   return (
     <div className="App-header">
       <Link to={{ pathname: '/' }} id='header-wrap'>

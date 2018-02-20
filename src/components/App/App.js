@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { setUser } from '../../actions/usersActions';
 import Main from '../../containers/Main/Main';
 import Header from '../../containers/Header/Header';
@@ -18,8 +18,16 @@ export class App extends Component {
   componentDidMount = () => {
     const { setUser } = this.props;
     auth.onAuthStateChanged(authUser => {
-      authUser ? setUser(authUser) : setUser(null);
+      authUser ? this.makeUserObj(authUser) : setUser(null);
     })
+  }
+
+  makeUserObj = async authUser => {
+    const { setUser } = this.props;
+    const userSnap = await db.getOnce(`users/${authUser.uid}`);
+    const user = userSnap.val();
+    const userObj = { uid: authUser.uid, username: user.username };
+    setUser(userObj)
   }
 
   render() {
