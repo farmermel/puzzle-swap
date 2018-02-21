@@ -9,6 +9,7 @@ export class PostPuzzleForm extends Component {
       title: '',
       numPieces: '',
       piecesMissing: '1-3',
+      fileUpload: 'Select puzzle photo',
       error: null
     }
   }
@@ -21,7 +22,10 @@ export class PostPuzzleForm extends Component {
 
   handlePhoto = (files: FileList) => {
     const puzzleImg = files[0];
-    this.setState({ puzzleImg });
+    files[0] && this.setState({ 
+                  puzzleImg,
+                  fileUpload: files[0].name
+                })
   }
 
   postToDB = (puzzleId) => {
@@ -70,7 +74,8 @@ export class PostPuzzleForm extends Component {
                    id='puzzle-name'
                    onChange={this.handleChange}
                    required />
-          <label htmlFor='puzzle-img'>Upload a puzzle photo</label>
+          <label htmlFor='puzzle-img'
+                 id='img-submit-label'>{this.state.fileUpload}</label>
             <input type='file' 
                    accept='image/x-png,image/jpeg'
                    name='puzzleImg' 
