@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Chat
+    chat={
+        Object {
+            "members": Object {
+              "3": "person1",
+              "4": "person2",
+            },
+            "timeStamp": 34,
+          }
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h3>
+          Members: 
+          <span>
+                    person1
+                    person2
+          </span>
+</h3>,
+        <h2>
+          34
+</h2>,
+        <p>
+          I'm a chat blurb
+</p>,
+        <p>
+          hopefully one day you can click on me and I'll also print a bunch of messages
+</p>,
+      ],
+      "className": "chat",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Members: ",
+            <span>
+              person1
+              person2
+</span>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Members: ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "person1",
+                "person2",
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              "person1",
+              "person2",
+            ],
+            "type": "span",
+          },
+        ],
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": 34,
+        },
+        "ref": null,
+        "rendered": 34,
+        "type": "h2",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "I'm a chat blurb",
+        },
+        "ref": null,
+        "rendered": "I'm a chat blurb",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "hopefully one day you can click on me and I'll also print a bunch of messages",
+        },
+        "ref": null,
+        "rendered": "hopefully one day you can click on me and I'll also print a bunch of messages",
+        "type": "p",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h3>
+            Members: 
+            <span>
+                        person1
+                        person2
+            </span>
+</h3>,
+          <h2>
+            34
+</h2>,
+          <p>
+            I'm a chat blurb
+</p>,
+          <p>
+            hopefully one day you can click on me and I'll also print a bunch of messages
+</p>,
+        ],
+        "className": "chat",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Members: ",
+              <span>
+                person1
+                person2
+</span>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Members: ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "person1",
+                  "person2",
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                "person1",
+                "person2",
+              ],
+              "type": "span",
+            },
+          ],
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": 34,
+          },
+          "ref": null,
+          "rendered": 34,
+          "type": "h2",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "I'm a chat blurb",
+          },
+          "ref": null,
+          "rendered": "I'm a chat blurb",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "hopefully one day you can click on me and I'll also print a bunch of messages",
+          },
+          "ref": null,
+          "rendered": "hopefully one day you can click on me and I'll also print a bunch of messages",
+          "type": "p",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

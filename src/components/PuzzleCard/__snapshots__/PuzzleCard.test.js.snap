@@ -1,0 +1,516 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PuzzleCard matches snapshot if user is logged in 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PuzzleCard
+    handleClaim={[Function]}
+    puzzle={
+        Object {
+            "imgUrl": "google",
+            "numPieces": "1000",
+            "piecesMissing": "3-4",
+            "puzzleId": 4,
+            "title": "Witch",
+          }
+    }
+    user={
+        Object {
+            "uid": "5",
+            "username": "Nymeria",
+          }
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="puzzle-img"
+          style={
+                    Object {
+                              "backgroundImage": "url(google)",
+                            }
+          }
+/>,
+        <h3>
+          Witch
+</h3>,
+        <p>
+          Pieces: 
+          1000
+</p>,
+        <p>
+          Pieces missing: 
+          3-4
+</p>,
+        <button
+          className="claim"
+          disabled={false}
+          onClick={[Function]}
+>
+          Claim
+</button>,
+      ],
+      "className": "puzzle-card",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "puzzle-img",
+          "style": Object {
+            "backgroundImage": "url(google)",
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Witch",
+        },
+        "ref": null,
+        "rendered": "Witch",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Pieces: ",
+            "1000",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Pieces: ",
+          "1000",
+        ],
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Pieces missing: ",
+            "3-4",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Pieces missing: ",
+          "3-4",
+        ],
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Claim",
+          "className": "claim",
+          "disabled": false,
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Claim",
+        "type": "button",
+      },
+    ],
+    "type": "article",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="puzzle-img"
+            style={
+                        Object {
+                                    "backgroundImage": "url(google)",
+                                  }
+            }
+/>,
+          <h3>
+            Witch
+</h3>,
+          <p>
+            Pieces: 
+            1000
+</p>,
+          <p>
+            Pieces missing: 
+            3-4
+</p>,
+          <button
+            className="claim"
+            disabled={false}
+            onClick={[Function]}
+>
+            Claim
+</button>,
+        ],
+        "className": "puzzle-card",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "puzzle-img",
+            "style": Object {
+              "backgroundImage": "url(google)",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Witch",
+          },
+          "ref": null,
+          "rendered": "Witch",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Pieces: ",
+              "1000",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Pieces: ",
+            "1000",
+          ],
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Pieces missing: ",
+              "3-4",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Pieces missing: ",
+            "3-4",
+          ],
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Claim",
+            "className": "claim",
+            "disabled": false,
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Claim",
+          "type": "button",
+        },
+      ],
+      "type": "article",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`PuzzleCard matches snapshot if user is not logged in 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PuzzleCard
+    handleClaim={[Function]}
+    puzzle={
+        Object {
+            "imgUrl": "google",
+            "numPieces": "1000",
+            "piecesMissing": "3-4",
+            "puzzleId": 4,
+            "title": "Witch",
+          }
+    }
+    user={null}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="puzzle-img"
+          style={
+                    Object {
+                              "backgroundImage": "url(google)",
+                            }
+          }
+/>,
+        <h3>
+          Witch
+</h3>,
+        <p>
+          Pieces: 
+          1000
+</p>,
+        <p>
+          Pieces missing: 
+          3-4
+</p>,
+        <h3>
+          Sign in to claim
+</h3>,
+      ],
+      "className": "puzzle-card",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "puzzle-img",
+          "style": Object {
+            "backgroundImage": "url(google)",
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Witch",
+        },
+        "ref": null,
+        "rendered": "Witch",
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Pieces: ",
+            "1000",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Pieces: ",
+          "1000",
+        ],
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Pieces missing: ",
+            "3-4",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "Pieces missing: ",
+          "3-4",
+        ],
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Sign in to claim",
+        },
+        "ref": null,
+        "rendered": "Sign in to claim",
+        "type": "h3",
+      },
+    ],
+    "type": "article",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="puzzle-img"
+            style={
+                        Object {
+                                    "backgroundImage": "url(google)",
+                                  }
+            }
+/>,
+          <h3>
+            Witch
+</h3>,
+          <p>
+            Pieces: 
+            1000
+</p>,
+          <p>
+            Pieces missing: 
+            3-4
+</p>,
+          <h3>
+            Sign in to claim
+</h3>,
+        ],
+        "className": "puzzle-card",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "puzzle-img",
+            "style": Object {
+              "backgroundImage": "url(google)",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Witch",
+          },
+          "ref": null,
+          "rendered": "Witch",
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Pieces: ",
+              "1000",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Pieces: ",
+            "1000",
+          ],
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Pieces missing: ",
+              "3-4",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Pieces missing: ",
+            "3-4",
+          ],
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Sign in to claim",
+          },
+          "ref": null,
+          "rendered": "Sign in to claim",
+          "type": "h3",
+        },
+      ],
+      "type": "article",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
