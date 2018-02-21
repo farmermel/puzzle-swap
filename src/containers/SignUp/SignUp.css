@@ -27,3 +27,16 @@ form h3 {
   padding: 50px 0 0 0;
   height: 100vh;
 }
+
+#img-submit-label {
+  height: 40px;
+  background-color: #F6CA4F;
+  color: white;
+  border-radius: 4px;
+  padding: 13px 10px 0px 11px;
+  margin: 0 0 16px 0;
+}
+
+#img-submit-label:hover {
+  background-color: #d1a425;
+}

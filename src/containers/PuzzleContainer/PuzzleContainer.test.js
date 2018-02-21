@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { db } from '../../firebase';
+import { db, storage } from '../../firebase';
 import { PuzzleContainer,
 mapStateToProps,
 mapDispatchToProps } from './PuzzleContainer';
@@ -11,7 +11,8 @@ describe('PuzzleContainer', () => {
   beforeEach(() => {
     wrapper = shallow(<PuzzleContainer setPuzzles={jest.fn()}
                                        puzzles={mockPuzzles}
-                                       history={{push: jest.fn()}} />);
+                                       history={{push: jest.fn()}}
+                                       user={{uid: '5', username: 'Casey'}} />);
   })
 
   it('matches snapshot', () => {
@@ -19,8 +20,13 @@ describe('PuzzleContainer', () => {
   })
 
   describe('componentDidMount', () => {
-    it.skip('calls retrivePuzzles', () => {
-
+    it('calls retrivePuzzles', () => {
+      wrapper.instance().retrievePuzzles = jest.fn().mockImplementation(() => {
+        return { on: jest.fn() }
+      })
+      expect(wrapper.instance().retrievePuzzles).not.toHaveBeenCalled();
+      wrapper.instance().componentDidMount();
+      expect(wrapper.instance().retrievePuzzles).toHaveBeenCalled();
     })
   })
 
@@ -48,30 +54,44 @@ describe('PuzzleContainer', () => {
   })
 
   describe('checkForExistingChat', () => {
-    // beforeAll(() => {
-    //   db.getOnce = jest.fn().mockImplementation(() => {
-    //     return { val: () => {return { 1: 'value'}} }
-    //     })
-    //   });
-    //   wrapper.instance().parseChats = jest.fn().mockImplementation(() => {
-    //     return 1
-    //   })
-    // })
+    beforeAll(() => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        return { 
+          val: () => {
+            return { 1: 'value'}
+          } 
+        }
+      })
+    });
 
-    it.skip('calls getOnce on db with chats as argument', () => {
-      // expect(wrapper.instance().checkForExistingChat(1, 2)).toEqual()
+    beforeEach(() => {
+      wrapper.instance().parseChats = jest.fn().mockImplementation(() => {
+        return '1'
+      })
     })
 
-    it.skip('calls parseChats', () => {
-
+    it('calls getOnce on db with chats as argument', async () => {
+      expect(db.getOnce).not.toHaveBeenCalled();
+      wrapper.instance().checkForExistingChat(1, 2);
+      expect(db.getOnce).toHaveBeenCalled();
     })
 
-    it.skip('returns an existing chat if there is one', () => {
-
+    it('calls parseChats', async () => {
+      expect(wrapper.instance().parseChats).not.toHaveBeenCalled();
+      await wrapper.instance().checkForExistingChat(1, 2);
+      expect(wrapper.instance().parseChats).toHaveBeenCalled();
     })
 
-    it.skip('returns null if there is no existing chat', () => {
+    it('returns an existing chat if there is one', async () => {
+      const expected = 'value';
+      expect(await wrapper.instance().checkForExistingChat(1, 2)).toEqual(expected);
+    })
 
+    it('returns null if there is no existing chat', async () => {
+      wrapper.instance().parseChats = jest.fn().mockImplementation(() => {
+        return false
+      })
+      expect(await wrapper.instance().checkForExistingChat(1, 2)).toEqual(null);
     })
 
     it.skip('catches error if something fails', () => {
@@ -115,39 +135,54 @@ describe('PuzzleContainer', () => {
   })
 
   describe('makeNewChat', () => {
-    // beforeAll(() => {
-    //   const mockUsernames = {"1": "mel", "2": "other user"};
-    //   db.getFirebaseKey = jest.fn().mockImplementation(() => {
-    //     return 2;
-    //   })
+    let mockUsernames;
+    beforeAll(() => {
+      mockUsernames = {"1": "mel", "2": "other user"};
+      db.getFirebaseKey = jest.fn().mockImplementation(() => {
+        return 2;
+      })
 
-    //   db.postUpdate = jest.fn();
-
-    //   wrapper.instance().getUserNames = jest.fn().mockImplementation(() => {
-    //     return mockUsernames;
-    //   })
-
-    //   wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
-    //     return 'done'
-    //   });
-    // })
-
-    it.skip('calls getFirebaseKey method on db with chats as argument', async () => {
-      // expect(db.getFirebaseKey).not.toHaveBeenCalled();
-      // await wrapper.instance().makeNewChat('1', '2');
-      // expect(db.getFirebaseKey).toHaveBeenCalled();
+      db.postUpdate = jest.fn();
     })
 
-    it.skip('makes a postDB object with members, a timestamp, a last message, and a chatId', () => {
-
+    beforeEach(() => {
+      wrapper.instance().getUserNames = jest.fn().mockImplementation(() => {
+      return mockUsernames;
+      })
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return 'done'
+      });
     })
 
-    it.skip('calls postUpdate on db with an updates object', () => {
-
+    it('calls getFirebaseKey method on db with chats as argument', async () => {
+      expect(db.getFirebaseKey).not.toHaveBeenCalled();
+      await wrapper.instance().makeNewChat('1', '2');
+      expect(db.getFirebaseKey).toHaveBeenCalled();
     })
 
-    it.skip('calles checkForExistingChat', () => {
+    it.skip('calls postUpdate on db with an updates object', async () => {
+      Date.now = jest.fn().mockImplementation(() => {
+        return 5
+      })
+      const expected = {
+        "chats/2": {
+          "chatId": 2, 
+          "lastMessage": "", 
+          "members": {
+            "1": "mel", 
+            "2": "other user"
+          }, 
+          "timeStamp": 5
+        }
+      }
+      wrapper.instance().makeNewChat('1', '2');
+      expect(db.postUpdate).toHaveBeenCalledWith(expected);
+    })
 
+    it('calls checkForExistingChat', async () => {
+      expect(wrapper.instance().checkForExistingChat).not.toHaveBeenCalled();
+      await wrapper.instance().makeNewChat('1', '2');
+      expect(wrapper.instance().checkForExistingChat).toHaveBeenCalled();
     })
 
     it.skip('catches error if anything fails', () => {
@@ -156,40 +191,106 @@ describe('PuzzleContainer', () => {
   })
 
   describe('handleClaim', () => {
+    beforeAll(() => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return {}
+      })
+      wrapper.instance().goToChat = jest.fn();
+      wrapper.instance().makeNewChat = jest.fn();
+    })
+
     it('calls checkForExistingChat', () => {
-
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return {}
+      })
+      expect(wrapper.instance().checkForExistingChat).not.toHaveBeenCalled();
+      wrapper.instance().handleClaim('3', '4');
+      expect(wrapper.instance().checkForExistingChat).toHaveBeenCalled();
     })
 
-    it('calls goToChat with existingChat if there is already a chat', () => {
-
+    it('calls goToChat with existingChat if there is already a chat', async () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return {chat: 'chat chat'}
+      })
+      wrapper.instance().goToChat = jest.fn();
+      expect(wrapper.instance().goToChat).not.toHaveBeenCalled();
+      await wrapper.instance().handleClaim('3', '4');
+      expect(wrapper.instance().goToChat).toHaveBeenCalled();
     })
 
-    it('calls makeNewChat if there is no existing chat', () => {
-
+    it('calls makeNewChat if there is no existing chat', async () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return false
+      })
+      wrapper.instance().makeNewChat = jest.fn();
+      expect(wrapper.instance().makeNewChat).not.toHaveBeenCalled();
+      await wrapper.instance().handleClaim('3', '4');
+      expect(wrapper.instance().makeNewChat).toHaveBeenCalled();
     })
   })
 
-  describe('retrievePuzzles', () => {
+  describe.skip('retrievePuzzles', () => {
     it('calls watchData on db with whatever is passed', () => {
-
+      // db.watchData = jest.fn();
+      // expect(db.watchData).not.toHaveBeenCalled();
+      // wrapper.instance().retrievePuzzles();
+      // expect(db.watchData).toHaveBeenCalled();
     })
   })
 
   describe('parsePuzzles', () => {
-    it.skip('does some stuff', () => {
-
+    let mockSnapshot;
+    beforeEach(() => {
+      wrapper.instance().getImg = jest.fn().mockImplementation(() => {
+        return 'url'
+      })
     })
-  })
 
-  describe('displayPuzzles', () => {
-    it.skip('does some stuff', () => {
+    beforeAll(() => {
+      mockSnapshot = {
+        1: {
+          puzzleId: '1'
+        },
+        2: {
+          puzzleId: '2'
+        },
+        3: {
+          puzzleId: '3'
+        }
+      }
+    })
 
+    it('calls getImg for every puzzle in storage', () => {
+      expect(wrapper.instance().getImg).not.toHaveBeenCalled();
+      wrapper.instance().parsePuzzles(mockSnapshot);
+      expect(wrapper.instance().getImg).toHaveBeenCalledTimes(3);
+    })
+
+    it('calls setPuzzles with an array of puzzles', async () => {
+      const expected = [{"imgUrl": "url", "puzzleId": "1"}, {"imgUrl": "url", "puzzleId": "2"}, {"imgUrl": "url", "puzzleId": "3"}];
+      expect(wrapper.instance().props.setPuzzles).not.toHaveBeenCalled();
+      await wrapper.instance().parsePuzzles(mockSnapshot);
+      expect(wrapper.instance().props.setPuzzles).toHaveBeenCalledWith(expected);
     })
   })
 
   describe('getImg', () => {
-    it.skip('does some stuff', () => {
+    beforeAll(() => {
+      storage.getStoreRef = jest.fn().mockImplementation(() => {
+        return { getDownloadURL: jest.fn().mockImplementation(() => {
+          return 'niceurl'
+        }) }
+      })
+    })
 
+    it('calls getStoreRef method on storage with url containing id passed in', () => {
+      expect(storage.getStoreRef).not.toHaveBeenCalled();
+      wrapper.instance().getImg('5');
+      expect(storage.getStoreRef).toHaveBeenCalledWith('images/5');
+    })
+
+    it('returns an image url', async () => {
+      expect(await wrapper.instance().getImg('5')).toEqual('niceurl');
     })
   })
 

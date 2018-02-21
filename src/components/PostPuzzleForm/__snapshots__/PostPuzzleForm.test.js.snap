@@ -44,8 +44,9 @@ ShallowWrapper {
           />
           <label
                     htmlFor="puzzle-img"
+                    id="img-submit-label"
           >
-                    Upload a puzzle photo
+                    Select puzzle photo
           </label>
           <input
                     accept="image/x-png,image/jpeg"
@@ -128,8 +129,9 @@ ShallowWrapper {
 />,
             <label
               htmlFor="puzzle-img"
+              id="img-submit-label"
 >
-              Upload a puzzle photo
+              Select puzzle photo
 </label>,
             <input
               accept="image/x-png,image/jpeg"
@@ -222,11 +224,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Upload a puzzle photo",
+              "children": "Select puzzle photo",
               "htmlFor": "puzzle-img",
+              "id": "img-submit-label",
             },
             "ref": null,
-            "rendered": "Upload a puzzle photo",
+            "rendered": "Select puzzle photo",
             "type": "label",
           },
           Object {
@@ -398,8 +401,9 @@ ShallowWrapper {
             />
             <label
                         htmlFor="puzzle-img"
+                        id="img-submit-label"
             >
-                        Upload a puzzle photo
+                        Select puzzle photo
             </label>
             <input
                         accept="image/x-png,image/jpeg"
@@ -482,8 +486,9 @@ ShallowWrapper {
 />,
               <label
                 htmlFor="puzzle-img"
+                id="img-submit-label"
 >
-                Upload a puzzle photo
+                Select puzzle photo
 </label>,
               <input
                 accept="image/x-png,image/jpeg"
@@ -576,11 +581,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Upload a puzzle photo",
+                "children": "Select puzzle photo",
                 "htmlFor": "puzzle-img",
+                "id": "img-submit-label",
               },
               "ref": null,
-              "rendered": "Upload a puzzle photo",
+              "rendered": "Select puzzle photo",
               "type": "label",
             },
             Object {

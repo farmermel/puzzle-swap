@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PuzzleCard.css';
 
-const PuzzleCard = ({ puzzle, handleClaim }) => {
+const determineDisable = (puzzleId, userId) => {
+  return puzzleId === userId ? true : false;
+}
+
+const PuzzleCard = ({ puzzle, handleClaim, user }) => {
   const inlineStyles = {
     backgroundImage: `url(${puzzle.imgUrl})`
   }
@@ -13,8 +17,13 @@ const PuzzleCard = ({ puzzle, handleClaim }) => {
       <h3>{puzzle.title}</h3>
       <p>Pieces: {puzzle.numPieces}</p>
       <p>Pieces missing: {puzzle.piecesMissing}</p>
-      <button onClick={() => handleClaim(puzzleId, userId)}
-              className='claim'>Claim</button>
+      {
+        user 
+          ? <button onClick={() => handleClaim(puzzleId, userId)}
+                    disabled={determineDisable(puzzle.userId, user.uid)}
+                    className='claim'>Claim</button>
+          : <h3>Sign in to claim</h3>
+      }
     </article>
   )
 }

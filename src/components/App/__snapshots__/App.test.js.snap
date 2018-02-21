@@ -43,7 +43,12 @@ ShallowWrapper {
                     render={[Function]}
           />
           <Route
+                    exact={true}
                     path="/messages"
+                    render={[Function]}
+          />
+          <Route
+                    path="/messages/:id"
                     render={[Function]}
           />
 </Switch>,
@@ -87,7 +92,12 @@ ShallowWrapper {
               render={[Function]}
 />,
             <Route
+              exact={true}
               path="/messages"
+              render={[Function]}
+/>,
+            <Route
+              path="/messages/:id"
               render={[Function]}
 />,
           ],
@@ -148,7 +158,20 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "exact": true,
               "path": "/messages",
+              "render": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "path": "/messages/:id",
               "render": [Function],
             },
             "ref": null,
@@ -190,7 +213,12 @@ ShallowWrapper {
                         render={[Function]}
             />
             <Route
+                        exact={true}
                         path="/messages"
+                        render={[Function]}
+            />
+            <Route
+                        path="/messages/:id"
                         render={[Function]}
             />
 </Switch>,
@@ -234,7 +262,12 @@ ShallowWrapper {
                 render={[Function]}
 />,
               <Route
+                exact={true}
                 path="/messages"
+                render={[Function]}
+/>,
+              <Route
+                path="/messages/:id"
                 render={[Function]}
 />,
             ],
@@ -295,7 +328,20 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
+                "exact": true,
                 "path": "/messages",
+                "render": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "path": "/messages/:id",
                 "render": [Function],
               },
               "ref": null,

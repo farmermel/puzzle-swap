@@ -26,7 +26,7 @@ export class PuzzleContainer extends Component {
     try {
       const chatsSnapshot = await db.getOnce('chats');
       const chats = chatsSnapshot.val();
-      const existingChat = this.parseChats(chats, ownerId, claimerId)
+      const existingChat = this.parseChats(chats, ownerId, claimerId);
       return existingChat ? chats[existingChat] : null;
     } catch (error) {
       console.log(error)
@@ -90,11 +90,12 @@ export class PuzzleContainer extends Component {
   }
 
   displayPuzzles = () => {
-    const { puzzles } = this.props;
+    const { puzzles, user } = this.props;
     return puzzles && puzzles.map( puzzle => {
-      return <PuzzleCard puzzle={puzzle}
-                         handleClaim={this.handleClaim}
-                         key={puzzle.puzzleId} />
+      return <PuzzleCard puzzle={ puzzle }
+                         handleClaim={ this.handleClaim }
+                         user={ user }
+                         key={ puzzle.puzzleId } />
     })
   }
 

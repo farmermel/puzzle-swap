@@ -19,10 +19,11 @@ describe('PostPuzzleForm', () => {
 
   it('has default state', () => {
     const expected = {
-      "title": "",
+      "error": null, 
+      "fileUpload": "Select puzzle photo", 
       "numPieces": "", 
       "piecesMissing": "1-3", 
-      "error": null 
+      "title": ""
     }
     expect(wrapper.instance().state).toEqual(expected);
   })

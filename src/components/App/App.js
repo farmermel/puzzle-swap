@@ -45,9 +45,17 @@ export class App extends Component {
           <Route path='/sign-up' render={() => 
             user ? <Redirect to='/' /> : <SignUp />
           } />
-          <Route path='/messages' render={() => (
+          <Route exact path='/messages' render={() => (
             user ? <MessageInbox /> : <Redirect to='/' />
           )} />
+
+          <Route path='/messages/:id' render={({match}) => {
+            const currentChat = usersChats.find( chat => {
+              return match.params.id === chat.chatId
+            })
+            debugger
+            return <Chat chat={currentChat}/>
+          }} />
         </Switch>
       </div>
     );
@@ -73,15 +81,5 @@ App.propTypes = {
     timeStamp: PropTypes.number
   }))
 }
-
-// <Route path='/messages/:id' render={() => {
-  // const currentChat = usersChats.find( chat => {
-    // console.log(this.props.match)
-    // return this.props.match.params.id === chat.chatId
-  // })
-  // console.log(currentChat)
-  // return <Chat />
-  // find current chat id in users chats, pass that in to chat to be rendered
-// }} />
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -10,7 +10,7 @@ renderNotLoggedIn } from './Header';
 describe('Header', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<Header setLogin={jest.fn()} />);
+    wrapper = shallow(<Header user={{username: 'case', uid: '5'}} />);
   })
 
   it('should match snapshot when user is logged in', () => {
@@ -18,17 +18,15 @@ describe('Header', () => {
   })
 
   it('should match snapshot when user is not logged in', () => {
-    wrapper = shallow(<Header loggedIn={false}
-                              setLogin={jest.fn()} />);
+    wrapper = shallow(<Header user={null} />);
     expect(wrapper).toMatchSnapshot();
   })
 
   describe('handleSignOut', () => {
-    it.skip('calls doSignOut method on auth', () => {
+    it('calls doSignOut method on auth', () => {
       auth.doSignOut = jest.fn();
       expect(auth.doSignOut).not.toHaveBeenCalled();
-      wrapper.instance();
-      //why is wrapper.instance null???
+      handleSignOut();
       expect(auth.doSignOut).toHaveBeenCalled();
     })
   })
