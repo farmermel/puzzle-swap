@@ -37,27 +37,34 @@ describe('Login', () => {
   })
 
   describe('handleSubmit', () => {
-    const mockEvent = {
-      preventDefault: jest.fn()
-    }
-    auth.doSignInWithEmailAndPassword = jest.fn().mockImplementation(() => {
-      return { uid: 4 }
+    let mockEvent;
+    beforeEach(() => {
+      mockEvent = {
+        preventDefault: jest.fn()
+      }
+      auth.doSignInWithEmailAndPassword = jest.fn().mockImplementation(() => {
+        return { uid: 4 }
+      })
     })
+
     it('prevents event default', () => {
+      expect(mockEvent.preventDefault).not.toHaveBeenCalled();
       wrapper.instance().handleSubmit(mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled();
     })
 
-    it('calls auth\'s sign in method', () => {
-
+    it('calls auth\'s sign in method with email and password in state', () => {
+      expect(auth.doSignInWithEmailAndPassword).not.toHaveBeenCalled();
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(auth.doSignInWithEmailAndPassword).toHaveBeenCalledWith('','');
     })
 
-    it('calls setLogin with argument true', () => {
-
-    })
-
-    it('sets state with an error message if signin fails', () => {
-
+    it.skip('sets state with an error message if signin fails', async () => {
+      auth.doSignInWithEmailAndPassword = jest.fn().mockImplementation(() => {
+        throw Error('failed to log in')
+      })
+      await wrapper.instance().handleSubmit(mockEvent);
+      expect(wrapper.instance().state).toEqual();
     })
   })
 })
