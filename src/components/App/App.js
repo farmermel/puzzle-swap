@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { auth, db } from '../../firebase';
 import { setUser } from '../../actions/usersActions';
+import { setUsersChats } from '../../actions/userChats';
 import Main from '../../containers/Main/Main';
 import Header from '../../containers/Header/Header';
 import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
@@ -17,9 +18,24 @@ import './App.css';
 export class App extends Component {
   componentDidMount = () => {
     const { setUser } = this.props;
-    auth.onAuthStateChanged(authUser => {
+    auth.onAuthStateChanged( authUser => {
       authUser ? this.makeUserObj(authUser) : setUser(null);
     })
+  }
+
+  setChats = (chats) => {
+    const { user, setUsersChats } = this.props;
+    const usersChats = Object.keys(chats).reduce((usersChats, chat) => {
+      chats[chat].members[user.uid] && usersChats.push(chats[chat]);
+      return usersChats;
+    }, [])
+    setUsersChats(usersChats);
+  }
+
+  getUsersChats = async () => {
+    const chatsSnapshot = await db.getOnce('chats');
+    const chats = chatsSnapshot.val();
+    this.setChats(chats);
   }
 
   makeUserObj = async authUser => {
@@ -27,7 +43,8 @@ export class App extends Component {
     const userSnap = await db.getOnce(`users/${authUser.uid}`);
     const user = userSnap.val();
     const userObj = { uid: authUser.uid, username: user.username };
-    setUser(userObj)
+    setUser(userObj);
+    this.getUsersChats();
   }
 
   render() {
@@ -53,7 +70,6 @@ export class App extends Component {
             const currentChat = usersChats.find( chat => {
               return match.params.id === chat.chatId
             })
-            debugger
             return <Chat chat={currentChat}/>
           }} />
         </Switch>
@@ -68,7 +84,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  setUser: user => dispatch(setUser(user))
+  setUser: user => dispatch(setUser(user)),
+  setUsersChats: usersChats => dispatch(setUsersChats(usersChats))
 })
 
 App.propTypes = {
