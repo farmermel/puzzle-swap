@@ -12,6 +12,7 @@ import Login from '../../containers/Login/Login';
 import SignUp from '../../containers/SignUp/SignUp';
 import MessageInbox from '../MessageInbox/MessageInbox';
 import Chat from '../../containers/Chat/Chat';
+import ChatThread from '../ChatThread/ChatThread';
 import PropTypes from 'prop-types';
 import './App.css';
 
@@ -70,7 +71,9 @@ export class App extends Component {
             const currentChat = usersChats.find( chat => {
               return match.params.id === chat.chatId
             })
-            return <Chat chat={currentChat}/>
+            return currentChat 
+              ? <ChatThread chat={currentChat}/> 
+              : <div className='chat-thread'>loading</div>;
           }} />
         </Switch>
       </div>
