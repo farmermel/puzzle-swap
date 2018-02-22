@@ -8,12 +8,13 @@
 
 .chat-form {
   position: fixed;
-  bottom: 0;
-  height: 40px;
-  width: 80%;
-  display: flex;
+  bottom: 8px;
+  padding: 0;
   align-items: center;
+  display: flex;
   flex-direction: row;
+  height: 36px;
+  width: 100%;
 }
 
 .chat-form input {
@@ -22,4 +23,10 @@
 
 .submit-chat {
   width: 100px;
+}
+
+.chat-members {
+  position: fixed;
+  top: 135px;
+  left: 40px;
 }

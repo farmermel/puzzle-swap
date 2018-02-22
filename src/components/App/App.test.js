@@ -10,7 +10,8 @@ describe('App', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<App setUser={jest.fn()}
-                           user={null} />, 
+                           user={{ uid: '4'}}
+                           setUsersChats={jest.fn()} />, 
                       {disableLifecycleMethods: true});
   })
 
@@ -35,21 +36,71 @@ describe('App', () => {
           return { username: 'Nymeria' }
         }}
       })
-
       mockAuthUser = { uid: '5' }
     })
 
     it('calls getOnce method on db with a path of users and id passed in', () => {
+      wrapper.instance().getUsersChats = jest.fn()
       expect(db.getOnce).not.toHaveBeenCalled();
       wrapper.instance().makeUserObj(mockAuthUser);
       expect(db.getOnce).toHaveBeenCalled();
     })
 
     it('calls setUser with a user object with a userid and username', async () => {
+      wrapper.instance().getUsersChats = jest.fn()
       const expected = {"uid": "5", "username": "Nymeria"};
       expect(wrapper.instance().props.setUser).not.toHaveBeenCalled();
       await wrapper.instance().makeUserObj(mockAuthUser);
       expect(wrapper.instance().props.setUser).toHaveBeenCalledWith(expected);
+    })
+  })
+
+  describe('setChats', () => {
+    let mockChats;
+    beforeAll(() => {
+      mockChats = {
+        1: {
+          members: {
+            3: 'person3',
+            4: 'person4'
+          }
+        },
+        2: {
+          members: {
+            5: 'person5',
+            6: 'person6'
+          }
+        }
+      }
+    })
+
+    it('cleans chats passed in to only chats with current user in store in them and calls setUsersChats with cleaned data', () => {
+      const expected = [{"members": {"3": "person3", "4": "person4"}}];
+      expect(wrapper.instance().props.setUsersChats).not.toHaveBeenCalled();
+      wrapper.instance().setChats(mockChats);
+      expect(wrapper.instance().props.setUsersChats).toHaveBeenCalledWith(expected);
+    })
+  })
+
+  describe('getUsersChats', () => {
+    beforeAll(() => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        return { val: () => 'chat' }
+      })
+    })
+
+    it('calls getOnce method on db with chats as argument', () => {
+      wrapper.instance().setChats = jest.fn();
+      expect(db.getOnce).not.toHaveBeenCalled();
+      wrapper.instance().getUsersChats();
+      expect(db.getOnce).toHaveBeenCalledWith('chats');
+    })
+
+    it('calls setChats with chats as an argument', async () => {
+      wrapper.instance().setChats = jest.fn();
+      expect(wrapper.instance().setChats).not.toHaveBeenCalled();
+      await wrapper.instance().getUsersChats();
+      expect(wrapper.instance().setChats).toHaveBeenCalledWith('chat');
     })
   })
 

@@ -6,7 +6,12 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <App
     setUser={[Function]}
-    user={null}
+    setUsersChats={[Function]}
+    user={
+        Object {
+            "uid": "4",
+          }
+    }
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -22,7 +27,11 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Unknown
-          user={null}
+          user={
+                    Object {
+                              "uid": "4",
+                            }
+          }
 />,
         <Switch>
           <Route
@@ -62,7 +71,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "user": null,
+          "user": Object {
+            "uid": "4",
+          },
         },
         "ref": null,
         "rendered": null,
@@ -192,7 +203,11 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Unknown
-            user={null}
+            user={
+                        Object {
+                                    "uid": "4",
+                                  }
+            }
 />,
           <Switch>
             <Route
@@ -232,7 +247,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "user": null,
+            "user": Object {
+              "uid": "4",
+            },
           },
           "ref": null,
           "rendered": null,

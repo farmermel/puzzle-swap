@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { locationReducer } from './locationReducer';
 import { puzzlesReducer } from './puzzlesReducer';
 import { usersChatsReducer } from './usersChatsReducer';
