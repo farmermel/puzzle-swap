@@ -94,6 +94,7 @@ export const mapDispatchToProps = dispatch => ({
 App.propTypes = {
   user: PropTypes.object,
   setUser: PropTypes.func.isRequired,
+  setUsersChats: PropTypes.func.isRequired,
   usersChats: PropTypes.arrayOf(PropTypes.shape({
     chatId: PropTypes.string,
     lastMessage: PropTypes.string,
