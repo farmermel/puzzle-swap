@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { addLocation } from './addLocation';
 import { setPuzzles } from './setPuzzles';
 import { setUsersChats } from './userChats';
