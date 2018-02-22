@@ -16,7 +16,7 @@
   "rules": {
     "eqeqeq": ["error", "always"],
     "getter-return": ["error", { "allowImplicit": true }],
-    "indent": ["warn", 2],
+    "indent": ["warn", 2, {"SwitchCase": 1}],
     "no-template-curly-in-string": "error",
     "semi": ["error", "always"],
     "array-bracket-spacing": ["error", "never"],
