@@ -1,8 +1,8 @@
 export const puzzlesReducer = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_PUZZLES':
-      return action.puzzles
+      return action.puzzles;
     default:
       return state;
   }
-}
+};

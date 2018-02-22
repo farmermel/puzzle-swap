@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as apiCalls from './apiCalls';
 
 describe('apiCalls', () => {
