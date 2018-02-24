@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { db } from '../../firebase';
 import PropTypes from 'prop-types';
@@ -17,14 +18,14 @@ export class ChatThread extends Component {
   async componentDidMount() {
     const { chat } = this.props;
     const messagesSnap = await db.watchData(`messages/${chat.chatId}`);
-    messagesSnap.on('value', snapshot => {
-      this.renderMessages(snapshot.val())
+    messagesSnap.on('value', async snapshot => {
+      await this.renderMessages(snapshot.val())
     })
   }
 
   getMembers = members => {
     const membersArr = Object.keys(members).map( member => (
-      members[member]
+      members[member].username
     ))
     return membersArr.join(', ');
   }
@@ -58,6 +59,7 @@ export class ChatThread extends Component {
   }
 
   renderMessages = messages => {
+    console.log(messages)
     const colorObj = this.determineMessageColor();
     const messagesToRender = messages
       ? Object.keys(messages).map( mkey => {
@@ -77,16 +79,25 @@ export class ChatThread extends Component {
   }
 
   determineMessageColor = () => {
-    const { chat } = this.props;
+    const { chat, user } = this.props;
     const members = Object.keys(chat.members);
+    const recipient = members.find( member => user.uid !== member);
     return {
-      [members[0]]: 'speech-right',
-      [members[1]]: 'speech-left'
+      [user.uid]: 'speech-right',
+      [recipient]: 'speech-left'
     }
   }
 
+  // getEmail = members => {
+  //   const { user } = this.props;
+  //   const membersIds = Object.keys(members);
+  //   const recipient = membersIds.find( member => user.uid !== member);
+  //   return members[recipient].email;
+  // }
+
   render() {
     const { chat } = this.props;
+    // const email = this.getEmail(chat.members);
     return (
       <section className='chat-thread'>
         <h3 className='chat-members'>Members: <span>{this.getMembers(chat.members)}</span></h3>
@@ -94,12 +105,19 @@ export class ChatThread extends Component {
           {this.state.messagesToRender}
         </section>
         <form onSubmit={ this.handleSubmit }
+              // action={`https://formspree.io/${email}`}
+              // method='POST'
               className='chat-form'>
           <input type='text'
                  name='message'
                  value={ this.state.message }
                  onChange={ this.handleChange } />
-          <button className='submit-chat'>Send</button>
+          {/*<input type="hidden" name="_format" value="plain" />
+          <input type="hidden" name="_next" value={`http://localhost:3000/messages/${chat.chatId}`} />
+          <input type="hidden" name="_subject" value="New message on puzzle swap!" />*/}
+          <button type='submit'
+                  value='Send'
+                  className='submit-chat'>Send</button>
         </form>
       </section>
     ) 
@@ -116,9 +134,9 @@ ChatThread.propTypes = {
     username: PropTypes.string
   }),
   chat: PropTypes.shape({
-    members: PropTypes.objectOf(PropTypes.string),
+    members: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
     chatId: PropTypes.string
   })
 }
 
-export default connect(mapStateToProps, null)(ChatThread);
+export default withRouter(connect(mapStateToProps, null)(ChatThread));
