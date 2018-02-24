@@ -5,7 +5,7 @@ import './Chat.css';
 
 const getMembers = members => {
   return Object.keys(members).map( member => (
-    members[member]
+    members[member].username
   ))
 }
 

@@ -6,14 +6,11 @@ export const doCreateUser = (id, username, email) =>
     email
   });
 
-// export const onceGetUsers = () => 
-//   db.ref('users').once('value');
-
 export const getOnce = path =>
   db.ref(path).once('value');
 
-export const getFirebaseKey = childNode => 
-  db.ref().child(childNode).push().key;
+export const getFirebaseKey = path => 
+  db.ref().child(path).push().key;
 
 export const postUpdate = updates => 
   db.ref().update(updates);
@@ -21,7 +18,5 @@ export const postUpdate = updates =>
 export const watchData = watchNode => 
   db.ref(watchNode);
 
-// export const getData = watchNode => 
-//   watchData(watchNode).on('value', (snapshot) => {
-//     return snapshot.val()
-//   })
+export const deleteData = path => 
+  db.ref().child(path).remove()

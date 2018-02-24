@@ -58,9 +58,6 @@ export class PostPuzzleForm extends Component {
   }
 
   render() {
-  // <form action='https://formspree.io/melenasuliteanu@gmail.com'
-  //   className='sign-up'
-  //   method='post'>
     return (
       <div className='form-wrapper'>
         {

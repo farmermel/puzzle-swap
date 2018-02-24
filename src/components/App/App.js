@@ -98,8 +98,8 @@ App.propTypes = {
   usersChats: PropTypes.arrayOf(PropTypes.shape({
     chatId: PropTypes.string,
     lastMessage: PropTypes.string,
-    members: PropTypes.objectOf(PropTypes.string),
-    timeStamp: PropTypes.number
+    members: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
+    timeStamp: PropTypes.string
   }))
 }
 

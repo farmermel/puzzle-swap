@@ -2,15 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PuzzleCard.css';
 
-const determineDisable = (puzzleId, userId) => {
-  return puzzleId === userId ? true : false;
+// const determineDisable = (puzzleId, userId) => {
+//   return puzzleId === userId ? true : false;
+// }
+
+//move logic of determine disable into handle claim
+//in handle claim, either delete puzzle if its the same user
+//or do current behavior
+//also have disabled attribute become a classname that toggles
+//appearance
+
+const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId) => {
+  return ownerId === userId 
+    ? renderDelete(handleDelete, puzzleId) 
+    : renderClaim(handleClaim, ownerId, userId);
 }
 
-const PuzzleCard = ({ puzzle, handleClaim, user }) => {
+const renderDelete = (handleDelete, puzzleId) => {
+  return (
+    <button onClick={() => handleDelete(puzzleId)}
+            className='claim'>Unlist</button>
+  )
+}
+
+const renderClaim = (handleClaim, ownerId, userId) => {
+  return (
+    <button onClick={() => handleClaim(ownerId, userId)}
+            className='claim'>Claim</button>
+  )
+}
+
+const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
   const inlineStyles = {
     backgroundImage: `url(${puzzle.imgUrl})`
   }
-  const { puzzleId, userId } = puzzle;
+  const { puzzleId, userId: ownerId } = puzzle;
   return (
     <article className='puzzle-card'>
       <div className='puzzle-img' style={inlineStyles}></div>
@@ -19,9 +45,7 @@ const PuzzleCard = ({ puzzle, handleClaim, user }) => {
       <p>Pieces missing: {puzzle.piecesMissing}</p>
       {
         user 
-          ? <button onClick={() => handleClaim(puzzleId, userId)}
-                    disabled={determineDisable(puzzle.userId, user.uid)}
-                    className='claim'>Claim</button>
+          ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid)
           : <h3>Sign in to claim</h3>
       }
     </article>
@@ -36,7 +60,8 @@ PuzzleCard.propTypes = {
     imgUrl: PropTypes.string,
     puzzleId: PropTypes.number
   }),
-  handleClaim: PropTypes.func.isRequired
+  handleClaim: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired
 }
 
 export default PuzzleCard;
