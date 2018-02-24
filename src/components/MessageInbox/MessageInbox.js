@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { db } from '../../firebase';
 import { connect } from 'react-redux';
-// import { setUsersChats } from '../../actions/userChats';
 import Chat from '../../containers/Chat/Chat';
 import PropTypes from 'prop-types';
 import './MessageInbox.css';
@@ -28,10 +27,6 @@ export const mapStateToProps = state => ({
   userId: state.user.uid,
   usersChats: state.usersChats
 })
-
-// export const mapDispatchToProps = dispatch => ({
-//   setUsersChats: usersChats => dispatch(setUsersChats(usersChats))
-// })
 
 MessageInbox.propTypes = {
   userId: PropTypes.string,
