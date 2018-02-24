@@ -27,8 +27,7 @@ export class SignUp extends Component {
       const authUser = await auth.doCreateUserWithEmailAndPassword(email, password);
       await db.doCreateUser(authUser.uid, name, email);
     } catch (error) {
-      this.setState({ error: error.message })
-      console.log(error)
+      this.setState({ error: error.message });
     }
   }
 
