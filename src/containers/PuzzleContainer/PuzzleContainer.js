@@ -49,7 +49,10 @@ export class PuzzleContainer extends Component {
     const allUsers = allUsersSnap.val();
     return Object.keys(allUsers).reduce((userNames, user) => {
       if (user === ownerId || user === claimerId) {
-        userNames[user] = allUsers[user].username
+        userNames[user] = { 
+          username: allUsers[user].username,
+          email: allUsers[user].email
+        }
       }
       return userNames;
     }, {})
@@ -59,14 +62,17 @@ export class PuzzleContainer extends Component {
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
       const userNames = await this.getUserNames(ownerId, claimerId);
+      console.log('usernames', userNames)
+      const timeStamp = Date.now();
       const postDB = {
         members: userNames,
-        timeStamp: Date.now(),
+        timeStamp,
         lastMessage: '',
         chatId: firebaseKey
       }
       let updates = {};
       updates[`chats/${firebaseKey}`] = postDB;
+      // updates[`messages/${firebaseKey}`]
       await db.postUpdate(updates);
       this.checkForExistingChat();
     } catch (error) {
@@ -78,8 +84,14 @@ export class PuzzleContainer extends Component {
     const { user } = this.props;
     const claimerId = user.uid;
     const existingChat = await this.checkForExistingChat(ownerId, claimerId);
-    existingChat ? this.goToChat(existingChat) : this.makeNewChat(ownerId, claimerId);
-    //this.handlePuzzleStatus(puzzleId)
+    existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId);
+  }
+
+  handleDelete = async puzzleId => {
+    const puzzlesSnap = await db.getOnce('puzzles');
+    const puzzles = puzzlesSnap.val();
+    const puzzle = Object.keys(puzzles).find( puzzle => puzzles[puzzle].puzzleId === puzzleId);
+    await db.deleteData(`puzzles/${puzzle}`)
   }
 
   retrievePuzzles = () => {
@@ -101,6 +113,7 @@ export class PuzzleContainer extends Component {
     return puzzles && puzzles.map( puzzle => {
       return <PuzzleCard puzzle={ puzzle }
                          handleClaim={ this.handleClaim }
+                         handleDelete={ this.handleDelete }
                          user={ user }
                          key={ puzzle.puzzleId } />
     })
