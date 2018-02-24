@@ -19,6 +19,7 @@
 
 .chat-form input {
   margin: 0;
+  height: 45px;
 }
 
 .submit-chat {
@@ -29,4 +30,50 @@
   position: fixed;
   top: 135px;
   left: 40px;
+}
+
+.speech-right {
+  position: relative;
+  background: #fff;
+  border-radius: .4em;
+  padding: 5px 27px;
+  margin: 20px 0;
+}
+
+.speech-right:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 36px solid transparent;
+  border-left-color: #fff;
+  border-right: 0;
+  border-bottom: 0;
+  margin-top: -18px;
+  margin-right: -36px;
+}
+
+.speech-left {
+  position: relative;
+  background: #00aabb;
+  border-radius: .4em;
+  padding: 5px 27px;
+  margin: 20px 0;
+}
+
+.speech-left:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 36px solid transparent;
+  border-right-color: #00aabb;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -18px;
+  margin-left: -36px;
 }

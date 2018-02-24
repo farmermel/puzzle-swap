@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  background-color: #efefef; 
+  background-color: #efefef;
+  padding: 0 0 60px 0;
 }
 
 h1,
