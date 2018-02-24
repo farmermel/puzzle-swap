@@ -15,8 +15,7 @@ const Chat = ({ chat }) => {
       <Link to={{ pathname: `/messages/${chat.chatId}`}}>
         <h3>Members: <span>{getMembers(chat.members)}</span></h3>
         <h2>{chat.timeStamp}</h2>
-        <p>I'm a chat blurb</p>
-        <p>hopefully one day you can click on me and I'll also print a bunch of messages</p>
+        <p>{chat.lastMessage}</p>
       </Link>
     </div>
   )

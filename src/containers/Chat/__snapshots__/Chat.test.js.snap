@@ -45,12 +45,7 @@ ShallowWrapper {
         <h2>
                 34
         </h2>
-        <p>
-                I'm a chat blurb
-        </p>
-        <p>
-                hopefully one day you can click on me and I'll also print a bunch of messages
-        </p>
+        <p />
 </Link>,
       "className": "chat",
     },
@@ -71,12 +66,7 @@ ShallowWrapper {
           <h2>
             34
 </h2>,
-          <p>
-            I'm a chat blurb
-</p>,
-          <p>
-            hopefully one day you can click on me and I'll also print a bunch of messages
-</p>,
+          <p />,
         ],
         "replace": false,
         "to": Object {
@@ -137,21 +127,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "I'm a chat blurb",
+            "children": undefined,
           },
           "ref": null,
-          "rendered": "I'm a chat blurb",
-          "type": "p",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "hopefully one day you can click on me and I'll also print a bunch of messages",
-          },
-          "ref": null,
-          "rendered": "hopefully one day you can click on me and I'll also print a bunch of messages",
+          "rendered": null,
           "type": "p",
         },
       ],
@@ -183,12 +162,7 @@ ShallowWrapper {
           <h2>
                     34
           </h2>
-          <p>
-                    I'm a chat blurb
-          </p>
-          <p>
-                    hopefully one day you can click on me and I'll also print a bunch of messages
-          </p>
+          <p />
 </Link>,
         "className": "chat",
       },
@@ -209,12 +183,7 @@ ShallowWrapper {
             <h2>
               34
 </h2>,
-            <p>
-              I'm a chat blurb
-</p>,
-            <p>
-              hopefully one day you can click on me and I'll also print a bunch of messages
-</p>,
+            <p />,
           ],
           "replace": false,
           "to": Object {
@@ -275,21 +244,10 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "I'm a chat blurb",
+              "children": undefined,
             },
             "ref": null,
-            "rendered": "I'm a chat blurb",
-            "type": "p",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "hopefully one day you can click on me and I'll also print a bunch of messages",
-            },
-            "ref": null,
-            "rendered": "hopefully one day you can click on me and I'll also print a bunch of messages",
+            "rendered": null,
             "type": "p",
           },
         ],

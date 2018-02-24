@@ -8,6 +8,13 @@ import PropTypes from 'prop-types';
 import './PuzzleContainer.css';
 
 export class PuzzleContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      error: null
+    }
+  }
+
   componentDidMount = () => {
     const puzzlesData = this.retrievePuzzles();
 
@@ -63,7 +70,7 @@ export class PuzzleContainer extends Component {
       await db.postUpdate(updates);
       this.checkForExistingChat();
     } catch (error) {
-      console.log(error)
+      this.setState({ error: error.message })
     }
   }
 

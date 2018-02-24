@@ -94,7 +94,7 @@ describe('PuzzleContainer', () => {
       expect(await wrapper.instance().checkForExistingChat(1, 2)).toEqual(null);
     })
 
-    it.skip('catches error if something fails', () => {
+    it('catches error if something fails', () => {
 
     })
   })
@@ -161,9 +161,13 @@ describe('PuzzleContainer', () => {
     })
 
     it.skip('calls postUpdate on db with an updates object', async () => {
-      Date.now = jest.fn().mockImplementation(() => {
-        return 5
-      })
+      // global.Date = jest.fn().mockImplementation(() => {
+      //   return {
+      //     now: jest.fn().mockImplementation(() => {
+      //       return 5
+      //     })
+      //   }
+      // })
       const expected = {
         "chats/2": {
           "chatId": 2, 
@@ -172,7 +176,7 @@ describe('PuzzleContainer', () => {
             "1": "mel", 
             "2": "other user"
           }, 
-          "timeStamp": 5
+          "timeStamp": Date.now()
         }
       }
       wrapper.instance().makeNewChat('1', '2');
@@ -185,8 +189,13 @@ describe('PuzzleContainer', () => {
       expect(wrapper.instance().checkForExistingChat).toHaveBeenCalled();
     })
 
-    it.skip('catches error if anything fails', () => {
+    it('catches error if anything fails', () => {
+      db.getFirebaseKey = jest.fn().mockImplementation(() => {
+        throw new Error('failed')
+      })
 
+      wrapper.instance().makeNewChat('1', '2');
+      expect(wrapper.instance().state.error).toEqual('failed');
     })
   })
 
@@ -226,15 +235,6 @@ describe('PuzzleContainer', () => {
       expect(wrapper.instance().makeNewChat).not.toHaveBeenCalled();
       await wrapper.instance().handleClaim('3', '4');
       expect(wrapper.instance().makeNewChat).toHaveBeenCalled();
-    })
-  })
-
-  describe.skip('retrievePuzzles', () => {
-    it('calls watchData on db with whatever is passed', () => {
-      // db.watchData = jest.fn();
-      // expect(db.watchData).not.toHaveBeenCalled();
-      // wrapper.instance().retrievePuzzles();
-      // expect(db.watchData).toHaveBeenCalled();
     })
   })
 

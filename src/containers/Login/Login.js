@@ -24,8 +24,7 @@ export class Login extends Component {
       const { email, password } = this.state;
       await auth.doSignInWithEmailAndPassword(email, password);
     } catch (error) {
-      this.setState({ error: error.message })
-      console.log(error)
+      this.setState({ error: error.message });
     }
   }
 

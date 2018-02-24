@@ -38,7 +38,7 @@ describe('SignUp', () => {
         return { Casey: 'I am Casey',
         uid: 5}
       })
-      db.doCreateUser = jest.fn()
+      db.doCreateUser = jest.fn();
       mockEvent = {
         preventDefault: jest.fn()
       }
@@ -61,14 +61,11 @@ describe('SignUp', () => {
       expect(db.doCreateUser).toHaveBeenCalled();
     })
 
-    it.skip('sets state with error if either create user method fails', async () => {
-      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-        status: 500,
-        message: 'failed'
-      }))
-      db.doCreateUser = window.fetch;
+    it('sets state with error if something fails', async () => {
+      auth.doCreateUserWithEmailAndPassword = jest.fn();
+      const expected = 'Cannot read property \'uid\' of undefined'
       await wrapper.instance().handleSubmit(mockEvent);
-      expect(wrapper.instance().state).toEqual();
+      expect(wrapper.instance().state.error).toEqual(expected);
     })
   })
 })

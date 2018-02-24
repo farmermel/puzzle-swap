@@ -59,12 +59,12 @@ describe('Login', () => {
       expect(auth.doSignInWithEmailAndPassword).toHaveBeenCalledWith('','');
     })
 
-    it.skip('sets state with an error message if signin fails', async () => {
+    it('sets state with an error message if signin fails', async () => {
       auth.doSignInWithEmailAndPassword = jest.fn().mockImplementation(() => {
-        throw Error('failed to log in')
-      })
+        throw new Error('failed')
+      });
       await wrapper.instance().handleSubmit(mockEvent);
-      expect(wrapper.instance().state).toEqual();
+      expect(wrapper.instance().state.error).toEqual('failed');
     })
   })
 })

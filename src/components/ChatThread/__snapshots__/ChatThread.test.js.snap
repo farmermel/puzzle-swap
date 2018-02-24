@@ -1,0 +1,316 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChatThread matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ChatThread
+    chat={
+        Object {
+            "chatId": "4",
+            "members": Object {
+              "1": "Nymeria",
+              "2": "Arya",
+            },
+          }
+    }
+    user={
+        Object {
+            "uid": 4,
+            "username": "Nymeria",
+          }
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h3
+          className="chat-members"
+>
+          Members: 
+          <span>
+                    Nymeria, Arya
+          </span>
+</h3>,
+        <section
+          className="messages-wrap"
+>
+          
+</section>,
+        <form
+          className="chat-form"
+          onSubmit={[Function]}
+>
+          <input
+                    name="message"
+                    onChange={[Function]}
+                    type="text"
+                    value=""
+          />
+          <button
+                    className="submit-chat"
+          >
+                    Send
+          </button>
+</form>,
+      ],
+      "className": "chat-thread",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Members: ",
+            <span>
+              Nymeria, Arya
+</span>,
+          ],
+          "className": "chat-members",
+        },
+        "ref": null,
+        "rendered": Array [
+          "Members: ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Nymeria, Arya",
+            },
+            "ref": null,
+            "rendered": "Nymeria, Arya",
+            "type": "span",
+          },
+        ],
+        "type": "h3",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [],
+          "className": "messages-wrap",
+        },
+        "ref": null,
+        "rendered": Array [],
+        "type": "section",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              name="message"
+              onChange={[Function]}
+              type="text"
+              value=""
+/>,
+            <button
+              className="submit-chat"
+>
+              Send
+</button>,
+          ],
+          "className": "chat-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "name": "message",
+              "onChange": [Function],
+              "type": "text",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Send",
+              "className": "submit-chat",
+            },
+            "ref": null,
+            "rendered": "Send",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+    ],
+    "type": "section",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h3
+            className="chat-members"
+>
+            Members: 
+            <span>
+                        Nymeria, Arya
+            </span>
+</h3>,
+          <section
+            className="messages-wrap"
+>
+            
+</section>,
+          <form
+            className="chat-form"
+            onSubmit={[Function]}
+>
+            <input
+                        name="message"
+                        onChange={[Function]}
+                        type="text"
+                        value=""
+            />
+            <button
+                        className="submit-chat"
+            >
+                        Send
+            </button>
+</form>,
+        ],
+        "className": "chat-thread",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Members: ",
+              <span>
+                Nymeria, Arya
+</span>,
+            ],
+            "className": "chat-members",
+          },
+          "ref": null,
+          "rendered": Array [
+            "Members: ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Nymeria, Arya",
+              },
+              "ref": null,
+              "rendered": "Nymeria, Arya",
+              "type": "span",
+            },
+          ],
+          "type": "h3",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [],
+            "className": "messages-wrap",
+          },
+          "ref": null,
+          "rendered": Array [],
+          "type": "section",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <input
+                name="message"
+                onChange={[Function]}
+                type="text"
+                value=""
+/>,
+              <button
+                className="submit-chat"
+>
+                Send
+</button>,
+            ],
+            "className": "chat-form",
+            "onSubmit": [Function],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "name": "message",
+                "onChange": [Function],
+                "type": "text",
+                "value": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "input",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Send",
+                "className": "submit-chat",
+              },
+              "ref": null,
+              "rendered": "Send",
+              "type": "button",
+            },
+          ],
+          "type": "form",
+        },
+      ],
+      "type": "section",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "disableLifecycleMethods": true,
+  },
+}
+`;
