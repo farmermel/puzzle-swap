@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { db, storage } from '../../firebase';
+import ReactCrop from 'react-image-crop';
+import { getCroppedImg } from '../../helpers/cropImg';
+import 'react-image-crop/dist/ReactCrop.css';
 
 export class PostPuzzleForm extends Component {
   constructor() {
@@ -10,8 +13,19 @@ export class PostPuzzleForm extends Component {
       numPieces: '',
       piecesMissing: '1-3',
       fileUpload: 'Select puzzle photo',
-      error: null
+      error: null,
+      crop: {
+        aspect: 10/7
+      } 
     }
+  }
+
+  test = async (crop, pixelCrop) => {
+    const image = document.createElement('img');
+    image.src = this.state.imageUrl;
+    const croppedImgBlob = await getCroppedImg(image, pixelCrop, this.state.fileUpload);
+    const croppedImg = new File([croppedImgBlob], this.state.fileUpload);
+    this.setState({ croppedImg });
   }
 
   handleChange = (e) => {
@@ -22,8 +36,9 @@ export class PostPuzzleForm extends Component {
 
   handlePhoto = (files: FileList) => {
     const puzzleImg = files[0];
+    const imageUrl = URL.createObjectURL(puzzleImg);
     files[0] && this.setState({ 
-                  puzzleImg,
+                  imageUrl,
                   fileUpload: files[0].name
                 })
   }
@@ -39,10 +54,10 @@ export class PostPuzzleForm extends Component {
   }
 
   postToCloudStore = () => {
-    const { puzzleImg } = this.state;
+    const { croppedImg } = this.state;
     const puzzleId = Date.now();
     const ref = storage.getStoreRef(`images/${puzzleId}`);
-    storage.putInStore(ref, puzzleImg);
+    storage.putInStore(ref, croppedImg);
     return puzzleId;
   }
 
@@ -57,28 +72,38 @@ export class PostPuzzleForm extends Component {
     }
   }
 
+  handleCropChange = (crop) => {
+  this.setState({ crop });
+  }
+
   render() {
     return (
       <div className='form-wrapper'>
         {
           this.state.error && <p>{this.state.error}</p>
         }
-        <form onSubmit={this.postPuzzleToFirebase}>
+        <form onSubmit={ this.postPuzzleToFirebase }>
           <label htmlFor='puzzle-name'>Puzzle Name</label>
             <input type='text' placeholder='puzzle title'
-                   value={this.state.title}
+                   value={ this.state.title }
                    name='title'
                    id='puzzle-name'
-                   onChange={this.handleChange}
+                   onChange={ this.handleChange }
                    required />
           <label htmlFor='puzzle-img'
-                 id='img-submit-label'>{this.state.fileUpload}</label>
+                 id='img-submit-label'>{ this.state.fileUpload }</label>
             <input type='file' 
                    accept='image/x-png,image/jpeg'
                    name='puzzleImg' 
                    onChange={(e) => this.handlePhoto(e.target.files)}
                    id='puzzle-img'
                    required />
+          {
+            this.state.imageUrl && <ReactCrop src={ this.state.imageUrl }
+                                              crop={ this.state.crop }
+                                              onChange={ (crop) => this.handleCropChange(crop) }
+                                              onComplete={ (crop, pixelCrop) => this.test(crop, pixelCrop) } />
+          }
           <label htmlFor='num-pieces'>Number of pieces</label>
             <input type='number' placeholder='number of pieces'
                    value={this.state.numPieces}
