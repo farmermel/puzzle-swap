@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Chat from '../../containers/Chat/Chat';
+import Chat from '../../components/Chat/Chat';
 import PropTypes from 'prop-types';
 import './MessageInbox.css';
 

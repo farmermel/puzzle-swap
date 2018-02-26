@@ -19,4 +19,4 @@ export const watchData = watchNode =>
   db.ref(watchNode);
 
 export const deleteData = path => 
-  db.ref().child(path).remove()
+  db.ref().child(path).remove();
