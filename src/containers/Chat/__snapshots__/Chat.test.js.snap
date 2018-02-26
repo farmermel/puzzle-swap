@@ -38,8 +38,7 @@ ShallowWrapper {
         <h3>
                 Members: 
                 <span>
-                        person1
-                        person2
+                        
                 </span>
         </h3>
         <h2>
@@ -59,8 +58,7 @@ ShallowWrapper {
           <h3>
             Members: 
             <span>
-                        person1
-                        person2
+                        
             </span>
 </h3>,
           <h2>
@@ -83,8 +81,7 @@ ShallowWrapper {
             "children": Array [
               "Members: ",
               <span>
-                person1
-                person2
+                
 </span>,
             ],
           },
@@ -97,14 +94,14 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  "person1",
-                  "person2",
+                  undefined,
+                  undefined,
                 ],
               },
               "ref": null,
               "rendered": Array [
-                "person1",
-                "person2",
+                undefined,
+                undefined,
               ],
               "type": "span",
             },
@@ -155,8 +152,7 @@ ShallowWrapper {
           <h3>
                     Members: 
                     <span>
-                              person1
-                              person2
+                              
                     </span>
           </h3>
           <h2>
@@ -176,8 +172,7 @@ ShallowWrapper {
             <h3>
               Members: 
               <span>
-                            person1
-                            person2
+                            
               </span>
 </h3>,
             <h2>
@@ -200,8 +195,7 @@ ShallowWrapper {
               "children": Array [
                 "Members: ",
                 <span>
-                  person1
-                  person2
+                  
 </span>,
               ],
             },
@@ -214,14 +208,14 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": Array [
-                    "person1",
-                    "person2",
+                    undefined,
+                    undefined,
                   ],
                 },
                 "ref": null,
                 "rendered": Array [
-                  "person1",
-                  "person2",
+                  undefined,
+                  undefined,
                 ],
                 "type": "span",
               },

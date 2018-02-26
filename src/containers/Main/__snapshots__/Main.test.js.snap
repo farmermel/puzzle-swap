@@ -6,6 +6,7 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Main
     addLocation={[Function]}
+    hasErrored={[Function]}
     location=""
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -25,34 +26,7 @@ ShallowWrapper {
         <p
           className="view-description"
 >
-          Viewing 
-          <select
-                    id="puzzle-filter"
-                    name="puzzleFilter"
-                    onChange={[Function]}
-          >
-                    <option
-                              value="all"
-                    >
-                              all
-                    </option>
-                    <option
-                              value="300-750"
-                    >
-                              300-750
-                    </option>
-                    <option
-                              value="1000"
-                    >
-                              1000
-                    </option>
-                    <option
-                              value="1100 or more"
-                    >
-                              1100 or more
-                    </option>
-          </select>
-           piece puzzles posted in 
+          Viewing puzzles posted in 
           
 </p>,
         <withRouter(Connect(PuzzleContainer)) />,
@@ -68,126 +42,14 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "Viewing ",
-            <select
-              id="puzzle-filter"
-              name="puzzleFilter"
-              onChange={[Function]}
->
-              <option
-                            value="all"
-              >
-                            all
-              </option>
-              <option
-                            value="300-750"
-              >
-                            300-750
-              </option>
-              <option
-                            value="1000"
-              >
-                            1000
-              </option>
-              <option
-                            value="1100 or more"
-              >
-                            1100 or more
-              </option>
-</select>,
-            " piece puzzles posted in ",
+            "Viewing puzzles posted in ",
             "",
           ],
           "className": "view-description",
         },
         "ref": null,
         "rendered": Array [
-          "Viewing ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <option
-                  value="all"
->
-                  all
-</option>,
-                <option
-                  value="300-750"
->
-                  300-750
-</option>,
-                <option
-                  value="1000"
->
-                  1000
-</option>,
-                <option
-                  value="1100 or more"
->
-                  1100 or more
-</option>,
-              ],
-              "id": "puzzle-filter",
-              "name": "puzzleFilter",
-              "onChange": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "all",
-                  "value": "all",
-                },
-                "ref": null,
-                "rendered": "all",
-                "type": "option",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "300-750",
-                  "value": "300-750",
-                },
-                "ref": null,
-                "rendered": "300-750",
-                "type": "option",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "1000",
-                  "value": "1000",
-                },
-                "ref": null,
-                "rendered": "1000",
-                "type": "option",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "1100 or more",
-                  "value": "1100 or more",
-                },
-                "ref": null,
-                "rendered": "1100 or more",
-                "type": "option",
-              },
-            ],
-            "type": "select",
-          },
-          " piece puzzles posted in ",
+          "Viewing puzzles posted in ",
           "",
         ],
         "type": "p",
@@ -215,34 +77,7 @@ ShallowWrapper {
           <p
             className="view-description"
 >
-            Viewing 
-            <select
-                        id="puzzle-filter"
-                        name="puzzleFilter"
-                        onChange={[Function]}
-            >
-                        <option
-                                    value="all"
-                        >
-                                    all
-                        </option>
-                        <option
-                                    value="300-750"
-                        >
-                                    300-750
-                        </option>
-                        <option
-                                    value="1000"
-                        >
-                                    1000
-                        </option>
-                        <option
-                                    value="1100 or more"
-                        >
-                                    1100 or more
-                        </option>
-            </select>
-             piece puzzles posted in 
+            Viewing puzzles posted in 
             
 </p>,
           <withRouter(Connect(PuzzleContainer)) />,
@@ -258,126 +93,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "Viewing ",
-              <select
-                id="puzzle-filter"
-                name="puzzleFilter"
-                onChange={[Function]}
->
-                <option
-                                value="all"
-                >
-                                all
-                </option>
-                <option
-                                value="300-750"
-                >
-                                300-750
-                </option>
-                <option
-                                value="1000"
-                >
-                                1000
-                </option>
-                <option
-                                value="1100 or more"
-                >
-                                1100 or more
-                </option>
-</select>,
-              " piece puzzles posted in ",
+              "Viewing puzzles posted in ",
               "",
             ],
             "className": "view-description",
           },
           "ref": null,
           "rendered": Array [
-            "Viewing ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <option
-                    value="all"
->
-                    all
-</option>,
-                  <option
-                    value="300-750"
->
-                    300-750
-</option>,
-                  <option
-                    value="1000"
->
-                    1000
-</option>,
-                  <option
-                    value="1100 or more"
->
-                    1100 or more
-</option>,
-                ],
-                "id": "puzzle-filter",
-                "name": "puzzleFilter",
-                "onChange": [Function],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "all",
-                    "value": "all",
-                  },
-                  "ref": null,
-                  "rendered": "all",
-                  "type": "option",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "300-750",
-                    "value": "300-750",
-                  },
-                  "ref": null,
-                  "rendered": "300-750",
-                  "type": "option",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "1000",
-                    "value": "1000",
-                  },
-                  "ref": null,
-                  "rendered": "1000",
-                  "type": "option",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "1100 or more",
-                    "value": "1100 or more",
-                  },
-                  "ref": null,
-                  "rendered": "1100 or more",
-                  "type": "option",
-                },
-              ],
-              "type": "select",
-            },
-            " piece puzzles posted in ",
+            "Viewing puzzles posted in ",
             "",
           ],
           "type": "p",

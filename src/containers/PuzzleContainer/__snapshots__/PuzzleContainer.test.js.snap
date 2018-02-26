@@ -5,6 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <PuzzleContainer
+    hasErrored={[Function]}
     history={
         Object {
             "push": [Function],
@@ -58,6 +59,7 @@ ShallowWrapper {
       "children": Array [
         <PuzzleCard
           handleClaim={[Function]}
+          handleDelete={[Function]}
           puzzle={
                     Object {
                               "imgUrl": "google",
@@ -76,6 +78,7 @@ ShallowWrapper {
 />,
         <PuzzleCard
           handleClaim={[Function]}
+          handleDelete={[Function]}
           puzzle={
                     Object {
                               "imgUrl": "yahoo",
@@ -94,6 +97,7 @@ ShallowWrapper {
 />,
         <PuzzleCard
           handleClaim={[Function]}
+          handleDelete={[Function]}
           puzzle={
                     Object {
                               "imgUrl": "aol",
@@ -121,6 +125,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "handleClaim": [Function],
+          "handleDelete": [Function],
           "puzzle": Object {
             "imgUrl": "google",
             "numPieces": "1000",
@@ -143,6 +148,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "handleClaim": [Function],
+          "handleDelete": [Function],
           "puzzle": Object {
             "imgUrl": "yahoo",
             "numPieces": "1000",
@@ -165,6 +171,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "handleClaim": [Function],
+          "handleDelete": [Function],
           "puzzle": Object {
             "imgUrl": "aol",
             "numPieces": "1500",
@@ -193,6 +200,7 @@ ShallowWrapper {
         "children": Array [
           <PuzzleCard
             handleClaim={[Function]}
+            handleDelete={[Function]}
             puzzle={
                         Object {
                                     "imgUrl": "google",
@@ -211,6 +219,7 @@ ShallowWrapper {
 />,
           <PuzzleCard
             handleClaim={[Function]}
+            handleDelete={[Function]}
             puzzle={
                         Object {
                                     "imgUrl": "yahoo",
@@ -229,6 +238,7 @@ ShallowWrapper {
 />,
           <PuzzleCard
             handleClaim={[Function]}
+            handleDelete={[Function]}
             puzzle={
                         Object {
                                     "imgUrl": "aol",
@@ -256,6 +266,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "handleClaim": [Function],
+            "handleDelete": [Function],
             "puzzle": Object {
               "imgUrl": "google",
               "numPieces": "1000",
@@ -278,6 +289,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "handleClaim": [Function],
+            "handleDelete": [Function],
             "puzzle": Object {
               "imgUrl": "yahoo",
               "numPieces": "1000",
@@ -300,6 +312,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "handleClaim": [Function],
+            "handleDelete": [Function],
             "puzzle": Object {
               "imgUrl": "aol",
               "numPieces": "1500",
