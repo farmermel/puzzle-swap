@@ -5,7 +5,7 @@ import './PuzzleCard.css';
 const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId) => {
   return ownerId === userId 
     ? renderDelete(handleDelete, puzzleId) 
-    : renderClaim(handleClaim, ownerId, userId);
+    : renderClaim(handleClaim, ownerId);
 }
 
 const renderDelete = (handleDelete, puzzleId) => {
@@ -15,9 +15,9 @@ const renderDelete = (handleDelete, puzzleId) => {
   )
 }
 
-const renderClaim = (handleClaim, ownerId, userId) => {
+const renderClaim = (handleClaim, ownerId) => {
   return (
-    <button onClick={() => handleClaim(ownerId, userId)}
+    <button onClick={() => handleClaim(ownerId)}
             className='claim'>Claim</button>
   )
 }
