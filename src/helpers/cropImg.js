@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const getCroppedImg = (image, pixelCrop, fileName) => {
 
   const canvas = document.createElement('canvas');
