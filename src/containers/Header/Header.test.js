@@ -10,7 +10,8 @@ renderNotLoggedIn } from './Header';
 describe('Header', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<Header user={{username: 'case', uid: '5'}} />);
+    wrapper = shallow(<Header user={{username: 'case', uid: '5'}}
+                              hasErrored={jest.fn()} />);
   })
 
   it('should match snapshot when user is logged in', () => {
@@ -18,7 +19,8 @@ describe('Header', () => {
   })
 
   it('should match snapshot when user is not logged in', () => {
-    wrapper = shallow(<Header user={null} />);
+    wrapper = shallow(<Header user={null}
+                              hasErrored={jest.fn()} />);
     expect(wrapper).toMatchSnapshot();
   })
 
@@ -28,6 +30,15 @@ describe('Header', () => {
       expect(auth.doSignOut).not.toHaveBeenCalled();
       handleSignOut();
       expect(auth.doSignOut).toHaveBeenCalled();
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      auth.doSignOut = jest.fn().mockImplementation(() => {
+        throw new Error('failed to sign out')
+      }); 
+      const hasErrored = jest.fn();
+      await handleSignOut(hasErrored);
+      expect(hasErrored).toHaveBeenCalledWith('failed to sign out');
     })
   })
 })
