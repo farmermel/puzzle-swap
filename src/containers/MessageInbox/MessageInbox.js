@@ -32,10 +32,9 @@ MessageInbox.propTypes = {
   usersChats: PropTypes.arrayOf(PropTypes.shape({
     chatId: PropTypes.string,
     lastMessage: PropTypes.string,
-    members: PropTypes.objectOf(PropTypes.string),
-    timeStamp: PropTypes.number
-  })),
-  setUsersChats: PropTypes.func.isRequired
+    members: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
+    timeStamp: PropTypes.string
+  }))
 }
 
 export default connect(mapStateToProps, null)(MessageInbox);

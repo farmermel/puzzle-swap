@@ -17,12 +17,11 @@ export class Main extends Component {
   }
 
   async componentDidMount() {
+      const { addLocation, hasErrored } = this.props;
     try {
-      const { addLocation } = this.props;
       const city = await getGeoLocation();
       addLocation(city);
     } catch (error) {
-      const { hasErrored } = this.props;
       hasErrored(error.message);
     }
   }

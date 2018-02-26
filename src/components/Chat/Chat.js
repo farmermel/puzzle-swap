@@ -23,8 +23,8 @@ const Chat = ({ chat }) => {
 
 Chat.propTypes = {
   chat: PropTypes.shape({
-    timeStamp: PropTypes.number,
-    members: PropTypes.objectOf(PropTypes.string),
+    timeStamp: PropTypes.string,
+    members: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
     chatId: PropTypes.string,
     lastMessage: PropTypes.string
   })

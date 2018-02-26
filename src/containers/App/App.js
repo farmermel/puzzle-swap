@@ -62,7 +62,7 @@ export class App extends Component {
   }
 
   render() {
-    const { user, usersChats, errorMessage, hasErrored } = this.props;
+    const { user, usersChats, errorMessage, hasErrored, location } = this.props;
     return (
       <div className="App">
         <Header user={ user } hasErrored={ hasErrored }/>
@@ -73,7 +73,8 @@ export class App extends Component {
           <Route exact path='/' component={ Main } />
           <Route path='/post-puzzle-form' render={() => (
             user ? <PostPuzzleForm userId={ user.uid } 
-                                   hasErrored={ hasErrored } /> : <Redirect to='/' /> )} />
+                                   hasErrored={ hasErrored }
+                                   userLocation={ location } /> : <Redirect to='/' /> )} />
           <Route path='/login' render={() => 
             user ? <Redirect to='/' /> : <Login />
           } />
@@ -101,7 +102,8 @@ export class App extends Component {
 export const mapStateToProps = state => ({
   user: state.user,
   usersChats: state.usersChats,
-  errorMessage: state.errorMessage
+  errorMessage: state.errorMessage,
+  location: state.location
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -115,6 +117,7 @@ App.propTypes = {
   setUser: PropTypes.func.isRequired,
   setUsersChats: PropTypes.func.isRequired,
   hasErrored: PropTypes.func.isRequired,
+  location: PropTypes.string,
   usersChats: PropTypes.arrayOf(PropTypes.shape({
     chatId: PropTypes.string,
     lastMessage: PropTypes.string,

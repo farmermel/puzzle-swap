@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   position: fixed;
-  width: 100%;
+  top: 0;
   background-color: #fdfdfd;
   /*background-color: #D2DDDC;*/
   /*border-bottom: 1px solid #EFEDED;*/
@@ -16,6 +16,7 @@
   padding: 20px;
   color: white;
   box-shadow: 0 2px 4px #bababa;
+  width: 100%;
   z-index: 1;
 }
 
@@ -55,4 +56,14 @@
 
 .login {
   margin: 0 15px 0 0;
+}
+
+@media screen and (max-width: 520px) {
+  .app-title {
+    padding: 14px 0 0 7px;
+  }
+
+  .puzzleicon {
+    width: 60px;
+  }
 }
