@@ -11,7 +11,8 @@ describe('App', () => {
   beforeEach(() => {
     wrapper = shallow(<App setUser={jest.fn()}
                            user={{ uid: '4'}}
-                           setUsersChats={jest.fn()} />, 
+                           setUsersChats={jest.fn()}
+                           hasErrored={jest.fn()} />, 
                       {disableLifecycleMethods: true});
   })
 
@@ -25,6 +26,14 @@ describe('App', () => {
       auth.onAuthStateChanged = jest.fn();
       wrapper.instance().componentDidMount();
       expect(auth.onAuthStateChanged).toHaveBeenCalled();
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      auth.onAuthStateChanged = jest.fn().mockImplementation(() => {
+        throw new Error('failed to check auth state')
+      }); 
+      await wrapper.instance().componentDidMount();
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to check auth state');
     })
   })
 
@@ -52,6 +61,14 @@ describe('App', () => {
       expect(wrapper.instance().props.setUser).not.toHaveBeenCalled();
       await wrapper.instance().makeUserObj(mockAuthUser);
       expect(wrapper.instance().props.setUser).toHaveBeenCalledWith(expected);
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().makeUserObj(wrapper.instance().props.user);
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
     })
   })
 
@@ -102,17 +119,27 @@ describe('App', () => {
       await wrapper.instance().getUsersChats();
       expect(wrapper.instance().setChats).toHaveBeenCalledWith('chat');
     })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().getUsersChats();
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
+    })
   })
 
   describe('mapStateToProps', () => {
     it('maps state to props', () => {
       const mockStore = {
         user: { uid: 7},
-        usersChats: [{ chatId: '5'}]
+        usersChats: [{ chatId: '5'}],
+        errorMessage: 'failed'
       }
       const mapped = mapStateToProps(mockStore);
       expect(mapped.user).toEqual(mockStore.user);
       expect(mapped.usersChats).toEqual(mockStore.usersChats);
+      expect(mapped.errorMessage).toEqual(mockStore.errorMessage);
     })
   })
 
@@ -122,7 +149,9 @@ describe('App', () => {
       const mapped = mapDispatchToProps(mockDispatch);
       expect(mockDispatch).not.toHaveBeenCalled();
       mapped.setUser();
-      expect(mockDispatch).toHaveBeenCalled();
+      mapped.hasErrored();
+      mapped.setUsersChats();
+      expect(mockDispatch).toHaveBeenCalledTimes(3);
     })
   })
 });
