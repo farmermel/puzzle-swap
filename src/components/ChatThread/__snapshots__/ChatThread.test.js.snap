@@ -9,14 +9,21 @@ ShallowWrapper {
         Object {
             "chatId": "4",
             "members": Object {
-              "1": "Nymeria",
-              "2": "Arya",
+              "1": Object {
+                "name": "Nymeria",
+                "uid": "1",
+              },
+              "2": Object {
+                "name": "Arya",
+                "uid": "2",
+              },
             },
           }
     }
+    hasErrored={[Function]}
     user={
         Object {
-            "uid": 4,
+            "uid": 1,
             "username": "Nymeria",
           }
     }
@@ -39,7 +46,7 @@ ShallowWrapper {
 >
           Members: 
           <span>
-                    Nymeria, Arya
+                    , 
           </span>
 </h3>,
         <section
@@ -59,6 +66,8 @@ ShallowWrapper {
           />
           <button
                     className="submit-chat"
+                    type="submit"
+                    value="Send"
           >
                     Send
           </button>
@@ -76,7 +85,7 @@ ShallowWrapper {
           "children": Array [
             "Members: ",
             <span>
-              Nymeria, Arya
+              , 
 </span>,
           ],
           "className": "chat-members",
@@ -89,10 +98,10 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Nymeria, Arya",
+              "children": ", ",
             },
             "ref": null,
-            "rendered": "Nymeria, Arya",
+            "rendered": ", ",
             "type": "span",
           },
         ],
@@ -124,6 +133,8 @@ ShallowWrapper {
 />,
             <button
               className="submit-chat"
+              type="submit"
+              value="Send"
 >
               Send
 </button>,
@@ -154,6 +165,8 @@ ShallowWrapper {
             "props": Object {
               "children": "Send",
               "className": "submit-chat",
+              "type": "submit",
+              "value": "Send",
             },
             "ref": null,
             "rendered": "Send",
@@ -177,7 +190,7 @@ ShallowWrapper {
 >
             Members: 
             <span>
-                        Nymeria, Arya
+                        , 
             </span>
 </h3>,
           <section
@@ -197,6 +210,8 @@ ShallowWrapper {
             />
             <button
                         className="submit-chat"
+                        type="submit"
+                        value="Send"
             >
                         Send
             </button>
@@ -214,7 +229,7 @@ ShallowWrapper {
             "children": Array [
               "Members: ",
               <span>
-                Nymeria, Arya
+                , 
 </span>,
             ],
             "className": "chat-members",
@@ -227,10 +242,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Nymeria, Arya",
+                "children": ", ",
               },
               "ref": null,
-              "rendered": "Nymeria, Arya",
+              "rendered": ", ",
               "type": "span",
             },
           ],
@@ -262,6 +277,8 @@ ShallowWrapper {
 />,
               <button
                 className="submit-chat"
+                type="submit"
+                value="Send"
 >
                 Send
 </button>,
@@ -292,6 +309,8 @@ ShallowWrapper {
               "props": Object {
                 "children": "Send",
                 "className": "submit-chat",
+                "type": "submit",
+                "value": "Send",
               },
               "ref": null,
               "rendered": "Send",
