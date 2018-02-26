@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { db } from '../../firebase';
 import { connect } from 'react-redux';
 import Chat from '../../containers/Chat/Chat';
 import PropTypes from 'prop-types';
