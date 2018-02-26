@@ -158,7 +158,8 @@ export class PuzzleContainer extends Component {
 
 export const mapStateToProps = state => ({
   puzzles: state.puzzles,
-  user: state.user
+  user: state.user,
+  userLocation: state.location
 })
 
 export const mapDispatchToProps = dispatch => ({

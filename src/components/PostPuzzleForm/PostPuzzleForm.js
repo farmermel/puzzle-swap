@@ -40,10 +40,10 @@ export class PostPuzzleForm extends Component {
   }
 
   postToDB = puzzleId => {
-    const { userId, hasErrored } = this.props;
+    const { userId, hasErrored, userLocation } = this.props;
     try {
       const { title, numPieces, piecesMissing } = this.state;
-      const postDB = { title, numPieces, piecesMissing, puzzleId, userId }
+      const postDB = { title, numPieces, piecesMissing, puzzleId, userId, userLocation }
       const firebaseKey = db.getFirebaseKey('puzzles');
       let updates = {};
       updates[`/puzzles/${firebaseKey}`] = postDB;
@@ -113,7 +113,7 @@ export class PostPuzzleForm extends Component {
     return (
       <div className='form-wrapper'>
         {
-          this.state.error && <p>{this.state.error}</p>
+          this.state.error && <p>{ this.state.error }</p>
         }
         <form onSubmit={ this.postPuzzleToFirebase }>
           <label htmlFor='puzzle-name'>Puzzle Name</label>
@@ -136,10 +136,10 @@ export class PostPuzzleForm extends Component {
           }
           <label htmlFor='num-pieces'>Number of pieces</label>
             <input type='number' placeholder='number of pieces'
-                   value={this.state.numPieces}
+                   value={ this.state.numPieces }
                    name='numPieces'
                    id='num-pieces'
-                   onChange={this.handleChange}
+                   onChange={ this.handleChange }
                    required />
           <label htmlFor='missing'>Number of pieces missing</label>
             <select name='piecesMissing'
@@ -159,7 +159,8 @@ export class PostPuzzleForm extends Component {
 
 PostPuzzleForm.propTypes = {
   userId: PropTypes.string.isRequired,
-  hasErrored: PropTypes.func.isRequired
+  hasErrored: PropTypes.func.isRequired,
+  userLocation: PropTypes.string
 }
 
 export default withRouter(PostPuzzleForm);

@@ -7,7 +7,6 @@
 h1,
 h2,
 h3 {
-  /*font-family: 'Handlee', cursive;*/
   font-family: 'Mukta Mahee', sans-serif;
   font-weight: 200;
 }
@@ -54,11 +53,13 @@ label {
   font-size: 1.3em;
 }
 
-/*.App-intro {
-  font-size: large;
-}*/
-
 a {
   text-decoration: none;
   color: #000;
+}
+
+@media screen and (max-width: 520px) {
+  .App {
+    font-size: 12px;
+  }
 }
