@@ -1,13 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ChatThread, mapStateToProps } from './ChatThread';
+import { ChatThread, mapStateToProps, mapDispatchToProps } from './ChatThread';
 import { db } from '../../firebase';
 
 describe('ChatThread', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<ChatThread user={{username: 'Nymeria', uid: 4}}
-                                  chat={{members: {1: 'Nymeria', 2: 'Arya'}, chatId: '4'}}/>,
+    wrapper = shallow(<ChatThread user={{username: 'Nymeria', uid: 1}}
+                                  chat={{members: {1: {name: 'Nymeria', uid: '1'}, 2: {name: 'Arya', uid: '2'}}, chatId: '4'}}
+                                  hasErrored={jest.fn()} />,
                       {disableLifecycleMethods: true})
   })
   it('matches snapshot', () => {
@@ -17,8 +18,7 @@ describe('ChatThread', () => {
   it('has default state', () => {
     const expected = {
       message: '',
-      messagesToRender: [],
-      error: null
+      messagesToRender: []
     };
     expect(wrapper.instance().state).toEqual(expected);
   })
@@ -41,6 +41,14 @@ describe('ChatThread', () => {
       expect(db.watchData).not.toHaveBeenCalled();
       wrapper.instance().componentDidMount();
       expect(db.watchData).toHaveBeenCalledWith('messages/4');
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.watchData = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().componentDidMount();
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
     })
   })
 
@@ -104,12 +112,12 @@ describe('ChatThread', () => {
       expect(db.postUpdate).toHaveBeenCalled();
     })
 
-    it('sets state with error if something goes wrong', () => {
-      db.postUpdate = jest.fn().mockImplementation(() => {
-        throw new Error('valhar doharis')
-      })
-      wrapper.instance().handleSubmit(mockEvent);
-      expect(wrapper.instance().state.error).toEqual('valhar doharis');
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getFirebaseKey = jest.fn().mockImplementation(() => {
+        throw new Error('failed to get key')
+      }); 
+      await wrapper.instance().handleSubmit(mockEvent);
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to get key');
     })
   })
 
@@ -165,6 +173,15 @@ describe('ChatThread', () => {
       }
       const mapped = mapStateToProps(mockState);
       expect(mapped.user).toEqual(mockState.user);
+    })
+  })
+
+  describe('mapDispatchToProps', () => {
+    it('maps dispatch to props', () => {
+      const mockDispatch = jest.fn();
+      const mapped = mapDispatchToProps(mockDispatch);
+      mapped.hasErrored();
+      expect(mockDispatch).toHaveBeenCalled();
     })
   })
 })
