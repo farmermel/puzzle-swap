@@ -2,16 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PuzzleCard.css';
 
-// const determineDisable = (puzzleId, userId) => {
-//   return puzzleId === userId ? true : false;
-// }
-
-//move logic of determine disable into handle claim
-//in handle claim, either delete puzzle if its the same user
-//or do current behavior
-//also have disabled attribute become a classname that toggles
-//appearance
-
 const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId) => {
   return ownerId === userId 
     ? renderDelete(handleDelete, puzzleId) 

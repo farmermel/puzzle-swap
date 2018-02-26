@@ -9,6 +9,7 @@ describe('PuzzleCard', () => {
   it('matches snapshot if user is logged in', () => {
     const wrapper = shallow(<PuzzleCard puzzle={ mockPuzzle }
                                   handleClaim={ jest.fn() }
+                                  handleDelete={ jest.fn() }
                                   user={{uid: '5', username: 'Nymeria'}} />);
     expect(wrapper).toMatchSnapshot();
   })
@@ -16,6 +17,7 @@ describe('PuzzleCard', () => {
   it('matches snapshot if user is not logged in', () => {
     const wrapper = shallow(<PuzzleCard puzzle={ mockPuzzle }
                                   handleClaim={ jest.fn() }
+                                  handleDelete={ jest.fn() }
                                   user={null} />);
     expect(wrapper).toMatchSnapshot();
   })

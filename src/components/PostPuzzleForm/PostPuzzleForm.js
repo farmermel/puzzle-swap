@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import { db, storage } from '../../firebase';
 import ReactCrop from 'react-image-crop';
 import { getCroppedImg } from '../../helpers/cropImg';
@@ -13,22 +14,17 @@ export class PostPuzzleForm extends Component {
       numPieces: '',
       piecesMissing: '1-3',
       fileUpload: 'Select puzzle photo',
-      error: null,
       crop: {
-        aspect: 10/7
+        aspect: 10/7,
+        height: 35,
+        width: 50,
+        x: 0,
+        y: 0
       } 
     }
   }
 
-  test = async (crop, pixelCrop) => {
-    const image = document.createElement('img');
-    image.src = this.state.imageUrl;
-    const croppedImgBlob = await getCroppedImg(image, pixelCrop, this.state.fileUpload);
-    const croppedImg = new File([croppedImgBlob], this.state.fileUpload);
-    this.setState({ croppedImg });
-  }
-
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -43,37 +39,74 @@ export class PostPuzzleForm extends Component {
                 })
   }
 
-  postToDB = (puzzleId) => {
-    const { title, numPieces, piecesMissing } = this.state;
-    const { userId } = this.props
-    const postDB = { title, numPieces, piecesMissing, puzzleId, userId }
-    const firebaseKey = db.getFirebaseKey('puzzles');
-    let updates = {};
-    updates[`/puzzles/${firebaseKey}`] = postDB;
-    return db.postUpdate(updates);
+  postToDB = puzzleId => {
+    const { userId, hasErrored } = this.props;
+    try {
+      const { title, numPieces, piecesMissing } = this.state;
+      const postDB = { title, numPieces, piecesMissing, puzzleId, userId }
+      const firebaseKey = db.getFirebaseKey('puzzles');
+      let updates = {};
+      updates[`/puzzles/${firebaseKey}`] = postDB;
+      return db.postUpdate(updates);
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   postToCloudStore = () => {
-    const { croppedImg } = this.state;
-    const puzzleId = Date.now();
-    const ref = storage.getStoreRef(`images/${puzzleId}`);
-    storage.putInStore(ref, croppedImg);
-    return puzzleId;
+    const { hasErrored } = this.props;
+    try {
+      const { croppedImg } = this.state;
+      const puzzleId = Date.now();
+      const ref = storage.getStoreRef(`images/${puzzleId}`);
+      storage.putInStore(ref, croppedImg);
+      return puzzleId;
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
-  postPuzzleToFirebase = async (e) => {
+  postPuzzleToFirebase = async e => {
     e.preventDefault();
     try {
       const puzzleId = await this.postToCloudStore();
       await this.postToDB(puzzleId);
       this.props.history.push('/');
     } catch (error) {
-      this.setState({ error: error.message })
+      const { hasErrored } = this.props;
+      hasErrored(error.message);
     }
   }
 
-  handleCropChange = (crop) => {
-  this.setState({ crop });
+  handleCropChange = crop => {
+    this.setState({ crop });
+  }
+
+  handleCropComplete = async (crop, pixelCrop) => {
+    const { hasErrored } = this.props;
+    try {
+      const image = document.createElement('img');
+      image.src = this.state.imageUrl;
+      const croppedImgBlob = await getCroppedImg(image, pixelCrop, this.state.fileUpload);
+      const croppedImg = new File([croppedImgBlob], this.state.fileUpload);
+      this.setState({ croppedImg });
+    } catch (error) {
+      hasErrored(error.message);
+    }
+  }
+
+  renderCrop = () => {
+    return (
+      <div className='crop-wrap'>
+        <label htmlFor='crop-img'
+               className='crop-label'>Crop your image</label>
+        <ReactCrop src={ this.state.imageUrl }
+                   crop={ this.state.crop }
+                   onChange={ crop => this.handleCropChange(crop) }
+                   onComplete={ (crop, pixelCrop) => this.handleCropComplete(crop, pixelCrop) }
+                   id='crop-img' />
+      </div>
+    )
   }
 
   render() {
@@ -99,10 +132,7 @@ export class PostPuzzleForm extends Component {
                    id='puzzle-img'
                    required />
           {
-            this.state.imageUrl && <ReactCrop src={ this.state.imageUrl }
-                                              crop={ this.state.crop }
-                                              onChange={ (crop) => this.handleCropChange(crop) }
-                                              onComplete={ (crop, pixelCrop) => this.test(crop, pixelCrop) } />
+            this.state.imageUrl && this.renderCrop()
           }
           <label htmlFor='num-pieces'>Number of pieces</label>
             <input type='number' placeholder='number of pieces'
@@ -125,6 +155,11 @@ export class PostPuzzleForm extends Component {
       </div>
     )
   }
+}
+
+PostPuzzleForm.propTypes = {
+  userId: PropTypes.string.isRequired,
+  hasErrored: PropTypes.func.isRequired
 }
 
 export default withRouter(PostPuzzleForm);

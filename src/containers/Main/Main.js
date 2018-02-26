@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getGeoLocation } from '../../helpers/apiCalls';
 import { addLocation } from '../../actions/addLocation';
+import { hasErrored } from '../../actions/hasErrored';
 import PuzzleContainer from '../PuzzleContainer/PuzzleContainer';
 import PropTypes from 'prop-types';
 import './Main.css';
@@ -12,7 +13,6 @@ export class Main extends Component {
     super();
     this.state = {
       puzzleFilter: 'all',
-      error: null
     }
   }
 
@@ -22,9 +22,8 @@ export class Main extends Component {
       const city = await getGeoLocation();
       addLocation(city);
     } catch (error) {
-      this.setState({
-        error: error.message
-      })
+      const { hasErrored } = this.props;
+      hasErrored(error.message);
     }
   }
 
@@ -32,19 +31,6 @@ export class Main extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-  }
-
-  generateSelect = () => {
-    return (
-      <select name='puzzleFilter'
-                    onChange={(e) => this.handleChange(e)}
-                    id='puzzle-filter'>
-        <option value='all'>all</option>
-        <option value='300-750'>300-750</option>
-        <option value='1000'>1000</option>
-        <option value='1100 or more'>1100 or more</option>
-      </select>
-    )
   }
 
   render() {
@@ -56,7 +42,7 @@ export class Main extends Component {
             <button className='puzzle-post'>Post a Puzzle</button>
           </Link>
         }
-        <p className='view-description'>Viewing {this.generateSelect()} piece puzzles posted in {location}</p>
+        <p className='view-description'>Viewing puzzles posted in {location}</p>
         <PuzzleContainer />
       </div>
     ) 
@@ -69,13 +55,15 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addLocation: location => dispatch(addLocation(location))
+  addLocation: location => dispatch(addLocation(location)),
+  hasErrored: message => dispatch(hasErrored(message))
 });
 
 Main.propTypes = {
   location: PropTypes.string,
   user: PropTypes.objectOf(PropTypes.string),
-  addLocation: PropTypes.func.isRequired 
+  addLocation: PropTypes.func.isRequired,
+  hasErrored: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

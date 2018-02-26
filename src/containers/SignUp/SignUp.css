@@ -24,8 +24,11 @@ form h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 50px 0 0 0;
-  height: 100vh;
+  padding: 170px 0 0 0;
+}
+
+.sign-up {
+  margin: 0 0 70px 0;
 }
 
 #img-submit-label {
@@ -39,4 +42,13 @@ form h3 {
 
 #img-submit-label:hover {
   background-color: #d1a425;
+}
+
+.crop-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.crop-label {
+  align-self: flex-start;
 }

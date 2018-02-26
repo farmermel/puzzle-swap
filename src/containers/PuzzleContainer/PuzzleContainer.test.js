@@ -12,6 +12,7 @@ describe('PuzzleContainer', () => {
     wrapper = shallow(<PuzzleContainer setPuzzles={jest.fn()}
                                        puzzles={mockPuzzles}
                                        history={{push: jest.fn()}}
+                                       hasErrored={jest.fn()}
                                        user={{uid: '5', username: 'Casey'}} />);
   })
 
@@ -94,8 +95,12 @@ describe('PuzzleContainer', () => {
       expect(await wrapper.instance().checkForExistingChat(1, 2)).toEqual(null);
     })
 
-    it('catches error if something fails', () => {
-
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().checkForExistingChat(1, 2);
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
     })
   })
 
@@ -115,8 +120,10 @@ describe('PuzzleContainer', () => {
       db.getOnce = jest.fn().mockImplementation(() => {
         return { val: () => {
           return {
-            1: {username: 'mel'},
-            2: {username: 'other user'}
+            1: {username: 'mel',
+                email: 'mel@mel.com'},
+            2: {username: 'other user',
+                email: 'user2@mail.com'}
           }
         }}
       })
@@ -129,8 +136,16 @@ describe('PuzzleContainer', () => {
     })
 
     it('returns an object with ids as keys and names as values', async () => {
-      const expected = {"1": "mel", "2": "other user"};
+      const expected = {1: {email: "mel@mel.com", username: "mel"}, 2: {email: "user2@mail.com", "username": "other user"}};
       expect(await wrapper.instance().getUserNames('1', '2')).toEqual(expected);
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().getUserNames('1', '2');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
     })
   })
 
@@ -189,13 +204,12 @@ describe('PuzzleContainer', () => {
       expect(wrapper.instance().checkForExistingChat).toHaveBeenCalled();
     })
 
-    it('catches error if anything fails', () => {
+    it('catches error and calls hasErrored error message if anything errors', async () => {
       db.getFirebaseKey = jest.fn().mockImplementation(() => {
-        throw new Error('failed')
-      })
-
-      wrapper.instance().makeNewChat('1', '2');
-      expect(wrapper.instance().state.error).toEqual('failed');
+        throw new Error('failed to get key')
+      }); 
+      await wrapper.instance().makeNewChat('1', '2');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to get key');
     })
   })
 
@@ -236,6 +250,55 @@ describe('PuzzleContainer', () => {
       await wrapper.instance().handleClaim('3', '4');
       expect(wrapper.instance().makeNewChat).toHaveBeenCalled();
     })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().handleClaim('1', '2');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
+    })
+  })
+
+  describe('handleDelete', () => {
+    beforeAll(() => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        return {
+          val: () => {
+            return {
+              4: {
+                puzzleId: '4'
+              }
+            }
+          }
+        }
+      })
+      db.deleteData = jest.fn();
+    })
+
+    afterEach(() => {
+      db.deleteData.mockClear();
+    })
+
+    it('calls getOnce method on db with puzzles argument', () => {
+      expect(db.getOnce).not.toHaveBeenCalled();
+      wrapper.instance().handleDelete('4');
+      expect(db.getOnce).toHaveBeenCalledWith('puzzles');
+    })
+
+    it('calls deleteData method on db with puzzles/ and puzzle passed in', async () => {
+      expect(db.deleteData).not.toHaveBeenCalled();
+      await wrapper.instance().handleDelete('4');
+      expect(db.deleteData).toHaveBeenCalledWith('puzzles/4');
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().handleDelete('1');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
+    })
   })
 
   describe('parsePuzzles', () => {
@@ -271,6 +334,14 @@ describe('PuzzleContainer', () => {
       expect(wrapper.instance().props.setPuzzles).not.toHaveBeenCalled();
       await wrapper.instance().parsePuzzles(mockSnapshot);
       expect(wrapper.instance().props.setPuzzles).toHaveBeenCalledWith(expected);
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      wrapper.instance().getImg = jest.fn().mockImplementation(() => {
+        throw new Error('failed to get image')
+      }); 
+      await wrapper.instance().parsePuzzles(mockSnapshot);
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to get image');
     })
   })
 
@@ -310,7 +381,8 @@ describe('PuzzleContainer', () => {
       const mapped = mapDispatchToProps(mockDispatch);
       expect(mockDispatch).not.toHaveBeenCalled();
       mapped.setPuzzles();
-      expect(mockDispatch).toHaveBeenCalled();
+      mapped.hasErrored();
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
     })
   })
 })

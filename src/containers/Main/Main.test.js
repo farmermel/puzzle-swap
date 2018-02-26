@@ -10,7 +10,8 @@ describe('Main', () => {
   let mockResponse
   beforeEach(() => {
     wrapper = shallow(<Main addLocation={jest.fn()}
-                            location='' />, {disableLifecycleMethods: true})
+                            location=''
+                            hasErrored={jest.fn()} />, {disableLifecycleMethods: true})
     window.fetch = jest.fn().mockImplementation( url => {
       return Promise.resolve({
         status: 200,
@@ -24,7 +25,7 @@ describe('Main', () => {
   })
 
   it('has default state', () => {
-    const expected =  {"error": null, "puzzleFilter": "all"};
+    const expected =  {puzzleFilter: 'all'};
     expect(wrapper.instance().state).toEqual(expected);
   })
 
@@ -42,15 +43,14 @@ describe('Main', () => {
       expect(wrapper.instance().props.addLocation).toHaveBeenCalled();
     })
 
-    it('sets state with error message if getGeoLocation fails', async () => {
+    it('calls hasErrored with error message if getGeoLocation fails', async () => {
       window.fetch = jest.fn().mockImplementation(() => Promise.reject({
         status: 500,
         message: 'you\'re a genius'
       }))
       apiCalls.getGeoLocation = jest.fn().mockImplementation(() => window.fetch());
       await wrapper.instance().componentDidMount();
-
-      expect(wrapper.instance().state.error).toEqual('you\'re a genius');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('you\'re a genius');
     })
   })
 

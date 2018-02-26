@@ -5,6 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <App
+    hasErrored={[Function]}
     setUser={[Function]}
     setUsersChats={[Function]}
     user={
@@ -27,12 +28,14 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Unknown
+          hasErrored={[Function]}
           user={
                     Object {
                               "uid": "4",
                             }
           }
 />,
+        undefined,
         <Switch>
           <Route
                     component={[Function]}
@@ -71,6 +74,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "hasErrored": [Function],
           "user": Object {
             "uid": "4",
           },
@@ -79,6 +83,7 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
+      undefined,
       Object {
         "instance": null,
         "key": undefined,
@@ -203,12 +208,14 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Unknown
+            hasErrored={[Function]}
             user={
                         Object {
                                     "uid": "4",
                                   }
             }
 />,
+          undefined,
           <Switch>
             <Route
                         component={[Function]}
@@ -247,6 +254,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "hasErrored": [Function],
             "user": Object {
               "uid": "4",
             },
@@ -255,6 +263,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+        undefined,
         Object {
           "instance": null,
           "key": undefined,
