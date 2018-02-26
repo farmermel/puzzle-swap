@@ -5,23 +5,27 @@ import { connect } from 'react-redux';
 import { auth, db } from '../../firebase';
 import { setUser } from '../../actions/usersActions';
 import { setUsersChats } from '../../actions/userChats';
+import { hasErrored } from '../../actions/hasErrored';
 import Main from '../../containers/Main/Main';
 import Header from '../../containers/Header/Header';
 import PostPuzzleForm from '../PostPuzzleForm/PostPuzzleForm';
 import Login from '../../containers/Login/Login';
 import SignUp from '../../containers/SignUp/SignUp';
 import MessageInbox from '../MessageInbox/MessageInbox';
-import Chat from '../../containers/Chat/Chat';
 import ChatThread from '../ChatThread/ChatThread';
 import PropTypes from 'prop-types';
 import './App.css';
 
 export class App extends Component {
   componentDidMount = () => {
-    const { setUser } = this.props;
-    auth.onAuthStateChanged( authUser => {
-      authUser ? this.makeUserObj(authUser) : setUser(null);
-    })
+    const { setUser, hasErrored } = this.props;
+    try {
+      auth.onAuthStateChanged( authUser => {
+        authUser ? this.makeUserObj(authUser) : setUser(null);
+      }) 
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   setChats = (chats) => {
@@ -34,29 +38,42 @@ export class App extends Component {
   }
 
   getUsersChats = async () => {
-    const chatsSnapshot = await db.getOnce('chats');
-    const chats = chatsSnapshot.val();
-    this.setChats(chats);
+    const { hasErrored } = this.props;
+    try {
+      const chatsSnapshot = await db.getOnce('chats');
+      const chats = chatsSnapshot.val();
+      this.setChats(chats);
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   makeUserObj = async authUser => {
-    const { setUser } = this.props;
-    const userSnap = await db.getOnce(`users/${authUser.uid}`);
-    const user = userSnap.val();
-    const userObj = { uid: authUser.uid, username: user.username };
-    setUser(userObj);
-    this.getUsersChats();
+    const { setUser, hasErrored } = this.props;
+    try {
+      const userSnap = await db.getOnce(`users/${authUser.uid}`);
+      const user = userSnap.val();
+      const userObj = { uid: authUser.uid, username: user.username };
+      setUser(userObj);
+      this.getUsersChats();
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   render() {
-    const { user, usersChats } = this.props;
+    const { user, usersChats, errorMessage, hasErrored } = this.props;
     return (
       <div className="App">
-        <Header user={ user }/>
+        <Header user={ user } hasErrored={ hasErrored }/>
+        {
+          errorMessage && <h2>Oops, something went wrong!</h2>
+        }
         <Switch>
           <Route exact path='/' component={ Main } />
           <Route path='/post-puzzle-form' render={() => (
-            <PostPuzzleForm userId={ user.uid } />)} />
+            user ? <PostPuzzleForm userId={ user.uid } 
+                                   hasErrored={ hasErrored } /> : <Redirect to='/' /> )} />
           <Route path='/login' render={() => 
             user ? <Redirect to='/' /> : <Login />
           } />
@@ -83,24 +100,28 @@ export class App extends Component {
 
 export const mapStateToProps = state => ({
   user: state.user,
-  usersChats: state.usersChats
+  usersChats: state.usersChats,
+  errorMessage: state.errorMessage
 });
 
 export const mapDispatchToProps = dispatch => ({
   setUser: user => dispatch(setUser(user)),
-  setUsersChats: usersChats => dispatch(setUsersChats(usersChats))
+  setUsersChats: usersChats => dispatch(setUsersChats(usersChats)),
+  hasErrored: message => dispatch(hasErrored(message))
 })
 
 App.propTypes = {
   user: PropTypes.object,
   setUser: PropTypes.func.isRequired,
   setUsersChats: PropTypes.func.isRequired,
+  hasErrored: PropTypes.func.isRequired,
   usersChats: PropTypes.arrayOf(PropTypes.shape({
     chatId: PropTypes.string,
     lastMessage: PropTypes.string,
     members: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
     timeStamp: PropTypes.string
-  }))
+  })),
+  errorMessage: PropTypes.string
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
