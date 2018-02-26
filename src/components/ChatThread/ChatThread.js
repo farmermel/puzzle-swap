@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { db } from '../../firebase';
+import { hasErrored } from '../../actions/hasErrored';
 import PropTypes from 'prop-types';
 import './ChatThread.css';
 
@@ -10,17 +11,20 @@ export class ChatThread extends Component {
     super();
     this.state = {
       message: '',
-      messagesToRender: [],
-      error: null
+      messagesToRender: []
     }
   }
 
   async componentDidMount() {
-    const { chat } = this.props;
-    const messagesSnap = await db.watchData(`messages/${chat.chatId}`);
-    messagesSnap.on('value', async snapshot => {
-      await this.renderMessages(snapshot.val())
-    })
+    const { chat, hasErrored } = this.props;
+    try {
+      const messagesSnap = await db.watchData(`messages/${chat.chatId}`);
+      messagesSnap.on('value', async snapshot => {
+        await this.renderMessages(snapshot.val())
+      })
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   getMembers = members => {
@@ -38,8 +42,8 @@ export class ChatThread extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    const { user, chat, hasErrored } = this.props;
     try {
-      const { user, chat } = this.props;
       const postDB = {
         username: user.username,
         uid: user.uid,
@@ -54,12 +58,11 @@ export class ChatThread extends Component {
       this.setState({ message: '' })
       await db.postUpdate(updates);
     } catch (error) {
-      this.setState({ error: error.message });
+      hasErrored(error.message);
     }
   }
 
   renderMessages = messages => {
-    console.log(messages)
     const colorObj = this.determineMessageColor();
     const messagesToRender = messages
       ? Object.keys(messages).map( mkey => {
@@ -81,23 +84,17 @@ export class ChatThread extends Component {
   determineMessageColor = () => {
     const { chat, user } = this.props;
     const members = Object.keys(chat.members);
-    const recipient = members.find( member => user.uid !== member);
+    const recipient = members.find( member => (
+      user.uid !== parseInt(member, 10)
+    ));
     return {
       [user.uid]: 'speech-right',
       [recipient]: 'speech-left'
     }
   }
 
-  // getEmail = members => {
-  //   const { user } = this.props;
-  //   const membersIds = Object.keys(members);
-  //   const recipient = membersIds.find( member => user.uid !== member);
-  //   return members[recipient].email;
-  // }
-
   render() {
     const { chat } = this.props;
-    // const email = this.getEmail(chat.members);
     return (
       <section className='chat-thread'>
         <h3 className='chat-members'>Members: <span>{this.getMembers(chat.members)}</span></h3>
@@ -105,16 +102,11 @@ export class ChatThread extends Component {
           {this.state.messagesToRender}
         </section>
         <form onSubmit={ this.handleSubmit }
-              // action={`https://formspree.io/${email}`}
-              // method='POST'
               className='chat-form'>
           <input type='text'
                  name='message'
                  value={ this.state.message }
                  onChange={ this.handleChange } />
-          {/*<input type="hidden" name="_format" value="plain" />
-          <input type="hidden" name="_next" value={`http://localhost:3000/messages/${chat.chatId}`} />
-          <input type="hidden" name="_subject" value="New message on puzzle swap!" />*/}
           <button type='submit'
                   value='Send'
                   className='submit-chat'>Send</button>
@@ -128,6 +120,10 @@ export const mapStateToProps = state => ({
   user: state.user
 })
 
+export const mapDispatchToProps = dispatch => ({
+  hasErrored: message => dispatch(hasErrored(message))
+})
+
 ChatThread.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.number,
@@ -136,7 +132,8 @@ ChatThread.propTypes = {
   chat: PropTypes.shape({
     members: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
     chatId: PropTypes.string
-  })
+  }),
+  hasErrored: PropTypes.func.isRequired
 }
 
 export default withRouter(connect(mapStateToProps, null)(ChatThread));
