@@ -5,6 +5,7 @@
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "firebase": "^4.9.1",
+    "node-sass-chokidar": "0.0.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-image-crop": "^3.0.10",
@@ -16,6 +17,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom --browser",
     "eject": "react-scripts eject",
     "lint": "./node_modules/eslint/bin/eslint.js ./src/*/*.js"
