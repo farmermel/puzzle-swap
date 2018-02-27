@@ -87,10 +87,17 @@ export class App extends Component {
 
           <Route path='/messages/:id' render={({match}) => {
             const currentChat = usersChats.find( chat => {
+              console.log(match.params.id, chat.chatId)
               return match.params.id === chat.chatId
             })
+            //chat id is right
+            //firebase key is not
+            //paass chat id somehow??
+            console.log('users chats', usersChats)
+            console.log('current', currentChat)
+            console.log('users chats', usersChats)
             return currentChat 
-              ? <ChatThread chat={currentChat}/> 
+              ? <ChatThread chat={ currentChat }/> 
               : <div className='chat-thread'>loading</div>;
           }} />
         </Switch>
