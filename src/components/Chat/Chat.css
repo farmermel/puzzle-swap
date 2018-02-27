@@ -1,5 +1,31 @@
 .chat {
+  margin: 10px 0;
   background-color: #fdfdfd;
-  height: 210px;
+  height: 90px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 1px 2px #999;
+  cursor: pointer;
+  transition: .25s;
   width: 80%;
-}
+  max-width: 700px; }
+  .chat:hover {
+    box-shadow: 0 1px 20px #999; }
+
+.chat a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #000;
+  justify-content: space-between;
+  padding: 3px 40px 20px 40px; }
+
+.last-message {
+  text-overflow: ellipsis;
+  width: 360px;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.chat-timestamp {
+  text-align: right;
+  width: 100px; }
