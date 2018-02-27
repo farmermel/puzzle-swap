@@ -1,6 +1,5 @@
 .puzzle-card {
   display: inline-block;
-  border-radius: 6px;
   background-color: #fdfdfd;
   box-shadow: 1px 1px 2px #bababa;
   margin: 10px;
@@ -10,6 +9,10 @@
 
 .puzzle-card h3 {
   font-size: 1.7em;
+  font-weight: 300;
+  text-align: initial;
+  line-height: 25px;
+  margin: 14px 0 14px 0;
 }
 
 .puzzle-img {
@@ -17,6 +20,17 @@
   height: 210px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.puzzle-txt-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 40px;
+}
+
+.puzzle-txt-wrap p {
+  color: #747574;
 }
 
 button:disabled {
