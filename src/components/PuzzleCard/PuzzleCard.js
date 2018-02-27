@@ -30,14 +30,16 @@ const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
   return (
     <article className='puzzle-card'>
       <div className='puzzle-img' style={inlineStyles}></div>
-      <h3>{puzzle.title}</h3>
-      <p>Pieces: {puzzle.numPieces}</p>
-      <p>Pieces missing: {puzzle.piecesMissing}</p>
-      {
-        user 
-          ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid)
-          : <h3>Sign in to claim</h3>
-      }
+      <div className='puzzle-txt-wrap'>
+        <h3>{puzzle.title}</h3>
+        <p>Pieces: {puzzle.numPieces}</p>
+        <p>Pieces missing: {puzzle.piecesMissing}</p>
+        {
+          user 
+            ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid)
+            : <button>Sign in to claim</button>
+        }
+      </div>
     </article>
   )
 }
