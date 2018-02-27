@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+  background-color: #efefef;
+  padding: 0 0 60px 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Mukta Mahee', sans-serif;
+  font-weight: 200;
+}
+
+button {
+  border-radius: 5px;
+  /*background-color: #df7a00;*/
+  /*background-color: #562d4f;*/
+  /*background-color: #1fbace;*/
+  background-color: #F6CA4F;
+  color: #fff;
+  font-size: 1.5em;
+  border: none;
+}
+
+button:hover {
+  /*background-color: #a05a00;*/
+  /*purple:*/
+  background-color: #d1a425;
+}
+
+input,
+select {
+  height: 40px;
+  width: 100%;
+  margin: 5px 0 22px 0;
+  font-size: 1.5em;
+  text-indent: 8px;
+}
+
+input[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+label {
+  font-size: 1.3em;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+@media screen and (max-width: 520px) {
+  .App {
+    font-size: 12px;
+  }
+}
