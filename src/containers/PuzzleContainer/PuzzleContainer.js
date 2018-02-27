@@ -25,7 +25,6 @@ export class PuzzleContainer extends Component {
 
   checkForExistingChat = async (ownerId, claimerId) => {
     const { hasErrored } = this.props;
-    console.log('will', ownerId, 'mel', claimerId)
     try {
       const chatsSnapshot = await db.getOnce('chats');
       const chats = chatsSnapshot.val();
@@ -37,8 +36,7 @@ export class PuzzleContainer extends Component {
   }
 
   goToChat = existingChat => {
-    console.log('going to a chat I think exists')
-    this.props.history.push(`messages/${existingChat.chatId}`)
+    this.props.history.push(`messages/${existingChat.chatId}`);
   }
 
   getUserNames = async (ownerId, claimerId) => {
@@ -47,7 +45,6 @@ export class PuzzleContainer extends Component {
       const allUsersSnap = await db.getOnce('users');
       const allUsers = allUsersSnap.val();
       return Object.keys(allUsers).reduce((userNames, user) => {
-        console.log('owner', ownerId, 'claimer', claimerId)
         if (user === ownerId || user === claimerId) {
           userNames[user] = { 
             username: allUsers[user].username,
@@ -63,9 +60,9 @@ export class PuzzleContainer extends Component {
 
   makeNewChat = async (ownerId, claimerId) => {
     const { hasErrored } = this.props;
-    console.log('making new Chat')
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
+      console.log(firebaseKey)
       const userNames = await this.getUserNames(ownerId, claimerId);
       const timeStamp = Date.now();
       const postDB = {
@@ -88,7 +85,6 @@ export class PuzzleContainer extends Component {
     try {
       const claimerId = user.uid;
       const existingChat = await this.checkForExistingChat(ownerId, claimerId);
-      console.log('existing chat', existingChat)
       existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId);
     } catch (error) {
       hasErrored(error.message);
