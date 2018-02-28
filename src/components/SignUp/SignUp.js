@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase'
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './SignUp';
 
 export class SignUp extends Component {
@@ -41,25 +41,23 @@ export class SignUp extends Component {
           <label htmlFor='signup-name'>Name</label>
           <input type='name' 
                  id='signup-name'
-                 placeholder='name' 
                  name='name' 
                  onChange={this.handleChange} 
                  value={this.state.name} />
           <label htmlFor='signup-email'>Email</label>
           <input type='email' 
                  id='signup-email'
-                 placeholder='email' 
                  name='email' 
                  onChange={this.handleChange} 
                  value={this.state.value} />
           <label htmlFor='signup-password'>Password</label>
           <input type='password' 
                  id='signup-password'
-                 placeholder='password'
                  name='password'
                  onChange={this.handleChange}
                  value={this.state.password} />
           <button className='sign-up-btn'>Sign up</button>
+          <Link to={{pathname: '/login'}} className='signup-redirect'>Already signed up? <span>Login!</span></Link>
         </form>
       </div>
     )

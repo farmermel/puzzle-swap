@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import './PuzzleCard.css';
 
 const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId, puzzleTitle) => {
@@ -22,7 +23,7 @@ const renderClaim = (handleClaim, ownerId, puzzleTitle) => {
   )
 }
 
-const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
+const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user, history }) => {
   const inlineStyles = {
     backgroundImage: `url(${puzzle.imgUrl})`
   }
@@ -37,7 +38,8 @@ const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
         {
           user 
             ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid, puzzle.title)
-            : <button className='claim'>Sign in to claim</button>
+            : <button className='claim'
+                      onClick={() => history.push('/login')}>Log in to claim</button>
         }
       </div>
     </article>
@@ -56,4 +58,4 @@ PuzzleCard.propTypes = {
   handleDelete: PropTypes.func.isRequired
 }
 
-export default PuzzleCard;
+export default withRouter(PuzzleCard);
