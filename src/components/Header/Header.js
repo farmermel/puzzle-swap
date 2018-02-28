@@ -67,7 +67,10 @@ export class Header extends Component {
           <img src={puzzleIcon} alt='puzzle' className='puzzleicon' />
           <h1 className='app-title'>Puzzle Swap</h1>
         </Link>
-        <nav role="navigation" className='header-right'>
+        <nav className='header-right'>
+          {
+            this.props.user && <p className='username-display'>{this.props.user.username}</p>
+          }
           <div className={`menu-toggle ${this.state.toggle}`}
                onClick={ this.toggleToggle }><span></span></div>
           { this.determineLoginButtons(this.props.user, this.props.hasErrored) }
