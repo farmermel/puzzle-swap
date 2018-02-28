@@ -6,6 +6,8 @@ import { withRouter } from 'react-router';
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard';
 import { db, storage } from '../../firebase';
 import PropTypes from 'prop-types';
+import loadingGif from '../../assets/puzzle.gif';
+import moment from 'moment';
 import './PuzzleContainer.css';
 
 export class PuzzleContainer extends Component {
@@ -58,13 +60,16 @@ export class PuzzleContainer extends Component {
     }
   }
 
+  formatTime = () => {
+    return moment().format('h:mma, MMMM Do');
+  }
+
   makeNewChat = async (ownerId, claimerId) => {
     const { hasErrored } = this.props;
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
-      console.log(firebaseKey)
       const userNames = await this.getUserNames(ownerId, claimerId);
-      const timeStamp = Date.now();
+      const timeStamp = this.formatTime();
       const postDB = {
         members: userNames,
         timeStamp,
@@ -74,12 +79,13 @@ export class PuzzleContainer extends Component {
       let updates = {};
       updates[`chats/${firebaseKey}`] = postDB;
       await db.postUpdate(updates);
-      this.checkForExistingChat();
+      const existingChat = this.checkForExistingChat();
+      existingChat && this.goToChat(existingChat);
     } catch (error) {
       hasErrored(error.message);
     }
   }
-//owner
+
   handleClaim = async (ownerId) => {
     const { user, hasErrored } = this.props;
     try {
@@ -151,7 +157,7 @@ export class PuzzleContainer extends Component {
   render() {
     return (
       <div className='puzzle-container'>
-        {this.displayPuzzles() || <div>loading</div>}
+        {this.displayPuzzles() || <img src={ loadingGif } alt='loading' className='loading-gif' />}
       </div>
     )
   }
