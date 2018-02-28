@@ -67,6 +67,11 @@ export class Header extends Component {
           <img src={puzzleIcon} alt='puzzle' className='puzzleicon' />
           <h1 className='app-title'>Puzzle Swap</h1>
         </Link>
+        { 
+          this.props.user && <Link to={{ pathname: '/post-puzzle-form' }}>
+            <button className='puzzle-post'>Post a Puzzle</button>
+          </Link>
+        }
         <nav className='header-right'>
           {
             this.props.user && <p className='username-display'>{this.props.user.username}</p>
