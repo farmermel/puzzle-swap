@@ -29,10 +29,11 @@ export class ChatThread extends Component {
   }
 
   getMembers = members => {
-    const membersArr = Object.keys(members).map( member => (
-      members[member].username
-    ))
-    return membersArr.join(', ');
+    const { user } = this.props;
+    const recipientId = Object.keys(members).find( member => (
+      members[member].uid !== user.uid
+    ));
+    return members[recipientId].username;
   }
 
   handleChange = (e) => {
@@ -74,15 +75,15 @@ export class ChatThread extends Component {
           return (
             <article className={colorObj[messages[mkey].uid]}
                      key={mkey}>
-              <div>
+              <div className='chatthread-details'>
                 <p>{messages[mkey].timeStamp}</p>
-                <h3>{messages[mkey].username}</h3>
+                <p>{messages[mkey].username}</p>
               </div>
               <p>{messages[mkey].message}</p>
             </article>
           )
         })
-      : <h3>Introduce yourself!</h3>
+      : <h3 className='no-messages'>Introduce yourself!</h3>
     this.setState({ messagesToRender })
   }
 
@@ -103,7 +104,7 @@ export class ChatThread extends Component {
     const { chat } = this.props;
     return (
       <section className='chat-thread'>
-        <h3 className='chat-members'>Members: <span>{this.getMembers(chat.members)}</span></h3>
+        <h3 className='chat-members'>Your messages with <span>{this.getMembers(chat.members)}</span></h3>
         <section className='messages-wrap'>
           {this.state.messagesToRender}
         </section>
