@@ -14,6 +14,7 @@ import SignUp from '../../components/SignUp/SignUp';
 import MessageInbox from '../MessageInbox/MessageInbox';
 import ChatThread from '../ChatThread/ChatThread';
 import PropTypes from 'prop-types';
+import loadingGif from '../../assets/puzzle.gif';
 import './App.css';
 
 export class App extends Component {
@@ -87,18 +88,20 @@ export class App extends Component {
 
           <Route path='/messages/:id' render={({match}) => {
             const currentChat = usersChats.find( chat => {
-              console.log(match.params.id, chat.chatId)
+              console.log('match params', match.params.id, 'chatid', chat.chatId)
               return match.params.id === chat.chatId
             })
             //chat id is right
             //firebase key is not
-            //paass chat id somehow??
+            //pass chat id somehow??
+            //maybe the firebase key is what it uses to make a new chat
+            //but that isn't the ending id??
             console.log('users chats', usersChats)
             console.log('current', currentChat)
             console.log('users chats', usersChats)
             return currentChat 
               ? <ChatThread chat={ currentChat }/> 
-              : <div className='chat-thread'>loading</div>;
+              : (<div className='chat-thread'><img src={ loadingGif } alt='loading' className='loading-gif' /></div>);
           }} />
         </Switch>
       </div>
