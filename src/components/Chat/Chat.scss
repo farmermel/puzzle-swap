@@ -23,14 +23,34 @@
   padding: 3px 40px 20px 40px;
 }
 
+.chat-member {
+  font-weight: 300;
+  text-align: left;
+  width: 80px;
+}
+
 .last-message {
+  text-align: left;
   text-overflow: ellipsis;
-  width: 360px;
   overflow: hidden;
+  width: 360px;
   white-space: nowrap;
 }
 
+.last-message p,
+.last-message h2 {
+  line-height: 30px;
+  margin: 0;
+}
+
+.last-message h2 {
+  color: #daa100;
+  font-weight: 800;
+}
+
 .chat-timestamp {
+  font-weight: 200;
+  font-size: .9em;
   text-align: right;
   width: 100px;
 }
