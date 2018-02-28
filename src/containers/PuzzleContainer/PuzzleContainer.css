@@ -1,5 +1,35 @@
 .puzzle-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
+}
+
+@media screen and (min-width: 200px) {
+  .puzzle-container {
+    max-width: 320px;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .puzzle-container {
+    max-width: 640px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .puzzle-container {
+    max-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1285px) {
+  .puzzle-container {
+    max-width: 1280px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .puzzle-container {
+    max-width: 1600px;
+  }
 }
