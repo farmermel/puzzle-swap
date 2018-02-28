@@ -69,17 +69,16 @@ export class PuzzleContainer extends Component {
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
       const userNames = await this.getUserNames(ownerId, claimerId);
-      const timeStamp = this.formatTime();
       const postDB = {
         members: userNames,
-        timeStamp,
+        timeStamp: this.formatTime(),
         lastMessage: '',
         chatId: firebaseKey
       }
       let updates = {};
       updates[`chats/${firebaseKey}`] = postDB;
       await db.postUpdate(updates);
-      const existingChat = this.checkForExistingChat();
+      const existingChat = await this.checkForExistingChat();
       existingChat && this.goToChat(existingChat);
     } catch (error) {
       hasErrored(error.message);
