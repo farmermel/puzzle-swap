@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { db } from '../../firebase';
 import { hasErrored } from '../../actions/hasErrored';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import './ChatThread.css';
 
 export class ChatThread extends Component {
@@ -40,6 +41,10 @@ export class ChatThread extends Component {
     })
   }
 
+  formatTime = () => {
+    return moment().format('h:mma, MMMM Do');
+  }
+
   handleSubmit = async (e) => {
     e.preventDefault();
     const { user, chat, hasErrored } = this.props;
@@ -48,7 +53,7 @@ export class ChatThread extends Component {
         username: user.username,
         uid: user.uid,
         message: this.state.message,
-        timeStamp: Date().toString()
+        timeStamp: this.formatTime()
       }
       const firebaseKey = db.getFirebaseKey(`messages/${chat.chatId}`);
       let updates = {};
@@ -85,7 +90,7 @@ export class ChatThread extends Component {
     const { chat, user } = this.props;
     const members = Object.keys(chat.members);
     const recipient = members.find( member => (
-      user.uid !== parseInt(member, 10)
+      user.uid !== member
     ));
     return {
       [user.uid]: 'speech-right',
@@ -94,6 +99,7 @@ export class ChatThread extends Component {
   }
 
   render() {
+    this.formatTime();
     const { chat } = this.props;
     return (
       <section className='chat-thread'>
