@@ -36,13 +36,10 @@ export class Main extends Component {
     const { location = '', user } = this.props;
     return (
       <div className='main'>
-        { 
-          user && <Link to={{ pathname: '/post-puzzle-form' }}>
-            <button className='puzzle-post'>Post a Puzzle</button>
-          </Link>
-        }
         <p className='view-description'>Viewing puzzles posted in {location}</p>
-        <PuzzleContainer />
+        <div className='flex-container'>
+          <PuzzleContainer />
+        </div>
       </div>
     ) 
   }
