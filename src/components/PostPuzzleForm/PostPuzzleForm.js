@@ -12,7 +12,7 @@ export class PostPuzzleForm extends Component {
     this.state = {
       title: '',
       numPieces: '',
-      piecesMissing: '1-3',
+      piecesMissing: '0',
       fileUpload: 'Select puzzle photo',
       crop: {
         aspect: 10/7,
@@ -146,6 +146,7 @@ export class PostPuzzleForm extends Component {
                     id='missing'
                     onChange={this.handleChange}
                     required>
+              <option value='0'>0</option>
               <option value='1-3'>1-3</option>
               <option value='4-9'>4-9</option>
               <option value='10 or more'>10 or more</option>

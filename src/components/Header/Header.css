@@ -1,12 +1,11 @@
 .app-title {
   margin: 0px;
   color: #260120;
-  font-size: 4em;
-}
+  font-size: 4em; }
 
 .App-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   position: fixed;
   top: 0;
   background-color: #fdfdfd;
@@ -17,53 +16,140 @@
   color: white;
   box-shadow: 0 2px 4px #bababa;
   width: 100%;
-  z-index: 1;
-}
-
-.header-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 35px 0 0;
-}
-
-.header-right a {
-  text-decoration: underline;
-  color: black;
-  height: fit-content;
-  cursor: pointer;
-}
+  z-index: 1; }
 
 .puzzleicon {
-  width: 80px;
-}
+  width: 80px; }
 
 #header-wrap {
-  display: flex;
-}
+  display: flex; }
 
 .user-wrap {
   display: flex;
   align-items: flex-end;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 .user-wrap p {
   color: black;
-  margin: 0 0 7px 0;
-}
+  margin: 0 0 7px 0; }
 
 .login {
-  margin: 0 15px 0 0;
-}
+  margin: 0 15px 0 0; }
+
+.username-display {
+  z-index: 3;
+  color: black;
+  position: absolute;
+  right: 98px;
+  font-weight: 200; }
+
+nav {
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  position: absolute; }
+  nav .menu {
+    top: 0px;
+    right: 40px;
+    margin: 0;
+    z-index: 1;
+    width: 14%;
+    background: #F6CA4F;
+    padding: 3em 0 2em;
+    position: absolute;
+    transform: translateY(-100%);
+    transition: transform 0.3s cubic-bezier(1, 0.5, 0, 1); }
+    nav .menu.active {
+      transform: translateY(0); }
+    nav .menu li {
+      list-style: none; }
+      nav .menu li a {
+        padding: 1em;
+        color: #fff;
+        display: block;
+        background: none;
+        line-height: 1em;
+        font-size: 1.125em;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s ease-in-out; }
+        nav .menu li a span {
+          border-bottom: 1px dotted #fff; }
+        nav .menu li a:hover, nav .menu li a:focus, nav .menu li a:active {
+          background: rgba(255, 255, 255, 0.2); }
+
+.menu-toggle {
+  top: 16px;
+  z-index: 2;
+  right: 65px;
+  width: 22px;
+  height: 4px;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute; }
+  .menu-toggle span {
+    height: 4px;
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    background: #F6CA4F;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: background 0.3s ease-in-out; }
+  .menu-toggle::before, .menu-toggle::after {
+    left: 0;
+    content: '';
+    width: 22px;
+    height: 4px;
+    background: #F6CA4F;
+    border-radius: 2px;
+    position: absolute;
+    transform-origin: center center;
+    transition: width 0.2s ease-in-out, background 0.2s ease-in-out, transform 0.2s ease-in-out, top 0.2s ease-in-out, bottom 0.2s ease-in-out, left 0.2s ease-in-out, right 0.2s ease-in-out; }
+  .menu-toggle::before {
+    top: 0; }
+  .menu-toggle::after {
+    bottom: 0; }
+  .menu-toggle.menu-open span {
+    background: rgba(255, 255, 255, 0); }
+  .menu-toggle.menu-open::before {
+    top: 8px;
+    transform: rotate(-45deg); }
+  .menu-toggle.menu-open::after {
+    bottom: 8px;
+    transform: rotate(45deg); }
+  .menu-toggle.menu-open::before, .menu-toggle.menu-open::after {
+    width: 26px;
+    background: #fff; }
+  .menu-toggle.menu-open:hover span, .menu-toggle.menu-open:focus span, .menu-toggle.menu-open:active span {
+    background: rgba(255, 255, 255, 0); }
+  .menu-toggle.menu-open:hover::before, .menu-toggle.menu-open:focus::before, .menu-toggle.menu-open:active::before {
+    top: 8px;
+    left: -3px;
+    transform: rotate(-45deg); }
+  .menu-toggle.menu-open:hover::after, .menu-toggle.menu-open:focus::after, .menu-toggle.menu-open:active::after {
+    left: 9px;
+    bottom: 8px;
+    transform: rotate(45deg); }
+  .menu-toggle.menu-open:hover::before, .menu-toggle.menu-open:hover::after, .menu-toggle.menu-open:focus::before, .menu-toggle.menu-open:focus::after, .menu-toggle.menu-open:active::before, .menu-toggle.menu-open:active::after {
+    width: 18px; }
+  .menu-toggle:hover span, .menu-toggle:focus span, .menu-toggle:active span {
+    background: rgba(255, 255, 255, 0); }
+  .menu-toggle:hover::before, .menu-toggle:focus::before, .menu-toggle:active::before {
+    top: 8px;
+    left: -3px;
+    transform: rotate(45deg); }
+  .menu-toggle:hover::after, .menu-toggle:focus::after, .menu-toggle:active::after {
+    left: 9px;
+    bottom: 8px;
+    transform: rotate(-45deg); }
+  .menu-toggle:hover::before, .menu-toggle:hover::after, .menu-toggle:focus::before, .menu-toggle:focus::after, .menu-toggle:active::before, .menu-toggle:active::after {
+    width: 18px; }
 
 @media screen and (max-width: 520px) {
   .app-title {
-    padding: 14px 0 0 7px;
-  }
-
+    padding: 14px 0 0 7px; }
   .puzzleicon {
-    width: 60px;
-  }
-}
+    width: 60px; } }

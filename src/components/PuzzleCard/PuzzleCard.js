@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import './PuzzleCard.css';
 
-const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId) => {
+const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId, puzzleTitle) => {
   return ownerId === userId 
     ? renderDelete(handleDelete, puzzleId) 
-    : renderClaim(handleClaim, ownerId, userId);
+    : renderClaim(handleClaim, ownerId, puzzleTitle);
 }
 
 const renderDelete = (handleDelete, puzzleId) => {
@@ -15,14 +16,14 @@ const renderDelete = (handleDelete, puzzleId) => {
   )
 }
 
-const renderClaim = (handleClaim, ownerId, userId) => {
+const renderClaim = (handleClaim, ownerId, puzzleTitle) => {
   return (
-    <button onClick={() => handleClaim(ownerId, userId)}
+    <button onClick={() => handleClaim(ownerId, puzzleTitle)}
             className='claim'>Claim</button>
   )
 }
 
-const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
+const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user, history }) => {
   const inlineStyles = {
     backgroundImage: `url(${puzzle.imgUrl})`
   }
@@ -30,14 +31,17 @@ const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
   return (
     <article className='puzzle-card'>
       <div className='puzzle-img' style={inlineStyles}></div>
-      <h3>{puzzle.title}</h3>
-      <p>Pieces: {puzzle.numPieces}</p>
-      <p>Pieces missing: {puzzle.piecesMissing}</p>
-      {
-        user 
-          ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid)
-          : <h3>Sign in to claim</h3>
-      }
+      <div className='puzzle-txt-wrap'>
+        <h3>{puzzle.title}</h3>
+        <p>Pieces: {puzzle.numPieces}</p>
+        <p>Pieces missing: {puzzle.piecesMissing}</p>
+        {
+          user 
+            ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid, puzzle.title)
+            : <button className='claim'
+                      onClick={() => history.push('/login')}>Log in to claim</button>
+        }
+      </div>
     </article>
   )
 }
@@ -54,4 +58,4 @@ PuzzleCard.propTypes = {
   handleDelete: PropTypes.func.isRequired
 }
 
-export default PuzzleCard;
+export default withRouter(PuzzleCard);

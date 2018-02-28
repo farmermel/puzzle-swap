@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { db } from '../../firebase';
 import { hasErrored } from '../../actions/hasErrored';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import './ChatThread.css';
 
 export class ChatThread extends Component {
@@ -28,16 +29,21 @@ export class ChatThread extends Component {
   }
 
   getMembers = members => {
-    const membersArr = Object.keys(members).map( member => (
-      members[member].username
-    ))
-    return membersArr.join(', ');
+    const { user } = this.props;
+    const recipientId = Object.keys(members).find( member => (
+      members[member].uid !== user.uid
+    ));
+    return members[recipientId].username;
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  formatTime = () => {
+    return moment().format('h:mma, MMMM Do');
   }
 
   handleSubmit = async (e) => {
@@ -48,7 +54,7 @@ export class ChatThread extends Component {
         username: user.username,
         uid: user.uid,
         message: this.state.message,
-        timeStamp: Date().toString()
+        timeStamp: this.formatTime()
       }
       const firebaseKey = db.getFirebaseKey(`messages/${chat.chatId}`);
       let updates = {};
@@ -69,15 +75,15 @@ export class ChatThread extends Component {
           return (
             <article className={colorObj[messages[mkey].uid]}
                      key={mkey}>
-              <div>
+              <div className='chatthread-details'>
                 <p>{messages[mkey].timeStamp}</p>
-                <h3>{messages[mkey].username}</h3>
+                <p>{messages[mkey].username}</p>
               </div>
               <p>{messages[mkey].message}</p>
             </article>
           )
         })
-      : <h3>Introduce yourself!</h3>
+      : <h3 className='no-messages'>Introduce yourself!</h3>
     this.setState({ messagesToRender })
   }
 
@@ -85,7 +91,7 @@ export class ChatThread extends Component {
     const { chat, user } = this.props;
     const members = Object.keys(chat.members);
     const recipient = members.find( member => (
-      user.uid !== parseInt(member, 10)
+      user.uid !== member
     ));
     return {
       [user.uid]: 'speech-right',
@@ -94,10 +100,11 @@ export class ChatThread extends Component {
   }
 
   render() {
+    this.formatTime();
     const { chat } = this.props;
     return (
       <section className='chat-thread'>
-        <h3 className='chat-members'>Members: <span>{this.getMembers(chat.members)}</span></h3>
+        <h3 className='chat-members'>Your messages with <span>{this.getMembers(chat.members)}</span></h3>
         <section className='messages-wrap'>
           {this.state.messagesToRender}
         </section>

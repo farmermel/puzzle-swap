@@ -6,9 +6,10 @@ import './MessageInbox.css';
 
 export class MessageInbox extends Component {
   renderChats = () => {
-    const { usersChats = [] } = this.props;
+    const { usersChats = [], userId } = this.props;
     return usersChats.map( chat => (
       <Chat chat={chat}
+            userId={userId}
             key={chat.chatId} />
     ))
   }
@@ -16,6 +17,7 @@ export class MessageInbox extends Component {
   render() {
     return (
       <div className='inbox'>
+        <h1 className='content-header'>Your Messages</h1>
         {this.renderChats()}
       </div>
     )

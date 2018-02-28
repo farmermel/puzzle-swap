@@ -6,6 +6,8 @@ import { withRouter } from 'react-router';
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard';
 import { db, storage } from '../../firebase';
 import PropTypes from 'prop-types';
+import loadingGif from '../../assets/puzzle.gif';
+import moment from 'moment';
 import './PuzzleContainer.css';
 
 export class PuzzleContainer extends Component {
@@ -36,7 +38,7 @@ export class PuzzleContainer extends Component {
   }
 
   goToChat = existingChat => {
-    this.props.history.push(`messages/${existingChat.chatId}`)
+    this.props.history.push(`messages/${existingChat.chatId}`);
   }
 
   getUserNames = async (ownerId, claimerId) => {
@@ -58,33 +60,38 @@ export class PuzzleContainer extends Component {
     }
   }
 
-  makeNewChat = async (ownerId, claimerId) => {
+  formatTime = () => {
+    return moment().format('h:mma, MMMM Do');
+  }
+
+  makeNewChat = async (ownerId, claimerId, puzzleTitle) => {
     const { hasErrored } = this.props;
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
       const userNames = await this.getUserNames(ownerId, claimerId);
-      const timeStamp = Date.now();
       const postDB = {
         members: userNames,
-        timeStamp,
-        lastMessage: '',
+        timeStamp: this.formatTime(),
+        lastMessage: 'No messages yet...',
+        puzzleTitle,
         chatId: firebaseKey
       }
       let updates = {};
       updates[`chats/${firebaseKey}`] = postDB;
       await db.postUpdate(updates);
-      this.checkForExistingChat();
+      const existingChat = await this.checkForExistingChat();
+      existingChat && this.goToChat(existingChat);
     } catch (error) {
       hasErrored(error.message);
     }
   }
 
-  handleClaim = async (puzzleId, ownerId) => {
+  handleClaim = async (ownerId, puzzleTitle) => {
     const { user, hasErrored } = this.props;
     try {
       const claimerId = user.uid;
       const existingChat = await this.checkForExistingChat(ownerId, claimerId);
-      existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId);
+      existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId, puzzleTitle);
     } catch (error) {
       hasErrored(error.message);
     }
@@ -150,7 +157,7 @@ export class PuzzleContainer extends Component {
   render() {
     return (
       <div className='puzzle-container'>
-        {this.displayPuzzles() || <div>loading</div>}
+        {this.displayPuzzles() || <img src={ loadingGif } alt='loading' className='loading-gif' />}
       </div>
     )
   }

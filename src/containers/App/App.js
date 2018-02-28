@@ -3,9 +3,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { auth, db } from '../../firebase';
-import { setUser } from '../../actions/usersActions';
-import { setUsersChats } from '../../actions/userChats';
-import { hasErrored } from '../../actions/hasErrored';
+import { setUser, setUsersChats, hasErrored } from '../../actions';
+// import { setUsersChats } from '../../actions/userChats';
+// import { hasErrored } from '../../actions/hasErrored';
 import Main from '../Main/Main';
 import Header from '../../components/Header/Header';
 import PostPuzzleForm from '../../components/PostPuzzleForm/PostPuzzleForm';
@@ -14,6 +14,7 @@ import SignUp from '../../components/SignUp/SignUp';
 import MessageInbox from '../MessageInbox/MessageInbox';
 import ChatThread from '../ChatThread/ChatThread';
 import PropTypes from 'prop-types';
+import loadingGif from '../../assets/puzzle.gif';
 import './App.css';
 
 export class App extends Component {
@@ -87,11 +88,20 @@ export class App extends Component {
 
           <Route path='/messages/:id' render={({match}) => {
             const currentChat = usersChats.find( chat => {
+              console.log('match params', match.params.id, 'chatid', chat.chatId)
               return match.params.id === chat.chatId
             })
+            //chat id is right
+            //firebase key is not
+            //pass chat id somehow??
+            //maybe the firebase key is what it uses to make a new chat
+            //but that isn't the ending id??
+            console.log('users chats', usersChats)
+            console.log('current', currentChat)
+            console.log('users chats', usersChats)
             return currentChat 
-              ? <ChatThread chat={currentChat}/> 
-              : <div className='chat-thread'>loading</div>;
+              ? <ChatThread chat={ currentChat }/> 
+              : (<div className='chat-thread'><img src={ loadingGif } alt='loading' className='loading-gif' /></div>);
           }} />
         </Switch>
       </div>

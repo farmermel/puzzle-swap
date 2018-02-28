@@ -1,8 +1,9 @@
 .chat-thread {
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   padding: 170px 0 0 0;
-  height: 100vh;
+  height: 73vh;
   overflow-y: scroll;
 }
 
@@ -23,6 +24,7 @@
 }
 
 .submit-chat {
+  border-radius: 0;
   width: 100px;
 }
 
@@ -32,12 +34,35 @@
   left: 40px;
 }
 
+.chat-members span {
+  font-weight: 800;
+  font-size: 1.4em;
+  color: #daa100;
+}
+
+.chatthread-details {
+  position: absolute;
+  top: -40px;
+  display: flex;
+  left: 0;
+  width: 100%;
+  font-weight: 200;
+  justify-content: space-between;
+}
+
+.no-messages {
+  font-size: 4em;
+  font-weight: 200;
+}
+
 .speech-right {
   position: relative;
   background: #fff;
   border-radius: .4em;
-  padding: 5px 27px;
-  margin: 20px 0;
+  box-shadow: 0 1px 2px #999;
+  padding: 10px 27px;
+  margin: 50px 0 6px 120px;
+  min-width: 240px;
 }
 
 .speech-right:after {
@@ -47,6 +72,7 @@
   top: 50%;
   width: 0;
   height: 0;
+  box-shadow: 0 3px 2px -2px #999;
   border: 36px solid transparent;
   border-left-color: #fff;
   border-right: 0;
@@ -55,12 +81,18 @@
   margin-right: -36px;
 }
 
+.speech-right .chatthread-details {
+  flex-direction: row-reverse;
+}
+
 .speech-left {
   position: relative;
-  background: #00aabb;
+  background: #dedede;
   border-radius: .4em;
-  padding: 5px 27px;
-  margin: 20px 0;
+  box-shadow: 0 1px 2px #999;
+  padding: 10px 27px;
+  margin: 50px 120px 6px 0;
+  min-width: 240px;
 }
 
 .speech-left:after {
@@ -71,9 +103,14 @@
   width: 0;
   height: 0;
   border: 36px solid transparent;
-  border-right-color: #00aabb;
+  border-right-color: #dedede;
+  box-shadow: 0 3px 2px -2px #999;
   border-left: 0;
   border-bottom: 0;
   margin-top: -18px;
   margin-left: -36px;
+}
+
+.messages-wrap {
+  width: 60%;
 }

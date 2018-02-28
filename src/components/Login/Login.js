@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { auth } from '../../firebase';
+import { Link } from 'react-router-dom';
 import '../SignUp/SignUp.css';
 
 export class Login extends Component {
@@ -50,6 +51,8 @@ export class Login extends Component {
                  value={ this.password } 
                  onChange={ this.handleChange } />
           <button className='sign-up-btn'>Log in</button>
+          <Link to={{pathname: '/sign-up'}}
+                className='signup-redirect'>Don't have an account? <span>Sign Up!</span></Link>
         </form>
       </div>
     )
