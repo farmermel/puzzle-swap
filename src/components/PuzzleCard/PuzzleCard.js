@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PuzzleCard.css';
 
-const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId) => {
+const determineDisable = (handleClaim, handleDelete, puzzleId, ownerId, userId, puzzleTitle) => {
   return ownerId === userId 
     ? renderDelete(handleDelete, puzzleId) 
-    : renderClaim(handleClaim, ownerId);
+    : renderClaim(handleClaim, ownerId, puzzleTitle);
 }
 
 const renderDelete = (handleDelete, puzzleId) => {
@@ -15,9 +15,9 @@ const renderDelete = (handleDelete, puzzleId) => {
   )
 }
 
-const renderClaim = (handleClaim, ownerId) => {
+const renderClaim = (handleClaim, ownerId, puzzleTitle) => {
   return (
-    <button onClick={() => handleClaim(ownerId)}
+    <button onClick={() => handleClaim(ownerId, puzzleTitle)}
             className='claim'>Claim</button>
   )
 }
@@ -36,8 +36,8 @@ const PuzzleCard = ({ handleClaim, handleDelete, puzzle, user }) => {
         <p>Pieces missing: {puzzle.piecesMissing}</p>
         {
           user 
-            ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid)
-            : <button>Sign in to claim</button>
+            ? determineDisable(handleClaim, handleDelete, puzzleId, ownerId, user.uid, puzzle.title)
+            : <button className='claim'>Sign in to claim</button>
         }
       </div>
     </article>
