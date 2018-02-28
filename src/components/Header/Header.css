@@ -36,6 +36,13 @@
 .login {
   margin: 0 15px 0 0; }
 
+.username-display {
+  z-index: 3;
+  color: black;
+  position: absolute;
+  right: 98px;
+  font-weight: 200; }
+
 nav {
   top: 0;
   right: 0;
