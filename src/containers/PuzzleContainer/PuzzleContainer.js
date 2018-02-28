@@ -64,7 +64,7 @@ export class PuzzleContainer extends Component {
     return moment().format('h:mma, MMMM Do');
   }
 
-  makeNewChat = async (ownerId, claimerId) => {
+  makeNewChat = async (ownerId, claimerId, puzzleTitle) => {
     const { hasErrored } = this.props;
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
@@ -72,7 +72,8 @@ export class PuzzleContainer extends Component {
       const postDB = {
         members: userNames,
         timeStamp: this.formatTime(),
-        lastMessage: '',
+        lastMessage: 'No messages yet...',
+        puzzleTitle,
         chatId: firebaseKey
       }
       let updates = {};
@@ -85,12 +86,12 @@ export class PuzzleContainer extends Component {
     }
   }
 
-  handleClaim = async (ownerId) => {
+  handleClaim = async (ownerId, puzzleTitle) => {
     const { user, hasErrored } = this.props;
     try {
       const claimerId = user.uid;
       const existingChat = await this.checkForExistingChat(ownerId, claimerId);
-      existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId);
+      existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId, puzzleTitle);
     } catch (error) {
       hasErrored(error.message);
     }
