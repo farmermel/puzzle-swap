@@ -12,15 +12,16 @@ const getMembers = (members, userId) => {
 
 const Chat = ({ chat, userId }) => {
   return (
-    // <div className='hover-wrap'>
-      <div className='chat'>
-        <Link to={{ pathname: `/messages/${chat.chatId}`}}>
-          <p>{getMembers(chat.members, userId)}</p>
-          <p className='last-message'>{chat.lastMessage}</p>
-          <p className='chat-timestamp'>{chat.timeStamp}</p>
-        </Link>
-      </div>
-    // </div>
+    <div className='chat'>
+      <Link to={{ pathname: `/messages/${chat.chatId}`}}>
+        <p className='chat-member'>{getMembers(chat.members, userId)}</p>
+        <div className='last-message'>
+          <h2>{chat.puzzleTitle}</h2>
+          <p>{chat.lastMessage}</p>
+        </div>
+        <p className='chat-timestamp'>{chat.timeStamp}</p>
+      </Link>
+    </div>
   )
 }
 
