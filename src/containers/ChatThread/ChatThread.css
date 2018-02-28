@@ -57,9 +57,11 @@
 
 .speech-left {
   position: relative;
-  background: #00aabb;
+  background: #dedede;
   border-radius: .4em;
   padding: 5px 27px;
+  box-shadow: 0 1px 2px #999;
+
   margin: 20px 0;
 }
 
@@ -71,7 +73,9 @@
   width: 0;
   height: 0;
   border: 36px solid transparent;
-  border-right-color: #00aabb;
+  border-right-color: #dedede;
+  box-shadow: 0 3px 2px -2px #999;
+  /*box-shadow: 0 1px 2px #999;*/
   border-left: 0;
   border-bottom: 0;
   margin-top: -18px;
