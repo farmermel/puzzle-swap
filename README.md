@@ -1,5 +1,11 @@
 # Puzzle Swap
 
+### Live project
+
+melena-suliteanu-puzzleswap.surge.sh
+
+## Description
+
 The goal of this project was to make something I'm excited about that pulls together everything I've learned in Mod 3. 
 I chose to make an application for people who love jigsaw puzzles and don't have anything to do with ones they've completed. An unauthenticated user is able to view all puzzles. A user can sign up or log in to claim or post a puzzle. The post puzzle form takes a title, an image (that can be cropped to a specific aspect ratio), number of pieces, and number of pieces missing. A user can unlist their own puzzles from the main page. To claim a puzzle, user clicks claim on the puzzle itself which starts a message with the owner. They can then message back and forth to come to an agreement about handoff.
 
