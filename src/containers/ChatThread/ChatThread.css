@@ -30,6 +30,7 @@
 
 .chat-members {
   position: fixed;
+  width: 160px;
   top: 135px;
   left: 40px;
 }

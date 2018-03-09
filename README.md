@@ -1,8 +1,7 @@
 # Puzzle Swap
 
 ### Live project
-
-melena-suliteanu-puzzleswap.surge.sh
+See this project live [here](http://melena-suliteanu-puzzleswap.surge.sh/)
 
 ## Description
 
