@@ -28,11 +28,11 @@ export class ChatThread extends Component {
     }
   }
 
-  getMembers = members => {
+  getRecipientName = members => {
     const { user } = this.props;
-    const recipientId = Object.keys(members).find( member => (
-      members[member].uid !== user.uid
-    ));
+    const recipientId = Object.keys(members).find( member => {
+      return member !== user.uid
+    });
     return members[recipientId].username;
   }
 
@@ -104,7 +104,7 @@ export class ChatThread extends Component {
     const { chat } = this.props;
     return (
       <section className='chat-thread'>
-        <h3 className='chat-members'>Your messages with <span>{this.getMembers(chat.members)}</span></h3>
+        <h3 className='chat-members'>Your messages with <span>{this.getRecipientName(chat.members)}</span></h3>
         <section className='messages-wrap'>
           {this.state.messagesToRender}
         </section>

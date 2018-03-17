@@ -85,20 +85,10 @@ export class App extends Component {
           <Route exact path='/messages' render={() => (
             user ? <MessageInbox /> : <Redirect to='/' />
           )} />
-
           <Route path='/messages/:id' render={({match}) => {
             const currentChat = usersChats.find( chat => {
-              console.log('match params', match.params.id, 'chatid', chat.chatId)
               return match.params.id === chat.chatId
             })
-            //chat id is right
-            //firebase key is not
-            //pass chat id somehow??
-            //maybe the firebase key is what it uses to make a new chat
-            //but that isn't the ending id??
-            console.log('users chats', usersChats)
-            console.log('current', currentChat)
-            console.log('users chats', usersChats)
             return currentChat 
               ? <ChatThread chat={ currentChat }/> 
               : (<div className='chat-thread'><img src={ loadingGif } alt='loading' className='loading-gif' /></div>);

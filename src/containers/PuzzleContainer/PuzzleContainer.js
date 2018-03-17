@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hasErrored } from '../../actions/hasErrored';
 import { setPuzzles } from '../../actions/setPuzzles';
+import { addOneUserChat } from '../../actions/userChats';
 import { withRouter } from 'react-router';
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard';
 import { db, storage } from '../../firebase';
@@ -65,7 +66,7 @@ export class PuzzleContainer extends Component {
   }
 
   makeNewChat = async (ownerId, claimerId, puzzleTitle) => {
-    const { hasErrored } = this.props;
+    const { hasErrored, addOneUserChat } = this.props;
     try {
       const firebaseKey = await db.getFirebaseKey('chats');
       const userNames = await this.getUserNames(ownerId, claimerId);
@@ -79,6 +80,7 @@ export class PuzzleContainer extends Component {
       let updates = {};
       updates[`chats/${firebaseKey}`] = postDB;
       await db.postUpdate(updates);
+      addOneUserChat(postDB);
       const existingChat = await this.checkForExistingChat();
       existingChat && this.goToChat(existingChat);
     } catch (error) {
@@ -171,7 +173,8 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   setPuzzles: puzzles => dispatch(setPuzzles(puzzles)),
-  hasErrored: message => dispatch(hasErrored(message))
+  hasErrored: message => dispatch(hasErrored(message)),
+  addOneUserChat: chat => dispatch(addOneUserChat(chat))
 })
 
 PuzzleContainer.propTypes = {
@@ -184,7 +187,8 @@ PuzzleContainer.propTypes = {
   })),
   user: PropTypes.objectOf(PropTypes.string),
   setPuzzles: PropTypes.func.isRequired,
-  hasErrored: PropTypes.func.isRequired
+  hasErrored: PropTypes.func.isRequired,
+  addOneUserChat: PropTypes.func.isRequired
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PuzzleContainer));
