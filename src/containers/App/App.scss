@@ -13,9 +13,6 @@ h3 {
 
 button {
   border-radius: 5px;
-  /*background-color: #df7a00;*/
-  /*background-color: #562d4f;*/
-  /*background-color: #1fbace;*/
   background-color: #F6CA4F;
   color: #fff;
   font-size: 1.5em;
@@ -23,9 +20,8 @@ button {
 }
 
 button:hover {
-  /*background-color: #a05a00;*/
-  /*purple:*/
   background-color: #d1a425;
+  cursor: pointer;
 }
 
 input,
