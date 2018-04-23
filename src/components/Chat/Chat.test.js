@@ -6,8 +6,8 @@ describe('Chat', () => {
   it('matches snapshot', () => {
     const mockChat = {
       members: {
-        3: {name: 'person1'},
-        4: {name: 'person2'}
+        3: {username: 'person1'},
+        4: {username: 'person2'}
       },
       timeStamp: '34'
     }
