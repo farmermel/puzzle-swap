@@ -23,7 +23,7 @@ ShallowWrapper {
     hasErrored={[Function]}
     user={
         Object {
-            "uid": 1,
+            "uid": "1",
             "username": "Nymeria",
           }
     }
@@ -44,10 +44,8 @@ ShallowWrapper {
         <h3
           className="chat-members"
 >
-          Members: 
-          <span>
-                    , 
-          </span>
+          Your messages with 
+          <span />
 </h3>,
         <section
           className="messages-wrap"
@@ -83,25 +81,23 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "Members: ",
-            <span>
-              , 
-</span>,
+            "Your messages with ",
+            <span />,
           ],
           "className": "chat-members",
         },
         "ref": null,
         "rendered": Array [
-          "Members: ",
+          "Your messages with ",
           Object {
             "instance": null,
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": ", ",
+              "children": undefined,
             },
             "ref": null,
-            "rendered": ", ",
+            "rendered": null,
             "type": "span",
           },
         ],
@@ -188,10 +184,8 @@ ShallowWrapper {
           <h3
             className="chat-members"
 >
-            Members: 
-            <span>
-                        , 
-            </span>
+            Your messages with 
+            <span />
 </h3>,
           <section
             className="messages-wrap"
@@ -227,25 +221,23 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "Members: ",
-              <span>
-                , 
-</span>,
+              "Your messages with ",
+              <span />,
             ],
             "className": "chat-members",
           },
           "ref": null,
           "rendered": Array [
-            "Members: ",
+            "Your messages with ",
             Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": ", ",
+                "children": undefined,
               },
               "ref": null,
-              "rendered": ", ",
+              "rendered": null,
               "type": "span",
             },
           ],

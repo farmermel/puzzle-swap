@@ -9,10 +9,10 @@ ShallowWrapper {
         Object {
             "members": Object {
               "3": Object {
-                "name": "person1",
+                "username": "person1",
               },
               "4": Object {
-                "name": "person2",
+                "username": "person2",
               },
             },
             "timeStamp": "34",
@@ -39,16 +39,22 @@ ShallowWrapper {
                       }
         }
 >
-        <h3>
-                Members: 
-                <span>
-                        
-                </span>
-        </h3>
-        <h2>
+        <p
+                className="chat-member"
+        >
+                person1
+        </p>
+        <div
+                className="last-message"
+        >
+                <h2 />
+                <p />
+        </div>
+        <p
+                className="chat-timestamp"
+        >
                 34
-        </h2>
-        <p />
+        </p>
 </Link>,
       "className": "chat",
     },
@@ -59,16 +65,22 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <h3>
-            Members: 
-            <span>
-                        
-            </span>
-</h3>,
-          <h2>
+          <p
+            className="chat-member"
+>
+            person1
+</p>,
+          <div
+            className="last-message"
+>
+            <h2 />
+            <p />
+</div>,
+          <p
+            className="chat-timestamp"
+>
             34
-</h2>,
-          <p />,
+</p>,
         ],
         "replace": false,
         "to": Object {
@@ -82,35 +94,50 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
+            "children": "person1",
+            "className": "chat-member",
+          },
+          "ref": null,
+          "rendered": "person1",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
             "children": Array [
-              "Members: ",
-              <span>
-                
-</span>,
+              <h2 />,
+              <p />,
             ],
+            "className": "last-message",
           },
           "ref": null,
           "rendered": Array [
-            "Members: ",
             Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": Array [
-                  undefined,
-                  undefined,
-                ],
+                "children": undefined,
               },
               "ref": null,
-              "rendered": Array [
-                undefined,
-                undefined,
-              ],
-              "type": "span",
+              "rendered": null,
+              "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "p",
             },
           ],
-          "type": "h3",
+          "type": "div",
         },
         Object {
           "instance": null,
@@ -118,20 +145,10 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "34",
+            "className": "chat-timestamp",
           },
           "ref": null,
           "rendered": "34",
-          "type": "h2",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": undefined,
-          },
-          "ref": null,
-          "rendered": null,
           "type": "p",
         },
       ],
@@ -153,16 +170,22 @@ ShallowWrapper {
                             }
           }
 >
-          <h3>
-                    Members: 
-                    <span>
-                              
-                    </span>
-          </h3>
-          <h2>
+          <p
+                    className="chat-member"
+          >
+                    person1
+          </p>
+          <div
+                    className="last-message"
+          >
+                    <h2 />
+                    <p />
+          </div>
+          <p
+                    className="chat-timestamp"
+          >
                     34
-          </h2>
-          <p />
+          </p>
 </Link>,
         "className": "chat",
       },
@@ -173,16 +196,22 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <h3>
-              Members: 
-              <span>
-                            
-              </span>
-</h3>,
-            <h2>
+            <p
+              className="chat-member"
+>
+              person1
+</p>,
+            <div
+              className="last-message"
+>
+              <h2 />
+              <p />
+</div>,
+            <p
+              className="chat-timestamp"
+>
               34
-</h2>,
-            <p />,
+</p>,
           ],
           "replace": false,
           "to": Object {
@@ -196,35 +225,50 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
+              "children": "person1",
+              "className": "chat-member",
+            },
+            "ref": null,
+            "rendered": "person1",
+            "type": "p",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
               "children": Array [
-                "Members: ",
-                <span>
-                  
-</span>,
+                <h2 />,
+                <p />,
               ],
+              "className": "last-message",
             },
             "ref": null,
             "rendered": Array [
-              "Members: ",
               Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": Array [
-                    undefined,
-                    undefined,
-                  ],
+                  "children": undefined,
                 },
                 "ref": null,
-                "rendered": Array [
-                  undefined,
-                  undefined,
-                ],
-                "type": "span",
+                "rendered": null,
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": undefined,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "p",
               },
             ],
-            "type": "h3",
+            "type": "div",
           },
           Object {
             "instance": null,
@@ -232,20 +276,10 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "34",
+              "className": "chat-timestamp",
             },
             "ref": null,
             "rendered": "34",
-            "type": "h2",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": undefined,
-            },
-            "ref": null,
-            "rendered": null,
             "type": "p",
           },
         ],

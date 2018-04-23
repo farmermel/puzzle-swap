@@ -20,11 +20,31 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [],
+      "children": Array [
+        <h1
+          className="content-header"
+>
+          Your Messages
+</h1>,
+        Array [],
+      ],
       "className": "inbox",
     },
     "ref": null,
-    "rendered": Array [],
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Your Messages",
+          "className": "content-header",
+        },
+        "ref": null,
+        "rendered": "Your Messages",
+        "type": "h1",
+      },
+    ],
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -33,11 +53,31 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": Array [],
+        "children": Array [
+          <h1
+            className="content-header"
+>
+            Your Messages
+</h1>,
+          Array [],
+        ],
         "className": "inbox",
       },
       "ref": null,
-      "rendered": Array [],
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Your Messages",
+            "className": "content-header",
+          },
+          "ref": null,
+          "rendered": "Your Messages",
+          "type": "h1",
+        },
+      ],
       "type": "div",
     },
   ],
