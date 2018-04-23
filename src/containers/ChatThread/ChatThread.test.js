@@ -6,7 +6,7 @@ import { db } from '../../firebase';
 describe('ChatThread', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<ChatThread user={{username: 'Nymeria', uid: 1}}
+    wrapper = shallow(<ChatThread user={{username: 'Nymeria', uid: '1'}}
                                   chat={{members: {1: {name: 'Nymeria', uid: '1'}, 2: {name: 'Arya', uid: '2'}}, chatId: '4'}}
                                   hasErrored={jest.fn()} />,
                       {disableLifecycleMethods: true})
@@ -153,7 +153,7 @@ describe('ChatThread', () => {
     })
 
     it('sets state with instructions to introduce yourself if there are no messages', () => {
-      const expected = <h3>Introduce yourself!</h3>
+      const expected = <h3 className="no-messages">Introduce yourself!</h3>
       wrapper.instance().renderMessages(undefined);
       expect(wrapper.instance().state.messagesToRender).toEqual(expected);
     })
