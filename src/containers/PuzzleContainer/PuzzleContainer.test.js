@@ -13,7 +13,8 @@ describe('PuzzleContainer', () => {
                                        puzzles={mockPuzzles}
                                        history={{push: jest.fn()}}
                                        hasErrored={jest.fn()}
-                                       user={{uid: '5', username: 'Casey'}} />);
+                                       user={{uid: '5', username: 'Casey'}}
+                                       addOneUserChat={jest.fn()} />);
   })
 
   it('matches snapshot', () => {
