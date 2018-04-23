@@ -133,7 +133,7 @@ export const mapDispatchToProps = dispatch => ({
 
 ChatThread.propTypes = {
   user: PropTypes.shape({
-    uid: PropTypes.number,
+    uid: PropTypes.string,
     username: PropTypes.string
   }),
   chat: PropTypes.shape({

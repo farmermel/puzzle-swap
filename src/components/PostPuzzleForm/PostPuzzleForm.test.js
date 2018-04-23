@@ -24,7 +24,7 @@ describe('PostPuzzleForm', () => {
     const expected = {
       fileUpload: "Select puzzle photo", 
       numPieces: "", 
-      piecesMissing: "1-3", 
+      piecesMissing: "0", 
       title: "",
       crop: {
         aspect: 10/7,
@@ -84,7 +84,7 @@ describe('PostPuzzleForm', () => {
         "/puzzles/5": 
         {
           numPieces: "", 
-          piecesMissing: "1-3", 
+          piecesMissing: "0", 
           puzzleId: undefined, 
           title: "",
           userId: '4'

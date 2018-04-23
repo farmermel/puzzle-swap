@@ -1,11 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { auth } from '../../firebase';
-import { Header,
-determineLoginButtons,
-renderLoggedIn,
-handleSignOut,
-renderNotLoggedIn } from './Header';
+import { Header } from './Header';
 
 describe('Header', () => {
   let wrapper;
@@ -28,7 +24,7 @@ describe('Header', () => {
     it('calls doSignOut method on auth', () => {
       auth.doSignOut = jest.fn();
       expect(auth.doSignOut).not.toHaveBeenCalled();
-      handleSignOut();
+      wrapper.instance().handleSignOut();
       expect(auth.doSignOut).toHaveBeenCalled();
     })
 
@@ -36,9 +32,8 @@ describe('Header', () => {
       auth.doSignOut = jest.fn().mockImplementation(() => {
         throw new Error('failed to sign out')
       }); 
-      const hasErrored = jest.fn();
-      await handleSignOut(hasErrored);
-      expect(hasErrored).toHaveBeenCalledWith('failed to sign out');
+      await wrapper.instance().handleSignOut();
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to sign out');
     })
   })
 })

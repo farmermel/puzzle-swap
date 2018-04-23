@@ -4,8 +4,6 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { auth, db } from '../../firebase';
 import { setUser, setUsersChats, hasErrored } from '../../actions';
-// import { setUsersChats } from '../../actions/userChats';
-// import { hasErrored } from '../../actions/hasErrored';
 import Main from '../Main/Main';
 import Header from '../../components/Header/Header';
 import PostPuzzleForm from '../../components/PostPuzzleForm/PostPuzzleForm';

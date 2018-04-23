@@ -27,7 +27,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Unknown
+        <Header
           hasErrored={[Function]}
           user={
                     Object {
@@ -72,7 +72,7 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "function",
+        "nodeType": "class",
         "props": Object {
           "hasErrored": [Function],
           "user": Object {
@@ -207,7 +207,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Unknown
+          <Header
             hasErrored={[Function]}
             user={
                         Object {
@@ -252,7 +252,7 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "class",
           "props": Object {
             "hasErrored": [Function],
             "user": Object {

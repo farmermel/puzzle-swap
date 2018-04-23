@@ -33,7 +33,6 @@ ShallowWrapper {
                 id="signup-name"
                 name="name"
                 onChange={[Function]}
-                placeholder="name"
                 type="name"
                 value=""
         />
@@ -46,7 +45,6 @@ ShallowWrapper {
                 id="signup-email"
                 name="email"
                 onChange={[Function]}
-                placeholder="email"
                 type="email"
                 value={undefined}
         />
@@ -59,7 +57,6 @@ ShallowWrapper {
                 id="signup-password"
                 name="password"
                 onChange={[Function]}
-                placeholder="password"
                 type="password"
                 value=""
         />
@@ -68,6 +65,20 @@ ShallowWrapper {
         >
                 Sign up
         </button>
+        <Link
+                className="signup-redirect"
+                replace={false}
+                to={
+                        Object {
+                                "pathname": "/login",
+                              }
+                }
+        >
+                Already signed up? 
+                <span>
+                        Login!
+                </span>
+        </Link>
 </form>,
       "className": "form-wrapper",
     },
@@ -91,7 +102,6 @@ ShallowWrapper {
             id="signup-name"
             name="name"
             onChange={[Function]}
-            placeholder="name"
             type="name"
             value=""
 />,
@@ -104,7 +114,6 @@ ShallowWrapper {
             id="signup-email"
             name="email"
             onChange={[Function]}
-            placeholder="email"
             type="email"
             value={undefined}
 />,
@@ -117,7 +126,6 @@ ShallowWrapper {
             id="signup-password"
             name="password"
             onChange={[Function]}
-            placeholder="password"
             type="password"
             value=""
 />,
@@ -126,6 +134,20 @@ ShallowWrapper {
 >
             Sign up
 </button>,
+          <Link
+            className="signup-redirect"
+            replace={false}
+            to={
+                        Object {
+                                    "pathname": "/login",
+                                  }
+            }
+>
+            Already signed up? 
+            <span>
+                        Login!
+            </span>
+</Link>,
         ],
         "className": "sign-up",
         "onSubmit": [Function],
@@ -164,7 +186,6 @@ ShallowWrapper {
             "id": "signup-name",
             "name": "name",
             "onChange": [Function],
-            "placeholder": "name",
             "type": "name",
             "value": "",
           },
@@ -192,7 +213,6 @@ ShallowWrapper {
             "id": "signup-email",
             "name": "email",
             "onChange": [Function],
-            "placeholder": "email",
             "type": "email",
             "value": undefined,
           },
@@ -220,7 +240,6 @@ ShallowWrapper {
             "id": "signup-password",
             "name": "password",
             "onChange": [Function],
-            "placeholder": "password",
             "type": "password",
             "value": "",
           },
@@ -239,6 +258,40 @@ ShallowWrapper {
           "ref": null,
           "rendered": "Sign up",
           "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              "Already signed up? ",
+              <span>
+                Login!
+</span>,
+            ],
+            "className": "signup-redirect",
+            "replace": false,
+            "to": Object {
+              "pathname": "/login",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            "Already signed up? ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Login!",
+              },
+              "ref": null,
+              "rendered": "Login!",
+              "type": "span",
+            },
+          ],
+          "type": [Function],
         },
       ],
       "type": "form",
@@ -267,7 +320,6 @@ ShallowWrapper {
                     id="signup-name"
                     name="name"
                     onChange={[Function]}
-                    placeholder="name"
                     type="name"
                     value=""
           />
@@ -280,7 +332,6 @@ ShallowWrapper {
                     id="signup-email"
                     name="email"
                     onChange={[Function]}
-                    placeholder="email"
                     type="email"
                     value={undefined}
           />
@@ -293,7 +344,6 @@ ShallowWrapper {
                     id="signup-password"
                     name="password"
                     onChange={[Function]}
-                    placeholder="password"
                     type="password"
                     value=""
           />
@@ -302,6 +352,20 @@ ShallowWrapper {
           >
                     Sign up
           </button>
+          <Link
+                    className="signup-redirect"
+                    replace={false}
+                    to={
+                              Object {
+                                        "pathname": "/login",
+                                      }
+                    }
+          >
+                    Already signed up? 
+                    <span>
+                              Login!
+                    </span>
+          </Link>
 </form>,
         "className": "form-wrapper",
       },
@@ -325,7 +389,6 @@ ShallowWrapper {
               id="signup-name"
               name="name"
               onChange={[Function]}
-              placeholder="name"
               type="name"
               value=""
 />,
@@ -338,7 +401,6 @@ ShallowWrapper {
               id="signup-email"
               name="email"
               onChange={[Function]}
-              placeholder="email"
               type="email"
               value={undefined}
 />,
@@ -351,7 +413,6 @@ ShallowWrapper {
               id="signup-password"
               name="password"
               onChange={[Function]}
-              placeholder="password"
               type="password"
               value=""
 />,
@@ -360,6 +421,20 @@ ShallowWrapper {
 >
               Sign up
 </button>,
+            <Link
+              className="signup-redirect"
+              replace={false}
+              to={
+                            Object {
+                                          "pathname": "/login",
+                                        }
+              }
+>
+              Already signed up? 
+              <span>
+                            Login!
+              </span>
+</Link>,
           ],
           "className": "sign-up",
           "onSubmit": [Function],
@@ -398,7 +473,6 @@ ShallowWrapper {
               "id": "signup-name",
               "name": "name",
               "onChange": [Function],
-              "placeholder": "name",
               "type": "name",
               "value": "",
             },
@@ -426,7 +500,6 @@ ShallowWrapper {
               "id": "signup-email",
               "name": "email",
               "onChange": [Function],
-              "placeholder": "email",
               "type": "email",
               "value": undefined,
             },
@@ -454,7 +527,6 @@ ShallowWrapper {
               "id": "signup-password",
               "name": "password",
               "onChange": [Function],
-              "placeholder": "password",
               "type": "password",
               "value": "",
             },
@@ -473,6 +545,40 @@ ShallowWrapper {
             "ref": null,
             "rendered": "Sign up",
             "type": "button",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                "Already signed up? ",
+                <span>
+                  Login!
+</span>,
+              ],
+              "className": "signup-redirect",
+              "replace": false,
+              "to": Object {
+                "pathname": "/login",
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              "Already signed up? ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Login!",
+                },
+                "ref": null,
+                "rendered": "Login!",
+                "type": "span",
+              },
+            ],
+            "type": [Function],
           },
         ],
         "type": "form",
