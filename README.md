@@ -15,6 +15,8 @@ Puzzle icon is by [Freepik](https://www.flaticon.com/authors/freepik) at flatico
 
 ## Design
 
+![gif of use](http://g.recordit.co/ITK9jvNC79.gif)
+
 #### Main Page
 ![Main page](https://i.imgur.com/0qYfFIWl.png)
 
