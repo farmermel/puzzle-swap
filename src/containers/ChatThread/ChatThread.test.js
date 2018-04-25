@@ -52,16 +52,6 @@ describe('ChatThread', () => {
     })
   })
 
-  describe('getMembers', () => {
-    it('returns a comma seperated string of the values from an object passed in', () => {
-      const mockMembers = {
-        4: 'Nymeria',
-        5: 'Arya'
-      };
-      const expected = 'Nymeria, Arya';
-    })
-  })
-
   describe('handleChange', () => {
     it('sets state with name and value of event passed in', () => {
       const mockEvent = {
@@ -72,6 +62,16 @@ describe('ChatThread', () => {
       }
       wrapper.instance().handleChange(mockEvent);
       expect(wrapper.instance().state.message).toEqual('Valhar morgulis');
+    })
+  })
+
+  describe('getMembers', () => {
+    it('returns a comma seperated string of the values from an object passed in', () => {
+      const mockMembers = {
+        4: 'Nymeria',
+        5: 'Arya'
+      };
+      const expected = 'Nymeria, Arya';
     })
   })
 
@@ -121,6 +121,13 @@ describe('ChatThread', () => {
     })
   })
 
+  describe('determineMessageColor', () => {
+    it('returns an object with member ids as keys and classnames as values', () => {
+      const expected = {1: 'speech-right', 2: 'speech-left'};
+      expect(wrapper.instance().determineMessageColor()).toEqual(expected)
+    })
+  })
+
   describe('renderMessages', () => {
     let mockMessages;
     beforeAll(() => {
@@ -156,13 +163,6 @@ describe('ChatThread', () => {
       const expected = <h3 className="no-messages">Introduce yourself!</h3>
       wrapper.instance().renderMessages(undefined);
       expect(wrapper.instance().state.messagesToRender).toEqual(expected);
-    })
-  })
-
-  describe('determineMessageColor', () => {
-    it('returns an object with member ids as keys and classnames as values', () => {
-      const expected = {1: 'speech-right', 2: 'speech-left'};
-      expect(wrapper.instance().determineMessageColor()).toEqual(expected)
     })
   })
 

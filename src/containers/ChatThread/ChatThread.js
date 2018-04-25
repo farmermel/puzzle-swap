@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { db } from '../../firebase';
-import { hasErrored } from '../../actions/hasErrored';
+import { hasErrored } from '../../actions';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import './ChatThread.css';
@@ -28,18 +28,18 @@ export class ChatThread extends Component {
     }
   }
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   getRecipientName = members => {
     const { user } = this.props;
     const recipientId = Object.keys(members).find( member => {
       return member !== user.uid
     });
     return members[recipientId].username;
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
   }
 
   formatTime = () => {
@@ -68,6 +68,18 @@ export class ChatThread extends Component {
     }
   }
 
+  determineMessageColor = () => {
+    const { chat, user } = this.props;
+    const members = Object.keys(chat.members);
+    const recipient = members.find( member => (
+      user.uid !== member
+    ));
+    return {
+      [user.uid]: 'speech-right',
+      [recipient]: 'speech-left'
+    }
+  }
+
   renderMessages = messages => {
     const colorObj = this.determineMessageColor();
     const messagesToRender = messages
@@ -85,18 +97,6 @@ export class ChatThread extends Component {
         })
       : <h3 className='no-messages'>Introduce yourself!</h3>
     this.setState({ messagesToRender })
-  }
-
-  determineMessageColor = () => {
-    const { chat, user } = this.props;
-    const members = Object.keys(chat.members);
-    const recipient = members.find( member => (
-      user.uid !== member
-    ));
-    return {
-      [user.uid]: 'speech-right',
-      [recipient]: 'speech-left'
-    }
   }
 
   render() {
@@ -143,4 +143,4 @@ ChatThread.propTypes = {
   hasErrored: PropTypes.func.isRequired
 }
 
-export default withRouter(connect(mapStateToProps, null)(ChatThread));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChatThread));
