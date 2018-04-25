@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hasErrored } from '../../actions/hasErrored';
-import { setPuzzles } from '../../actions/setPuzzles';
-import { addOneUserChat } from '../../actions/userChats';
+import { hasErrored, setPuzzles, addOneUserChat } from '../../actions';
 import { withRouter } from 'react-router';
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard';
 import { db, storage } from '../../firebase';
