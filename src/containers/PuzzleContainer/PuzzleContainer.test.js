@@ -176,28 +176,28 @@ describe('PuzzleContainer', () => {
       expect(db.getFirebaseKey).toHaveBeenCalled();
     })
 
-    it.skip('calls postUpdate on db with an updates object', async () => {
-      // global.Date = jest.fn().mockImplementation(() => {
-      //   return {
-      //     now: jest.fn().mockImplementation(() => {
-      //       return 5
-      //     })
-      //   }
-      // })
-      const expected = {
-        "chats/2": {
-          "chatId": 2, 
-          "lastMessage": "", 
-          "members": {
-            "1": "mel", 
-            "2": "other user"
-          }, 
-          "timeStamp": Date.now()
-        }
-      }
-      wrapper.instance().makeNewChat('1', '2');
-      expect(db.postUpdate).toHaveBeenCalledWith(expected);
-    })
+    // it.skip('calls postUpdate on db with an updates object', async () => {
+    //   // global.Date = jest.fn().mockImplementation(() => {
+    //   //   return {
+    //   //     now: jest.fn().mockImplementation(() => {
+    //   //       return 5
+    //   //     })
+    //   //   }
+    //   // })
+    //   const expected = {
+    //     "chats/2": {
+    //       "chatId": 2, 
+    //       "lastMessage": "", 
+    //       "members": {
+    //         "1": "mel", 
+    //         "2": "other user"
+    //       }, 
+    //       "timeStamp": Date.now()
+    //     }
+    //   }
+    //   wrapper.instance().makeNewChat('1', '2');
+    //   expect(db.postUpdate).toHaveBeenCalledWith(expected);
+    // })
 
     it('calls checkForExistingChat', async () => {
       expect(wrapper.instance().checkForExistingChat).not.toHaveBeenCalled();
