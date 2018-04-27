@@ -37,7 +37,7 @@ describe('ChatThread', () => {
       db.getFirebaseKey.mockClear();
     })
 
-    it('calls watchData method on db with messages/chatid', () => {
+    it('calls watches chat data in db', () => {
       expect(db.watchData).not.toHaveBeenCalled();
       wrapper.instance().componentDidMount();
       expect(db.watchData).toHaveBeenCalledWith('messages/4');
@@ -75,8 +75,19 @@ describe('ChatThread', () => {
     })
   })
 
+  describe('makeUpdatesObj', () => {
+    it('returns an updates object with three urls as keys and last message, time, and message details as values', () => {
+      const expected = {"chats/4/lastMessage": "", "chats/4/timeStamp": "4:00", "messages/4/key": {"message": "", "timeStamp": "4:00", "uid": "1", "username": "Nymeria"}}
+      wrapper.instance().formatTime = jest.fn().mockImplementation(() => {
+        return '4:00'
+      })
+      expect(wrapper.instance().makeUpdatesObj('key')).toEqual(expected)
+    })
+  })
+
   describe('handleSubmit', () => {
     let mockEvent;
+    let mockUpdates;
     beforeEach(() => {
       db.getFirebaseKey = jest.fn().mockImplementation(() => {
         return 4
@@ -84,6 +95,11 @@ describe('ChatThread', () => {
       db.postUpdate = jest.fn();
       mockEvent = {
         preventDefault: jest.fn()
+      }
+      mockUpdates = {
+        messages: [],
+        lastMessage: 'hey',
+        timeStamp: '4:00'
       }
     })
 
@@ -93,10 +109,17 @@ describe('ChatThread', () => {
       expect(mockEvent.preventDefault).toHaveBeenCalled();
     })
 
-    it('calls getFirebaseKey method on db', () => {
+    it('gets firebase key from db', () => {
       expect(db.getFirebaseKey).not.toHaveBeenCalled();
       wrapper.instance().handleSubmit(mockEvent);
       expect(db.getFirebaseKey).toHaveBeenCalled();
+    })
+
+    it('calls makeUpdatesObject', () => {
+      wrapper.instance().makeUpdatesObj = jest.fn();
+      expect(wrapper.instance().makeUpdatesObj).not.toHaveBeenCalled();
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(wrapper.instance().makeUpdatesObj).toHaveBeenCalled();
     })
 
     it('clears message in state', () => {
@@ -106,10 +129,13 @@ describe('ChatThread', () => {
       expect(wrapper.instance().state.message).toEqual('');
     })
 
-    it('calls postUpdate on database with an updates object containing three keys for different updates', () => {
+    it('calls postUpdate on database', () => {
+      wrapper.instance().makeUpdatesObj = jest.fn().mockImplementation(() => {
+        return mockUpdates;
+      });
       expect(db.postUpdate).not.toHaveBeenCalled();
       wrapper.instance().handleSubmit(mockEvent);
-      expect(db.postUpdate).toHaveBeenCalled();
+      expect(db.postUpdate).toHaveBeenCalledWith(mockUpdates);
     })
 
     it('catches error and calls hasErrored error message if anything errors', async () => {
