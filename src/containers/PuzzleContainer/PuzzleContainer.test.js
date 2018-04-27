@@ -14,7 +14,8 @@ describe('PuzzleContainer', () => {
                                        history={{push: jest.fn()}}
                                        hasErrored={jest.fn()}
                                        user={{uid: '5', username: 'Casey'}}
-                                       addOneUserChat={jest.fn()} />);
+                                       addOneUserChat={jest.fn()} />, 
+                                       { disableLifecycleMethods: true });
   })
 
   it('matches snapshot', () => {
@@ -32,26 +33,171 @@ describe('PuzzleContainer', () => {
     })
   })
 
-  describe('parseChats', () => {
-    const mockChats = {
-      1: {
-        members: {
-          1: 'Im a member',
-          2: 'Im another member'
-        }
-      }
-    }
-
-    it('returns an existing chat if ownerId and claimerId match an existing chat', () => {
-      const ownerId = 1;
-      const claimerId = 2;
-      expect(wrapper.instance().parseChats(mockChats, ownerId, claimerId)).toEqual('1');
+  describe('retrievePuzzles', () => {
+    it('calls watchData on db with puzzles as argument', () => {
+      db.watchData = jest.fn();
+      wrapper.instance().retrievePuzzles();
+      expect(db.watchData).toHaveBeenCalledWith('puzzles');
     })
 
-    it('returns undefined if no chat matches ownderId and claimerId', () => {
-      const ownerId = 0;
-      const claimerId = 4;
-      expect(wrapper.instance().parseChats(mockChats, ownerId, claimerId)).toEqual(undefined);
+    it('calls hasErrored with message if there is an error', () => {
+      db.watchData = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database');
+      });
+      wrapper.instance().retrievePuzzles();
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
+    })
+  })
+
+  describe('parsePuzzles', () => {
+    let mockSnapshot;
+    beforeEach(() => {
+      wrapper.instance().getImg = jest.fn().mockImplementation(() => {
+        return 'url'
+      })
+    })
+
+    beforeAll(() => {
+      mockSnapshot = {
+        1: {
+          puzzleId: '1'
+        },
+        2: {
+          puzzleId: '2'
+        },
+        3: {
+          puzzleId: '3'
+        }
+      }
+    })
+
+    it('calls getImg for every puzzle in storage', () => {
+      expect(wrapper.instance().getImg).not.toHaveBeenCalled();
+      wrapper.instance().parsePuzzles(mockSnapshot);
+      expect(wrapper.instance().getImg).toHaveBeenCalledTimes(3);
+    })
+
+    it('calls setPuzzles with an array of puzzles', async () => {
+      const expected = [{"imgUrl": "url", "puzzleId": "1"}, {"imgUrl": "url", "puzzleId": "2"}, {"imgUrl": "url", "puzzleId": "3"}];
+      expect(wrapper.instance().props.setPuzzles).not.toHaveBeenCalled();
+      await wrapper.instance().parsePuzzles(mockSnapshot);
+      expect(wrapper.instance().props.setPuzzles).toHaveBeenCalledWith(expected);
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      wrapper.instance().getImg = jest.fn().mockImplementation(() => {
+        throw new Error('failed to get image')
+      }); 
+      await wrapper.instance().parsePuzzles(mockSnapshot);
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to get image');
+    })
+  })
+
+  describe('getImg', () => {
+    beforeAll(() => {
+      storage.getStoreRef = jest.fn().mockImplementation(() => {
+        return { getDownloadURL: jest.fn().mockImplementation(() => {
+          return 'niceurl'
+        }) }
+      })
+    })
+
+    it('calls getStoreRef method on storage with url containing id passed in', () => {
+      expect(storage.getStoreRef).not.toHaveBeenCalled();
+      wrapper.instance().getImg('5');
+      expect(storage.getStoreRef).toHaveBeenCalledWith('images/5');
+    })
+
+    it('returns an image url', async () => {
+      expect(await wrapper.instance().getImg('5')).toEqual('niceurl');
+    })
+  })
+
+  describe('handleDelete', () => {
+    beforeAll(() => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        return {
+          val: () => {
+            return {
+              4: {
+                puzzleId: '4'
+              }
+            }
+          }
+        }
+      })
+      db.deleteData = jest.fn();
+    })
+
+    afterEach(() => {
+      db.deleteData.mockClear();
+    })
+
+    it('calls getOnce method on db with puzzles argument', () => {
+      expect(db.getOnce).not.toHaveBeenCalled();
+      wrapper.instance().handleDelete('4');
+      expect(db.getOnce).toHaveBeenCalledWith('puzzles');
+    })
+
+    it('calls deleteData method on db with puzzles/ and puzzle passed in', async () => {
+      expect(db.deleteData).not.toHaveBeenCalled();
+      await wrapper.instance().handleDelete('4');
+      expect(db.deleteData).toHaveBeenCalledWith('puzzles/4');
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      db.getOnce = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().handleDelete('1');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
+    })
+  })
+
+  describe('handleClaim', () => {
+    beforeAll(() => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return {}
+      })
+      wrapper.instance().goToChat = jest.fn();
+      wrapper.instance().makeNewChat = jest.fn();
+    })
+
+    it('calls checkForExistingChat', () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return {}
+      })
+      expect(wrapper.instance().checkForExistingChat).not.toHaveBeenCalled();
+      wrapper.instance().handleClaim('3', '4');
+      expect(wrapper.instance().checkForExistingChat).toHaveBeenCalled();
+    })
+
+    it('calls goToChat with existingChat if there is already a chat', async () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return {chat: 'chat chat'}
+      })
+      wrapper.instance().goToChat = jest.fn();
+      expect(wrapper.instance().goToChat).not.toHaveBeenCalled();
+      await wrapper.instance().handleClaim('3', '4');
+      expect(wrapper.instance().goToChat).toHaveBeenCalled();
+    })
+
+    it('calls makeNewChat if there is no existing chat', async () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        return false
+      })
+      wrapper.instance().makeNewChat = jest.fn();
+      expect(wrapper.instance().makeNewChat).not.toHaveBeenCalled();
+      await wrapper.instance().handleClaim('3', '4');
+      expect(wrapper.instance().makeNewChat).toHaveBeenCalled();
+    })
+
+    it('catches error and calls hasErrored error message if anything errors', async () => {
+      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
+        throw new Error('failed to reach database')
+      }); 
+      await wrapper.instance().handleClaim('1', '2');
+      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
     })
   })
 
@@ -102,6 +248,29 @@ describe('PuzzleContainer', () => {
       }); 
       await wrapper.instance().checkForExistingChat(1, 2);
       expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
+    })
+  })
+
+  describe('parseChats', () => {
+    const mockChats = {
+      1: {
+        members: {
+          1: 'Im a member',
+          2: 'Im another member'
+        }
+      }
+    }
+
+    it('returns an existing chat if ownerId and claimerId match an existing chat', () => {
+      const ownerId = 1;
+      const claimerId = 2;
+      expect(wrapper.instance().parseChats(mockChats, ownerId, claimerId)).toEqual('1');
+    })
+
+    it('returns undefined if no chat matches ownderId and claimerId', () => {
+      const ownerId = 0;
+      const claimerId = 4;
+      expect(wrapper.instance().parseChats(mockChats, ownerId, claimerId)).toEqual(undefined);
     })
   })
 
@@ -176,29 +345,6 @@ describe('PuzzleContainer', () => {
       expect(db.getFirebaseKey).toHaveBeenCalled();
     })
 
-    // it.skip('calls postUpdate on db with an updates object', async () => {
-    //   // global.Date = jest.fn().mockImplementation(() => {
-    //   //   return {
-    //   //     now: jest.fn().mockImplementation(() => {
-    //   //       return 5
-    //   //     })
-    //   //   }
-    //   // })
-    //   const expected = {
-    //     "chats/2": {
-    //       "chatId": 2, 
-    //       "lastMessage": "", 
-    //       "members": {
-    //         "1": "mel", 
-    //         "2": "other user"
-    //       }, 
-    //       "timeStamp": Date.now()
-    //     }
-    //   }
-    //   wrapper.instance().makeNewChat('1', '2');
-    //   expect(db.postUpdate).toHaveBeenCalledWith(expected);
-    // })
-
     it('calls checkForExistingChat', async () => {
       expect(wrapper.instance().checkForExistingChat).not.toHaveBeenCalled();
       await wrapper.instance().makeNewChat('1', '2');
@@ -211,158 +357,6 @@ describe('PuzzleContainer', () => {
       }); 
       await wrapper.instance().makeNewChat('1', '2');
       expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to get key');
-    })
-  })
-
-  describe('handleClaim', () => {
-    beforeAll(() => {
-      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
-        return {}
-      })
-      wrapper.instance().goToChat = jest.fn();
-      wrapper.instance().makeNewChat = jest.fn();
-    })
-
-    it('calls checkForExistingChat', () => {
-      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
-        return {}
-      })
-      expect(wrapper.instance().checkForExistingChat).not.toHaveBeenCalled();
-      wrapper.instance().handleClaim('3', '4');
-      expect(wrapper.instance().checkForExistingChat).toHaveBeenCalled();
-    })
-
-    it('calls goToChat with existingChat if there is already a chat', async () => {
-      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
-        return {chat: 'chat chat'}
-      })
-      wrapper.instance().goToChat = jest.fn();
-      expect(wrapper.instance().goToChat).not.toHaveBeenCalled();
-      await wrapper.instance().handleClaim('3', '4');
-      expect(wrapper.instance().goToChat).toHaveBeenCalled();
-    })
-
-    it('calls makeNewChat if there is no existing chat', async () => {
-      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
-        return false
-      })
-      wrapper.instance().makeNewChat = jest.fn();
-      expect(wrapper.instance().makeNewChat).not.toHaveBeenCalled();
-      await wrapper.instance().handleClaim('3', '4');
-      expect(wrapper.instance().makeNewChat).toHaveBeenCalled();
-    })
-
-    it('catches error and calls hasErrored error message if anything errors', async () => {
-      wrapper.instance().checkForExistingChat = jest.fn().mockImplementation(() => {
-        throw new Error('failed to reach database')
-      }); 
-      await wrapper.instance().handleClaim('1', '2');
-      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
-    })
-  })
-
-  describe('handleDelete', () => {
-    beforeAll(() => {
-      db.getOnce = jest.fn().mockImplementation(() => {
-        return {
-          val: () => {
-            return {
-              4: {
-                puzzleId: '4'
-              }
-            }
-          }
-        }
-      })
-      db.deleteData = jest.fn();
-    })
-
-    afterEach(() => {
-      db.deleteData.mockClear();
-    })
-
-    it('calls getOnce method on db with puzzles argument', () => {
-      expect(db.getOnce).not.toHaveBeenCalled();
-      wrapper.instance().handleDelete('4');
-      expect(db.getOnce).toHaveBeenCalledWith('puzzles');
-    })
-
-    it('calls deleteData method on db with puzzles/ and puzzle passed in', async () => {
-      expect(db.deleteData).not.toHaveBeenCalled();
-      await wrapper.instance().handleDelete('4');
-      expect(db.deleteData).toHaveBeenCalledWith('puzzles/4');
-    })
-
-    it('catches error and calls hasErrored error message if anything errors', async () => {
-      db.getOnce = jest.fn().mockImplementation(() => {
-        throw new Error('failed to reach database')
-      }); 
-      await wrapper.instance().handleDelete('1');
-      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to reach database');
-    })
-  })
-
-  describe('parsePuzzles', () => {
-    let mockSnapshot;
-    beforeEach(() => {
-      wrapper.instance().getImg = jest.fn().mockImplementation(() => {
-        return 'url'
-      })
-    })
-
-    beforeAll(() => {
-      mockSnapshot = {
-        1: {
-          puzzleId: '1'
-        },
-        2: {
-          puzzleId: '2'
-        },
-        3: {
-          puzzleId: '3'
-        }
-      }
-    })
-
-    it('calls getImg for every puzzle in storage', () => {
-      expect(wrapper.instance().getImg).not.toHaveBeenCalled();
-      wrapper.instance().parsePuzzles(mockSnapshot);
-      expect(wrapper.instance().getImg).toHaveBeenCalledTimes(3);
-    })
-
-    it('calls setPuzzles with an array of puzzles', async () => {
-      const expected = [{"imgUrl": "url", "puzzleId": "1"}, {"imgUrl": "url", "puzzleId": "2"}, {"imgUrl": "url", "puzzleId": "3"}];
-      expect(wrapper.instance().props.setPuzzles).not.toHaveBeenCalled();
-      await wrapper.instance().parsePuzzles(mockSnapshot);
-      expect(wrapper.instance().props.setPuzzles).toHaveBeenCalledWith(expected);
-    })
-
-    it('catches error and calls hasErrored error message if anything errors', async () => {
-      wrapper.instance().getImg = jest.fn().mockImplementation(() => {
-        throw new Error('failed to get image')
-      }); 
-      await wrapper.instance().parsePuzzles(mockSnapshot);
-      expect(wrapper.instance().props.hasErrored).toHaveBeenCalledWith('failed to get image');
-    })
-  })
-
-  describe('getImg', () => {
-    beforeAll(() => {
-      storage.getStoreRef = jest.fn().mockImplementation(() => {
-        return { getDownloadURL: jest.fn().mockImplementation(() => {
-          return 'niceurl'
-        }) }
-      })
-    })
-
-    it('calls getStoreRef method on storage with url containing id passed in', () => {
-      expect(storage.getStoreRef).not.toHaveBeenCalled();
-      wrapper.instance().getImg('5');
-      expect(storage.getStoreRef).toHaveBeenCalledWith('images/5');
-    })
-
-    it('returns an image url', async () => {
-      expect(await wrapper.instance().getImg('5')).toEqual('niceurl');
     })
   })
 
