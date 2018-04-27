@@ -27,13 +27,17 @@ export class App extends Component {
     }
   }
 
-  setChats = (chats) => {
-    const { user, setUsersChats } = this.props;
-    const usersChats = Object.keys(chats).reduce((usersChats, chat) => {
-      chats[chat].members[user.uid] && usersChats.push(chats[chat]);
-      return usersChats;
-    }, [])
-    setUsersChats(usersChats);
+  makeUserObj = async authUser => {
+    const { setUser, hasErrored } = this.props;
+    try {
+      const userSnap = await db.getOnce(`users/${authUser.uid}`);
+      const user = userSnap.val();
+      const userObj = { uid: authUser.uid, username: user.username };
+      setUser(userObj);
+      this.getUsersChats();
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   getUsersChats = async () => {
@@ -47,17 +51,13 @@ export class App extends Component {
     }
   }
 
-  makeUserObj = async authUser => {
-    const { setUser, hasErrored } = this.props;
-    try {
-      const userSnap = await db.getOnce(`users/${authUser.uid}`);
-      const user = userSnap.val();
-      const userObj = { uid: authUser.uid, username: user.username };
-      setUser(userObj);
-      this.getUsersChats();
-    } catch (error) {
-      hasErrored(error.message);
-    }
+  setChats = (chats) => {
+    const { user, setUsersChats } = this.props;
+    const usersChats = Object.keys(chats).reduce((usersChats, chat) => {
+      chats[chat].members[user.uid] && usersChats.push(chats[chat]);
+      return usersChats;
+    }, [])
+    setUsersChats(usersChats);
   }
 
   render() {
