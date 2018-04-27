@@ -54,19 +54,19 @@ describe('Main', () => {
     })
   })
 
-  describe('handleChange', () => {
-    it('sets state with event passed in', () => {
-      const mockEvent = {
-        target: {
-          name: 'Casey',
-          value: 'very high'
-        }
-      }
+  // describe('handleChange', () => {
+  //   it('sets state with event passed in', () => {
+  //     const mockEvent = {
+  //       target: {
+  //         name: 'Casey',
+  //         value: 'very high'
+  //       }
+  //     }
 
-      wrapper.instance().handleChange(mockEvent);
-      expect(wrapper.instance().state.Casey).toEqual('very high');
-    })
-  })
+  //     wrapper.instance().handleChange(mockEvent);
+  //     expect(wrapper.instance().state.Casey).toEqual('very high');
+  //   })
+  // })
 
   describe('mapStateToProps', () => {
     it('maps state to props', () => {

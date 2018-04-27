@@ -18,10 +18,73 @@ export class PuzzleContainer extends Component {
     })
   }
 
-  parseChats = (chats, ownerId, claimerId) => {
-    return Object.keys(chats).find( chat => {
-      return chats[chat].members[ownerId] && chats[chat].members[claimerId];
+  retrievePuzzles = () => {
+    const { hasErrored } = this.props;
+    try {
+      return db.watchData('puzzles');
+    } catch (error) {
+      hasErrored(error.message);
+    }
+  }
+
+  parsePuzzles = async snapshot => {
+    const { hasErrored } = this.props;
+    try {
+      const puzzles = await Object.keys(snapshot).map(async puzzle => {
+        const imgUrl = await this.getImg(snapshot[puzzle].puzzleId);
+        snapshot[puzzle].imgUrl = imgUrl;
+        return snapshot[puzzle];
+      })
+      const resolvedPuzzles = await Promise.all(puzzles)
+      this.props.setPuzzles(resolvedPuzzles);
+    } catch (error) {
+      hasErrored(error.message);
+    }
+  }
+
+  getImg = async imgId => {
+    const { hasErrored } = this.props;
+    try{
+      const ref = await storage.getStoreRef(`images/${imgId}`)
+      const imgUrl = await ref.getDownloadURL();
+      return imgUrl;
+    } catch (error) {
+      hasErrored(error.message);
+    }
+  }
+
+  handleDelete = async puzzleId => {
+    const { hasErrored } = this.props;
+    try {
+      const puzzlesSnap = await db.getOnce('puzzles');
+      const puzzles = puzzlesSnap.val();
+      const puzzle = Object.keys(puzzles).find( puzzle => puzzles[puzzle].puzzleId === puzzleId);
+      await db.deleteData(`puzzles/${puzzle}`);
+    } catch (error) {
+      hasErrored(error.message);
+    }
+  }
+
+  displayPuzzles = () => {
+    const { puzzles, user } = this.props;
+    return puzzles && puzzles.map( puzzle => {
+      return <PuzzleCard puzzle={ puzzle }
+                         handleClaim={ this.handleClaim }
+                         handleDelete={ this.handleDelete }
+                         user={ user }
+                         key={ puzzle.puzzleId } />
     })
+  }
+
+  handleClaim = async (ownerId, puzzleTitle) => {
+    const { user, hasErrored } = this.props;
+    try {
+      const claimerId = user.uid;
+      const existingChat = await this.checkForExistingChat(ownerId, claimerId);
+      existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId, puzzleTitle);
+    } catch (error) {
+      hasErrored(error.message);
+    }
   }
 
   checkForExistingChat = async (ownerId, claimerId) => {
@@ -34,6 +97,12 @@ export class PuzzleContainer extends Component {
     } catch (error) {
       hasErrored(error.message);
     }
+  }
+
+  parseChats = (chats, ownerId, claimerId) => {
+    return Object.keys(chats).find( chat => {
+      return chats[chat].members[ownerId] && chats[chat].members[claimerId];
+    })
   }
 
   goToChat = existingChat => {
@@ -81,74 +150,6 @@ export class PuzzleContainer extends Component {
       addOneUserChat(postDB);
       const existingChat = await this.checkForExistingChat();
       existingChat && this.goToChat(existingChat);
-    } catch (error) {
-      hasErrored(error.message);
-    }
-  }
-
-  handleClaim = async (ownerId, puzzleTitle) => {
-    const { user, hasErrored } = this.props;
-    try {
-      const claimerId = user.uid;
-      const existingChat = await this.checkForExistingChat(ownerId, claimerId);
-      existingChat ? this.goToChat(existingChat) : await this.makeNewChat(ownerId, claimerId, puzzleTitle);
-    } catch (error) {
-      hasErrored(error.message);
-    }
-  }
-
-  handleDelete = async puzzleId => {
-    const { hasErrored } = this.props;
-    try {
-      const puzzlesSnap = await db.getOnce('puzzles');
-      const puzzles = puzzlesSnap.val();
-      const puzzle = Object.keys(puzzles).find( puzzle => puzzles[puzzle].puzzleId === puzzleId);
-      await db.deleteData(`puzzles/${puzzle}`);
-    } catch (error) {
-      hasErrored(error.message);
-    }
-  }
-
-  retrievePuzzles = () => {
-    try {
-      return db.watchData('puzzles');
-    } catch (error) {
-      hasErrored(error.message);
-    }
-  }
-
-  parsePuzzles = async snapshot => {
-    const { hasErrored } = this.props;
-    try {
-      const puzzles = await Object.keys(snapshot).map(async puzzle => {
-        const imgUrl = await this.getImg(snapshot[puzzle].puzzleId);
-        snapshot[puzzle].imgUrl = imgUrl;
-        return snapshot[puzzle];
-      })
-      const resolvedPuzzles = await Promise.all(puzzles)
-      this.props.setPuzzles(resolvedPuzzles);
-    } catch (error) {
-      hasErrored(error.message);
-    }
-  }
-
-  displayPuzzles = () => {
-    const { puzzles, user } = this.props;
-    return puzzles && puzzles.map( puzzle => {
-      return <PuzzleCard puzzle={ puzzle }
-                         handleClaim={ this.handleClaim }
-                         handleDelete={ this.handleDelete }
-                         user={ user }
-                         key={ puzzle.puzzleId } />
-    })
-  }
-
-  getImg = async imgId => {
-    const { hasErrored } = this.props;
-    try{
-      const ref = await storage.getStoreRef(`images/${imgId}`)
-      const imgUrl = await ref.getDownloadURL();
-      return imgUrl;
     } catch (error) {
       hasErrored(error.message);
     }
