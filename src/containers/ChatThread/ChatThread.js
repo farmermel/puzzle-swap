@@ -46,21 +46,28 @@ export class ChatThread extends Component {
     return moment().format('h:mma, MMMM Do');
   }
 
+  makeUpdatesObj = (firebaseKey) => {
+    const { user, chat } = this.props;
+    const postDB = {
+      username: user.username,
+      uid: user.uid,
+      message: this.state.message,
+      timeStamp: this.formatTime()
+    }
+
+    let updates = {};
+    updates[`messages/${chat.chatId}/${firebaseKey}`] = postDB;
+    updates[`chats/${chat.chatId}/lastMessage`] = this.state.message;
+    updates[`chats/${chat.chatId}/timeStamp`] = postDB.timeStamp;
+    return updates;
+  }
+
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { user, chat, hasErrored } = this.props;
+    const { chat, hasErrored } = this.props;
     try {
-      const postDB = {
-        username: user.username,
-        uid: user.uid,
-        message: this.state.message,
-        timeStamp: this.formatTime()
-      }
       const firebaseKey = db.getFirebaseKey(`messages/${chat.chatId}`);
-      let updates = {};
-      updates[`messages/${chat.chatId}/${firebaseKey}`] = postDB;
-      updates[`chats/${chat.chatId}/lastMessage`] = this.state.message;
-      updates[`chats/${chat.chatId}/timeStamp`] = postDB.timeStamp;
+      let updates = this.makeUpdatesObj(firebaseKey);
       this.setState({ message: '' })
       await db.postUpdate(updates);
     } catch (error) {
