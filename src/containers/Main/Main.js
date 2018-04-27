@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getGeoLocation } from '../../helpers/apiCalls';
 import { addLocation, hasErrored } from '../../actions';
@@ -25,14 +24,14 @@ export class Main extends Component {
     }
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  // handleChange = (e) => {
+  //   this.setState({
+  //     [e.target.name]: e.target.value
+  //   })
+  // }
 
   render() {
-    const { location = '', user } = this.props;
+    const { location = 'all locations', user } = this.props;
     return (
       <div className='main'>
         <p className='view-description'>Viewing puzzles posted in {location}</p>
