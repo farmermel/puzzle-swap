@@ -43,7 +43,7 @@ export class PostPuzzleForm extends Component {
     const { userId, hasErrored, userLocation } = this.props;
     try {
       const { title, numPieces, piecesMissing } = this.state;
-      const postDB = { title, numPieces, piecesMissing, puzzleId, userId, userLocation }
+      const postDB = { title, numPieces, piecesMissing, puzzleId, userId, userLocation };
       const firebaseKey = db.getFirebaseKey('puzzles');
       let updates = {};
       updates[`/puzzles/${firebaseKey}`] = postDB;
