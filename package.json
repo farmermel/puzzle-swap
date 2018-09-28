@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@sendgrid/mail": "^6.2.1",
-    "firebase": "^4.9.1",
-    "moment": "^2.20.1",
+    "@sendgrid/mail": "^6.3.1",
+    "firebase": "^4.13.1",
+    "moment": "^2.22.2",
     "node-sass-chokidar": "0.0.3",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-image-crop": "^3.0.10",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-image-crop": "^3.0.11",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2"
   },
@@ -25,10 +25,10 @@
     "lint": "./node_modules/eslint/bin/eslint.js ./src/*/*.js"
   },
   "devDependencies": {
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.17.0",
-    "prop-types": "^15.6.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^4.19.1",
+    "prop-types": "^15.6.2",
     "redux-devtools": "^3.4.1"
   }
 }
